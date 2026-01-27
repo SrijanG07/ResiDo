@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomGi - Unified Property Management & Discovery Platform</title>
+    <style>
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #bdc3c7;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            font-size: 22px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        h4 {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .highlight {
+            background-color: #fffde7;
+            padding: 15px;
+            border-left: 4px solid #f1c40f;
+            margin: 15px 0;
+        }
+        .success {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #27ae60;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff3e0;
+            padding: 15px;
+            border-left: 4px solid #e67e22;
+            margin: 15px 0;
+        }
+        .checkbox {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .checkbox li::before {
+            content: "☐ ";
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .emoji {
+            font-size: 18px;
+        }
+        .center {
+            text-align: center;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-style: italic;
+            text-align: center;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="center">🏠 RoomGi - Unified Property Management & Discovery Platform</h1>
+    <p class="subtitle">A hackathon project combining rental discovery, buy-sell listings, and owner management into one powerful platform</p>
+
+    <hr>
+
+    <h2>1. PROJECT OVERVIEW (5-LINE SUMMARY)</h2>
+    <div class="highlight">
+        <p><strong>RoomGi</strong> is an all-in-one property platform that solves fragmented real estate discovery. It serves <strong>three user groups simultaneously</strong>:</p>
+        <ol>
+            <li>Students/professionals searching for rental rooms/PGs/hostels with verified info</li>
+            <li>Home buyers exploring flat/home listings directly from sellers</li>
+            <li>Property owners/brokers managing multiple listings efficiently from one dashboard</li>
+        </ol>
+        <p>The platform eliminates intermediaries, reduces fake listings through verification, and provides transparency with street-level views, price comparisons, and direct seller contact. It's built as a fully responsive web app with filtering, real-time updates, and a scalable architecture—not just a landing page, but a working marketplace.</p>
+    </div>
+
+    <h2>2. WHAT'S BUILT vs. WHAT'S MISSING</h2>
+
+    <h3>✅ What You Need to Build:</h3>
+
+    <h4>Frontend (React + Tailwind)</h4>
+    <ul class="checkbox">
+        <li>Multi-page responsive website (not SPA, actual pages)</li>
+        <li>Property listing pages with advanced filters (location, budget, amenities, availability)</li>
+        <li>Individual property detail pages with images gallery + street view</li>
+        <li>Owner/Broker dashboard for CRUD operations</li>
+        <li>User authentication (signup/login)</li>
+        <li>Search & sort functionality</li>
+        <li>Responsive design (mobile-first)</li>
+        <li>Reviews & ratings system</li>
+        <li>Contact/inquiry messaging</li>
+    </ul>
+
+    <h4>Backend (Node.js/Express or Python/Flask)</h4>
+    <ul class="checkbox">
+        <li>RESTful API for properties (CRUD)</li>
+        <li>User authentication & authorization</li>
+        <li>Advanced search/filtering</li>
+        <li>Image upload handling</li>
+        <li>Database schema management</li>
+        <li>Geolocation services</li>
+        <li>Email notifications</li>
+        <li>Analytics tracking</li>
+    </ul>
+
+    <h4>Database (PostgreSQL)</h4>
+    <ul class="checkbox">
+        <li>Properties table (rental, buy-sell, status)</li>
+        <li>Users table (owners, buyers, renters, brokers)</li>
+        <li>Listings table with geo-coordinates</li>
+        <li>Reviews/ratings table</li>
+        <li>Images table</li>
+        <li>Inquiries/messages table</li>
+    </ul>
+
+    <h3>🎯 Differentiation (Stand-Out Features):</h3>
+    <ul>
+        <li>Street-level views via Mapillary</li>
+        <li>Price comparison tool</li>
+        <li>Verified owner badges</li>
+        <li>AI-powered price prediction</li>
+        <li>Neighborhood safety scores</li>
+        <li>Amenity availability calendar</li>
+        <li>Virtual tours (360° photos)</li>
+        <li>Direct messaging with reviews</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>3. SIMILAR SUCCESSFUL APPS - FEATURES TO BORROW</h2>
+
+    <h3>App 1: OLX (olx.in)</h3>
+    <p><strong>Strengths to copy:</strong></p>
+    <ul>
+        <li>Simple, fast search & filtering</li>
+        <li>Trust scoring for sellers</li>
+        <li>Category-based organization</li>
+        <li>Mobile-friendly interface</li>
+        <li>Posted time indicators</li>
+    </ul>
+
+    <h3>App 2: MagicBricks (magicbricks.com)</h3>
+    <p><strong>Strengths to copy:</strong></p>
+    <ul>
+        <li>Advanced property filters (furnishing, type, size)</li>
+        <li>Neighborhood information panels</li>
+        <li>Price trends graphs</li>
+        <li>Similar properties suggestions</li>
+        <li>Posted by owner/agent distinction</li>
+    </ul>
+
+    <h3>App 3: 99Acres (99acres.com)</h3>
+    <p><strong>Strengths to copy:</strong></p>
+    <ul>
+        <li>Property comparison tool</li>
+        <li>Amenities checklist</li>
+        <li>Locality ratings</li>
+        <li>Builder/project profiles (for brokers)</li>
+        <li>Property history tracking</li>
+    </ul>
+
+    <h3>App 4: Airbnb (for inspiration)</h3>
+    <p><strong>Strengths to copy:</strong></p>
+    <ul>
+        <li>Photo gallery with zoom</li>
+        <li>User reviews with photos</li>
+        <li>Host profiles with verification badge</li>
+        <li>Availability calendar</li>
+        <li>Instant messaging between users</li>
+    </ul>
+
+    <h3>App 5: Zillow (for data viz)</h3>
+    <p><strong>Strengths to copy:</strong></p>
+    <ul>
+        <li>Zestimate (price estimates)</li>
+        <li>Price history graphs</li>
+        <li>Market insights/trends</li>
+        <li>Mortgage calculator</li>
+        <li>School/neighborhood ratings</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>4. FREE TECH STACK & APIS</h2>
+
+    <h3>Frontend Stack</h3>
+    <table>
+        <tr>
+            <th>Technology</th>
+            <th>Purpose</th>
+        </tr>
+        <tr><td>React 18+</td><td>Component-based UI</td></tr>
+        <tr><td>Tailwind CSS</td><td>Styling, responsive design</td></tr>
+        <tr><td>Leaflet.js + OpenStreetMap</td><td>Interactive maps</td></tr>
+        <tr><td>React Query</td><td>Data fetching/caching</td></tr>
+        <tr><td>Axios</td><td>HTTP client</td></tr>
+        <tr><td>React Router</td><td>Multi-page navigation</td></tr>
+        <tr><td>Formik + Yup</td><td>Form validation</td></tr>
+        <tr><td>React Slick</td><td>Image carousels</td></tr>
+        <tr><td>Chart.js</td><td>Price trends, graphs</td></tr>
+        <tr><td>React Icons</td><td>Iconography</td></tr>
+    </table>
+
+    <h3>Backend Stack</h3>
+    <table>
+        <tr>
+            <th>Technology</th>
+            <th>Purpose</th>
+        </tr>
+        <tr><td>Node.js + Express.js</td><td>Lightweight & fast server</td></tr>
+        <tr><td>PostgreSQL</td><td>Powerful, free, reliable database</td></tr>
+        <tr><td>Sequelize ORM</td><td>Database queries</td></tr>
+        <tr><td>JWT</td><td>Authentication</td></tr>
+        <tr><td>Multer</td><td>File uploads</td></tr>
+        <tr><td>Nodemailer</td><td>Email sending</td></tr>
+        <tr><td>Dotenv</td><td>Environment config</td></tr>
+        <tr><td>CORS</td><td>Cross-origin requests</td></tr>
+    </table>
+
+    <h3>Hosting (Free Tier)</h3>
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Purpose</th>
+        </tr>
+        <tr><td>Vercel</td><td>Frontend hosting (free tier, unlimited projects)</td></tr>
+        <tr><td>Render.com</td><td>Backend hosting (free tier with auto-deploy)</td></tr>
+        <tr><td>Render PostgreSQL</td><td>Database hosting (free trial)</td></tr>
+        <tr><td>Cloudinary</td><td>Image Storage (free tier: 10GB storage)</td></tr>
+    </table>
+
+    <h3>APIs & Integrations (ALL FREE)</h3>
+    <table>
+        <tr>
+            <th>API</th>
+            <th>Purpose</th>
+            <th>Free Tier</th>
+            <th>Link</th>
+        </tr>
+        <tr>
+            <td><strong>Mapillary</strong></td>
+            <td>Street-level images inside rooms/properties</td>
+            <td>1M images/month</td>
+            <td><a href="https://www.mapillary.com/developer">mapillary.com/developer</a></td>
+        </tr>
+        <tr>
+            <td><strong>OpenStreetMap + Leaflet</strong></td>
+            <td>Interactive mapping</td>
+            <td>Unlimited</td>
+            <td><a href="https://leafletjs.com">leafletjs.com</a></td>
+        </tr>
+        <tr>
+            <td><strong>Nominatim (OSM)</strong></td>
+            <td>Geocoding (address → coordinates)</td>
+            <td>1 req/sec</td>
+            <td><a href="https://nominatim.openstreetmap.org">nominatim.openstreetmap.org</a></td>
+        </tr>
+        <tr>
+            <td><strong>Google Places API</strong></td>
+            <td>Location suggestions & autocomplete</td>
+            <td>1000 free/month</td>
+            <td><a href="https://developers.google.com/maps/documentation/places">developers.google.com</a></td>
+        </tr>
+        <tr>
+            <td><strong>Firebase Auth</strong></td>
+            <td>User authentication</td>
+            <td>50k logins/month free</td>
+            <td><a href="https://firebase.google.com">firebase.google.com</a></td>
+        </tr>
+        <tr>
+            <td><strong>Cloudinary</strong></td>
+            <td>Image storage & optimization</td>
+            <td>10GB storage free</td>
+            <td><a href="https://cloudinary.com">cloudinary.com</a></td>
+        </tr>
+        <tr>
+            <td><strong>SendGrid / Mailgun</strong></td>
+            <td>Email notifications</td>
+            <td>100 emails/day free</td>
+            <td><a href="https://sendgrid.com">sendgrid.com</a></td>
+        </tr>
+        <tr>
+            <td><strong>Chart.js</strong></td>
+            <td>Price trends visualization</td>
+            <td>Free & open-source</td>
+            <td><a href="https://www.chartjs.org">chartjs.org</a></td>
+        </tr>
+        <tr>
+            <td><strong>Unsplash API</strong></td>
+            <td>Sample property images for demo</td>
+            <td>50 requests/hour</td>
+            <td><a href="https://unsplash.com/api">unsplash.com/api</a></td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>5. IMPLEMENTATION ROADMAP</h2>
+
+    <h3>Phase 1: Core Setup (Week 1)</h3>
+    <ul class="checkbox">
+        <li>Setup React + Tailwind frontend</li>
+        <li>Setup Node.js + Express backend</li>
+        <li>Setup PostgreSQL database</li>
+        <li>Create data schema</li>
+        <li>Setup authentication (JWT)</li>
+        <li>Deploy skeleton to Vercel + Render</li>
+    </ul>
+
+    <h3>Phase 2: Basic Features (Week 1.5)</h3>
+    <ul class="checkbox">
+        <li>Property listing CRUD (backend API)</li>
+        <li>Property listing page (frontend)</li>
+        <li>Search & filtering</li>
+        <li>Owner dashboard basics</li>
+        <li>Image upload</li>
+    </ul>
+
+    <h3>Phase 3: Advanced Features (Week 2)</h3>
+    <ul class="checkbox">
+        <li>Mapillary street view integration</li>
+        <li>Maps with property markers</li>
+        <li>Messaging system</li>
+        <li>Reviews & ratings</li>
+        <li>Price comparison tool</li>
+    </ul>
+
+    <h3>Phase 4: Polish & Stand-Out (Week 2.5)</h3>
+    <ul class="checkbox">
+        <li>Price prediction algorithm</li>
+        <li>Neighborhood ratings</li>
+        <li>Responsive mobile design</li>
+        <li>Performance optimization</li>
+        <li>Bug fixes & testing</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>6. RESEARCH PAPERS & GOOGLE SCHOLAR LINKS</h2>
+    <p><em>Feature Inspiration from Academic Research:</em></p>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Topic</th>
+            <th>Paper Title</th>
+            <th>Google Scholar Link</th>
+            <th>Feature Inspiration</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Price Prediction Models</td>
+            <td>Machine Learning for Real Estate Price Prediction</td>
+            <td><a href="https://scholar.google.com/scholar?q=machine+learning+real+estate+price+prediction">Search Link</a></td>
+            <td>Implement simple price range prediction based on location/size</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Trust & Verification Systems</td>
+            <td>Reputation Systems in E-Commerce Marketplaces</td>
+            <td><a href="https://scholar.google.com/scholar?q=trust+systems+online+marketplaces">Search Link</a></td>
+            <td>Verified badges for owners, user reviews, rating algorithms</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Recommendation Systems</td>
+            <td>Content-Based and Collaborative Filtering in Real Estate</td>
+            <td><a href="https://scholar.google.com/scholar?q=recommendation+systems+real+estate">Search Link</a></td>
+            <td>Suggest similar properties, personalized search</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Geospatial Analysis</td>
+            <td>Location Intelligence in Property Valuation</td>
+            <td><a href="https://scholar.google.com/scholar?q=geospatial+analysis+property+valuation">Search Link</a></td>
+            <td>Show nearby amenities, distance to schools/hospitals, safety scores</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Image Processing</td>
+            <td>Automated Real Estate Photo Recognition</td>
+            <td><a href="https://scholar.google.com/scholar?q=computer+vision+real+estate+image+recognition">Search Link</a></td>
+            <td>Auto-detect room features from photos (kitchen, bathroom count)</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>User Behavior Analysis</td>
+            <td>Search Behavior in Online Rental Marketplaces</td>
+            <td><a href="https://scholar.google.com/scholar?q=user+behavior+rental+marketplaces">Search Link</a></td>
+            <td>Popular searches, trending locations, seasonal patterns</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Fraud Detection</td>
+            <td>Detecting Fraudulent Listings in Rental Marketplaces</td>
+            <td><a href="https://scholar.google.com/scholar?q=fraud+detection+real+estate+listings">Search Link</a></td>
+            <td>Flag suspicious postings, duplicate photos, pricing anomalies</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>7. EXTRA STAND-OUT FEATURES (TO WIN)</h2>
+    <p><em>🚀 Wow Features (Pick 2-3):</em></p>
+
+    <h3>1. Virtual 360° Tours</h3>
+    <ul>
+        <li>Use Mapillary's panoramic images</li>
+        <li>Create walkthrough experience of rooms</li>
+        <li>Embed panoramic viewers for each property</li>
+    </ul>
+
+    <h3>2. Smart Price Predictor</h3>
+    <ul>
+        <li>Analyze historical data on your platform</li>
+        <li>Predict fair price based on: location, size, amenities, demand</li>
+        <li>Show comparison: "₹5000 vs avg ₹4800" on listings</li>
+        <li>Use simple ML (Linear Regression with TensorFlow.js)</li>
+    </ul>
+
+    <h3>3. Neighborhood Safety Score</h3>
+    <ul>
+        <li>Aggregate user reviews mentioning safety</li>
+        <li>Show icons: crime rate, traffic, noise level</li>
+        <li>Link to public datasets if available</li>
+    </ul>
+
+    <h3>4. Availability Calendar</h3>
+    <ul>
+        <li>PG/hostel owners set availability</li>
+        <li>Users see real-time availability</li>
+        <li>Color-coded: Available (green), Booked (red), Maintenance (gray)</li>
+    </ul>
+
+    <h3>5. Quick Contact + Messaging</h3>
+    <ul>
+        <li>Direct in-app messaging (not email)</li>
+        <li>Show response time ("Usually replies in 2 hours")</li>
+        <li>Rating system for communication</li>
+    </ul>
+
+    <h3>6. Advanced Filters (Unique)</h3>
+    <ul>
+        <li>Distance from metro/college</li>
+        <li>Furnished level (unfurnished, semi, fully)</li>
+        <li>Shared vs private</li>
+        <li>Pet-friendly filter</li>
+        <li>Vegetarian/non-veg community</li>
+        <li>Gender-specific options</li>
+        <li>Lease duration flexibility</li>
+        <li>Amenities checklist (WiFi, laundry, parking, etc.)</li>
+    </ul>
+
+    <h3>7. Analytics Dashboard for Owners</h3>
+    <ul>
+        <li>Views per listing (graph)</li>
+        <li>Inquiries count</li>
+        <li>Conversion rate (inquiries → bookings)</li>
+        <li>Price comparison with nearby properties</li>
+        <li>Seasonal demand trends</li>
+    </ul>
+
+    <h3>8. Verification Badge System</h3>
+    <ul>
+        <li>Phone verification (mandatory)</li>
+        <li>Email verification</li>
+        <li>ID verification (if time allows)</li>
+        <li>Show verification level on profile</li>
+    </ul>
+
+    <h3>9. Price Comparison Tool</h3>
+    <ul>
+        <li>User clicks "Compare" on a property</li>
+        <li>Show 3-5 similar properties side-by-side</li>
+        <li>Highlight differences in amenities/price</li>
+        <li>Why it's better/worse than alternatives</li>
+    </ul>
+
+    <h3>10. AI Chatbot (Optional)</h3>
+    <ul>
+        <li>Answer common questions (check-in times, pet policy, etc.)</li>
+        <li>Uses FAQ database</li>
+        <li>Can be simple rule-based (no actual AI needed)</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>8. PROJECT STRUCTURE (File Organization)</h2>
+
+    <pre>
+RoomGi/
+├── frontend/                    # React App
+│   ├── public/
+│   ├── src/
+│   │   ├── components/          # Reusable components
+│   │   │   ├── PropertyCard.jsx
+│   │   │   ├── FilterPanel.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   └── MapViewer.jsx
+│   │   ├── pages/               # Page components
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── SearchPage.jsx
+│   │   │   ├── PropertyDetail.jsx
+│   │   │   ├── OwnerDashboard.jsx
+│   │   │   └── LoginPage.jsx
+│   │   ├── services/            # API calls
+│   │   │   └── api.js
+│   │   ├── App.jsx
+│   │   └── index.css
+│   ├── package.json
+│   └── .env.local
+│
+├── backend/                     # Node.js + Express
+│   ├── routes/
+│   │   ├── properties.js        # Property CRUD
+│   │   ├── users.js             # Auth & profiles
+│   │   ├── listings.js          # Owner listings
+│   │   └── inquiries.js         # User inquiries
+│   ├── controllers/
+│   │   ├── propertyController.js
+│   │   ├── userController.js
+│   │   └── inquiryController.js
+│   ├── models/                  # Database models
+│   │   ├── User.js
+│   │   ├── Property.js
+│   │   └── Inquiry.js
+│   ├── middleware/
+│   │   └── auth.js              # JWT verification
+│   ├── config/
+│   │   └── database.js          # PostgreSQL connection
+│   ├── server.js
+│   ├── package.json
+│   └── .env
+│
+├── database/                    # SQL schemas
+│   └── schema.sql
+│
+└── docs/                        # Documentation
+    ├── API_ENDPOINTS.md
+    ├── DATABASE_SCHEMA.md
+    └── DEPLOYMENT.md
+    </pre>
+
+    <div class="page-break"></div>
+
+    <h2>9. DATABASE SCHEMA (PostgreSQL)</h2>
+
+    <pre>
+-- Users Table
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  phone VARCHAR(15) UNIQUE,
+  user_type ENUM('buyer', 'owner', 'broker', 'renter') NOT NULL,
+  profile_pic_url TEXT,
+  is_verified BOOLEAN DEFAULT FALSE,
+  verification_level INT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Properties Table
+CREATE TABLE properties (
+  id SERIAL PRIMARY KEY,
+  owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  property_type ENUM('room', 'pg', 'hostel', 'flat', 'home') NOT NULL,
+  listing_type ENUM('rent', 'sale') NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  city VARCHAR(100) NOT NULL,
+  state VARCHAR(100) NOT NULL,
+  postal_code VARCHAR(10),
+  latitude DECIMAL(10, 8),
+  longitude DECIMAL(11, 8),
+  price INT NOT NULL,
+  price_period ENUM('monthly', 'yearly', 'one-time') DEFAULT 'monthly',
+  size INT,  -- in sq ft
+  bedrooms INT,
+  bathrooms INT,
+  furnished ENUM('unfurnished', 'semi-furnished', 'fully-furnished'),
+  available_from DATE,
+  status ENUM('available', 'booked', 'maintenance') DEFAULT 'available',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Amenities Table (Join Table)
+CREATE TABLE property_amenities (
+  id SERIAL PRIMARY KEY,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  amenity VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Images Table
+CREATE TABLE images (
+  id SERIAL PRIMARY KEY,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  image_url TEXT NOT NULL,
+  display_order INT,
+  uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Reviews Table
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  reviewer_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  rating INT CHECK (rating >= 1 AND rating <= 5),
+  comment TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Inquiries/Messages Table
+CREATE TABLE inquiries (
+  id SERIAL PRIMARY KEY,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  sender_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  message TEXT NOT NULL,
+  status ENUM('new', 'replied', 'closed') DEFAULT 'new',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Wishlist Table
+CREATE TABLE wishlist (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  property_id INT NOT NULL REFERENCES properties(id) ON DELETE CASCADE,
+  added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, property_id)
+);
+
+-- Create Indexes for Performance
+CREATE INDEX idx_properties_city ON properties(city);
+CREATE INDEX idx_properties_price ON properties(price);
+CREATE INDEX idx_properties_owner ON properties(owner_id);
+CREATE INDEX idx_images_property ON images(property_id);
+CREATE INDEX idx_reviews_property ON reviews(property_id);
+CREATE INDEX idx_inquiries_property ON inquiries(property_id);
+    </pre>
+
+    <div class="page-break"></div>
+
+    <h2>10. KEY API ENDPOINTS</h2>
+
+    <h3>AUTH</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/auth/register</td><td>User signup</td></tr>
+        <tr><td>POST</td><td>/api/auth/login</td><td>User login</td></tr>
+        <tr><td>POST</td><td>/api/auth/logout</td><td>User logout</td></tr>
+        <tr><td>POST</td><td>/api/auth/verify-phone</td><td>Phone verification</td></tr>
+    </table>
+
+    <h3>PROPERTIES</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/properties</td><td>Get all properties (with filters)</td></tr>
+        <tr><td>GET</td><td>/api/properties/:id</td><td>Get single property details</td></tr>
+        <tr><td>POST</td><td>/api/properties</td><td>Create new property (owner only)</td></tr>
+        <tr><td>PUT</td><td>/api/properties/:id</td><td>Update property (owner only)</td></tr>
+        <tr><td>DELETE</td><td>/api/properties/:id</td><td>Delete property (owner only)</td></tr>
+    </table>
+
+    <h3>SEARCH & FILTERS</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/properties/search</td><td>Advanced search</td></tr>
+        <tr><td>GET</td><td>/api/properties/filter?location=x&budget=y</td><td>Filter results</td></tr>
+    </table>
+
+    <h3>IMAGES</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/properties/:id/images</td><td>Upload images</td></tr>
+        <tr><td>GET</td><td>/api/properties/:id/images</td><td>Get all images for property</td></tr>
+    </table>
+
+    <h3>REVIEWS</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/reviews</td><td>Create review</td></tr>
+        <tr><td>GET</td><td>/api/reviews/:property_id</td><td>Get reviews for property</td></tr>
+    </table>
+
+    <h3>INQUIRIES/MESSAGES</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/inquiries</td><td>Send inquiry</td></tr>
+        <tr><td>GET</td><td>/api/inquiries</td><td>Get user inquiries</td></tr>
+        <tr><td>PUT</td><td>/api/inquiries/:id</td><td>Reply to inquiry</td></tr>
+    </table>
+
+    <h3>WISHLIST</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>POST</td><td>/api/wishlist</td><td>Add to wishlist</td></tr>
+        <tr><td>GET</td><td>/api/wishlist</td><td>Get user wishlist</td></tr>
+        <tr><td>DELETE</td><td>/api/wishlist/:id</td><td>Remove from wishlist</td></tr>
+    </table>
+
+    <h3>USER</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/users/:id</td><td>Get user profile</td></tr>
+        <tr><td>PUT</td><td>/api/users/:id</td><td>Update user profile</td></tr>
+        <tr><td>GET</td><td>/api/users/:id/listings</td><td>Get owner's properties (dashboard)</td></tr>
+    </table>
+
+    <h3>ANALYTICS</h3>
+    <table>
+        <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td>GET</td><td>/api/analytics/owner</td><td>Owner dashboard stats</td></tr>
+        <tr><td>GET</td><td>/api/analytics/price-trends</td><td>Price trends for city</td></tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>11. QUICK START SETUP COMMANDS</h2>
+
+    <pre>
+# Clone or create project
+git init RoomGi && cd RoomGi
+
+# Frontend Setup
+npx create-react-app frontend
+cd frontend
+npm install axios react-query react-router-dom tailwindcss leaflet mapillary react-icons formik yup
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+cd ..
+
+# Backend Setup
+mkdir backend && cd backend
+npm init -y
+npm install express cors dotenv sequelize pg bcryptjs jsonwebtoken multer nodemailer cloudinary
+npm install -D nodemon
+cd ..
+
+# Database Setup (PostgreSQL)
+# Install PostgreSQL locally or use Docker:
+# docker run --name roomgi-db -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres
+
+# Create .env files:
+# backend/.env:
+# DB_HOST=localhost
+# DB_USER=postgres
+# DB_PASSWORD=password
+# DB_NAME=roomgi
+# JWT_SECRET=your-secret-key
+# CLOUDINARY_KEY=your-key
+# SENDGRID_KEY=your-key
+
+# Start development
+# Terminal 1: cd backend && npm run dev
+# Terminal 2: cd frontend && npm start
+    </pre>
+
+    <div class="page-break"></div>
+
+    <h2>12. WINNING TIPS 🏆</h2>
+
+    <h3>Do's ✅</h3>
+    <ul>
+        <li><strong>Combine all 3 problem statements</strong> into one unified platform (unique angle)</li>
+        <li><strong>Mobile-first responsive design</strong> (most users browse on phones)</li>
+        <li><strong>Mapillary integration</strong> with street view (wow factor!)</li>
+        <li><strong>Real verification system</strong> (differentiator from OLX)</li>
+        <li><strong>Working analytics dashboard</strong> (shows maturity)</li>
+        <li><strong>Price predictor/comparison</strong> (AI wow factor)</li>
+        <li><strong>Fast & clean UI</strong> (Tailwind makes this easy)</li>
+        <li><strong>Deploy on Vercel + Render</strong> (judges can access live link)</li>
+        <li><strong>GitHub README that's professional</strong> (first impression)</li>
+    </ul>
+
+    <h3>Don'ts ❌</h3>
+    <ul>
+        <li>Don't build only landing pages (judges want functional website)</li>
+        <li>Don't hardcode data (use real database)</li>
+        <li>Don't ignore mobile experience</li>
+        <li>Don't forget error handling</li>
+        <li>Don't make confusing navigation</li>
+        <li>Don't deploy with placeholder data only</li>
+        <li>Don't skip testing</li>
+        <li>Don't ignore security (hash passwords, validate inputs, use HTTPS)</li>
+    </ul>
+
+    <div class="success">
+        <h4>Judging Psychology 💭</h4>
+        <p>Judges look for: <strong>Working product > Pretty design > Code quality > Innovation</strong></p>
+        <ul>
+            <li>Make it WORK first (even with dummy data)</li>
+            <li>Make it PRETTY second (Tailwind + clean layout)</li>
+            <li>Make it STABLE third (no console errors)</li>
+            <li>Make it UNIQUE fourth (Mapillary + AI = differentiator)</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <h2>13. RESOURCES TO DOWNLOAD</h2>
+
+    <table>
+        <tr>
+            <th>Resource</th>
+            <th>Link</th>
+            <th>Why</th>
+        </tr>
+        <tr>
+            <td>Figma Templates</td>
+            <td><a href="https://www.figma.com/community">figma.com/community</a></td>
+            <td>UI inspiration</td>
+        </tr>
+        <tr>
+            <td>React Components</td>
+            <td><a href="https://tailwindui.com">tailwindui.com</a></td>
+            <td>Copy-paste components</td>
+        </tr>
+        <tr>
+            <td>Icons</td>
+            <td><a href="https://react-icons.github.io/react-icons">react-icons.github.io</a></td>
+            <td>10k+ free icons</td>
+        </tr>
+        <tr>
+            <td>Sample Data</td>
+            <td><a href="https://www.mockaroo.com">mockaroo.com</a></td>
+            <td>Generate dummy property data</td>
+        </tr>
+        <tr>
+            <td>PostgreSQL GUI</td>
+            <td><a href="https://www.pgadmin.org">pgadmin.org</a></td>
+            <td>Easy database management</td>
+        </tr>
+        <tr>
+            <td>Postman</td>
+            <td><a href="https://www.postman.com">postman.com</a></td>
+            <td>Test APIs during development</td>
+        </tr>
+        <tr>
+            <td>VSCode Extensions</td>
+            <td>ES7+, Tailwind CSS IntelliSense, REST Client</td>
+            <td>Speed up coding</td>
+        </tr>
+    </table>
+
+    <h2>14. TIMELINE ESTIMATE (For 2-3 Person Team)</h2>
+
+    <table>
+        <tr>
+            <th>Phase</th>
+            <th>Duration</th>
+            <th>Tasks</th>
+        </tr>
+        <tr>
+            <td>Planning & Setup</td>
+            <td>6 hours</td>
+            <td>Design, DB schema, API planning, environment setup</td>
+        </tr>
+        <tr>
+            <td>Backend Core</td>
+            <td>12 hours</td>
+            <td>Auth, CRUD APIs, database queries, basic testing</td>
+        </tr>
+        <tr>
+            <td>Frontend Core</td>
+            <td>12 hours</td>
+            <td>Pages, components, routing, basic styling</td>
+        </tr>
+        <tr>
+            <td>Integration</td>
+            <td>8 hours</td>
+            <td>Connect frontend to backend, test APIs</td>
+        </tr>
+        <tr>
+            <td>Features</td>
+            <td>10 hours</td>
+            <td>Mapillary, filtering, search, messaging</td>
+        </tr>
+        <tr>
+            <td>Polish & Deploy</td>
+            <td>8 hours</td>
+            <td>Mobile responsive, bug fixes, deploy to Vercel/Render</td>
+        </tr>
+        <tr>
+            <td>Presentation</td>
+            <td>2 hours</td>
+            <td>Create slides, demo script, walkthrough</td>
+        </tr>
+        <tr>
+            <td>Buffer</td>
+            <td>6 hours</td>
+            <td>Unexpected issues, performance fixes</td>
+        </tr>
+        <tr style="background-color: #3498db; color: white; font-weight: bold;">
+            <td>TOTAL</td>
+            <td>~64 hours</td>
+            <td>~26 hours/person for 2-3 weeks part-time</td>
+        </tr>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>15. FINAL CHECKLIST BEFORE SUBMISSION</h2>
+
+    <ul class="checkbox">
+        <li>All 3 problem statements covered (rental + buy-sell + owner dashboard)</li>
+        <li>Website is fully functional (not just landing page)</li>
+        <li>Responsive on mobile, tablet, desktop</li>
+        <li>Search & filtering working</li>
+        <li>Owner dashboard CRUD working</li>
+        <li>Mapillary integration working</li>
+        <li>Images upload working</li>
+        <li>Messages/inquiries working</li>
+        <li>Reviews & ratings working</li>
+        <li>Database has real schema (not just JSON)</li>
+        <li>Deployed to Vercel (frontend) + Render (backend)</li>
+        <li>GitHub repository is public with good README</li>
+        <li>No console errors or warnings</li>
+        <li>API endpoints tested with Postman</li>
+        <li>Password hashing implemented</li>
+        <li>CORS configured correctly</li>
+        <li>Environment variables not exposed</li>
+        <li>Code is commented (especially complex logic)</li>
+        <li>Performance: pages load < 3 seconds</li>
+        <li>Presentation slide deck ready (10-15 slides)</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <h2>16. PRESENTATION STRUCTURE (10 Minutes)</h2>
+
+    <table>
+        <tr>
+            <th>Slide</th>
+            <th>Content</th>
+            <th>Duration</th>
+        </tr>
+        <tr>
+            <td>Slide 1-2</td>
+            <td><strong>Problem Statement:</strong> Show fragmented rental discovery problem, current pain points (fake listings, no transparency)</td>
+            <td>1 min</td>
+        </tr>
+        <tr>
+            <td>Slide 3-4</td>
+            <td><strong>Your Solution:</strong> Unified platform for 3 user types, key differentiators (Mapillary, verification, price prediction)</td>
+            <td>1 min</td>
+        </tr>
+        <tr>
+            <td>Slide 5-6</td>
+            <td><strong>Demo (LIVE if possible):</strong> Show search functionality, owner dashboard, messaging</td>
+            <td>4 min</td>
+        </tr>
+        <tr>
+            <td>Slide 7-8</td>
+            <td><strong>Technical Stack:</strong> Frontend: React + Tailwind, Backend: Node.js + PostgreSQL, APIs: Mapillary, OpenStreetMap</td>
+            <td>1 min</td>
+        </tr>
+        <tr>
+            <td>Slide 9</td>
+            <td><strong>Unique Features:</strong> Street view integration, price predictor, verification badges, analytics dashboard</td>
+            <td>1 min</td>
+        </tr>
+        <tr>
+            <td>Slide 10</td>
+            <td><strong>Scalability & Future:</strong> Can handle 1M+ listings, ready for mobile app, AI chatbot</td>
+            <td>1 min</td>
+        </tr>
+        <tr>
+            <td>Slide 11</td>
+            <td><strong>Team & Timeline:</strong> Team members, built in 48 hours</td>
+            <td>30 sec</td>
+        </tr>
+        <tr>
+            <td>Slide 12</td>
+            <td><strong>Call to Action:</strong> "RoomGi: Making real estate transparent & trustworthy"</td>
+            <td>30 sec</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <div class="success center">
+        <h2>🚀 YOU'VE GOT THIS!</h2>
+        <p><strong>Remember:</strong></p>
+        <ul style="list-style: none; padding: 0;">
+            <li>✓ Start simple, add complexity gradually</li>
+            <li>✓ Get something working ASAP (don't perfect first)</li>
+            <li>✓ Judges value working MVP over perfect concept</li>
+            <li>✓ Combine all 3 problems = 10x differentiation</li>
+            <li>✓ Mapillary + price predictor = wow factor</li>
+            <li>✓ Deploy early, troubleshoot live if needed</li>
+        </ul>
+        <h3>Good luck! 🏆</h3>
+    </div>
+
+    <hr>
+    <p class="center"><em>Last Updated: January 27, 2026</em></p>
+    <p class="center"><em>Made for hackathon champions 💪</em></p>
+
+</body>
+</html>
