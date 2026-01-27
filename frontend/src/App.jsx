@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import BrowseProperties from './pages/BrowseProperties';
 import './index.css';
 
 // Scroll animation observer
@@ -74,6 +75,11 @@ const FEATURED_HOMES = [
 function App() {
     useScrollAnimation();
     const mascotPosition = useFloatingMascot();
+    const [currentPage, setCurrentPage] = useState('home');
+
+    if (currentPage === 'browse') {
+        return <BrowseProperties />;
+    }
 
     return (
         <div className="app">
@@ -84,12 +90,12 @@ function App() {
 
             {/* Navigation */}
             <nav className="navbar">
-                <a href="/" className="navbar-logo">
+                <a href="#" onClick={() => setCurrentPage('home')} className="navbar-logo">
                     <img src="/mascot.png" alt="RoomGi" />
                     <span>RoomGi</span>
                 </a>
                 <ul className="navbar-links">
-                    <li><a href="#properties">Properties</a></li>
+                    <li><a href="#" onClick={() => setCurrentPage('browse')}>Browse Properties</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -109,7 +115,7 @@ function App() {
                             Unlock the perfect living experience by exploring a diverse selection of premium homes.
                         </p>
                         <div className="hero-buttons animate-on-scroll animate-delay-200">
-                            <button className="btn btn-primary">Explore Now</button>
+                            <button className="btn btn-primary" onClick={() => setCurrentPage('browse')}>Explore Now</button>
                             <button className="btn btn-outline">Learn More</button>
                         </div>
                     </div>
