@@ -5,7 +5,7 @@ import './BrowseProperties.css';
 const CITIES = ['Bangalore', 'Delhi', 'Mumbai', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Chandigarh'];
 const PROPERTY_TYPES = ['flat', 'home', 'villa', 'plot', 'commercial'];
 
-function BrowseProperties() {
+function BrowseProperties({ onViewProperty }) {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filters, setFilters] = useState({
@@ -195,7 +195,12 @@ function BrowseProperties() {
 
                                     <div className="property-footer">
                                         <span className="owner-type">{property.owner?.user_type || 'Owner'}</span>
-                                        <button className="btn btn-sm btn-primary">View Details</button>
+                                        <button
+                                            className="btn btn-sm btn-primary"
+                                            onClick={() => onViewProperty(property.id)}
+                                        >
+                                            View Details
+                                        </button>
                                     </div>
                                 </div>
                             </div>

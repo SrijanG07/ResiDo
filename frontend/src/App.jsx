@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BrowseProperties from './pages/BrowseProperties';
+import PropertyDetail from './pages/PropertyDetail';
 import './index.css';
 
 // Scroll animation observer
@@ -76,9 +77,20 @@ function App() {
     useScrollAnimation();
     const mascotPosition = useFloatingMascot();
     const [currentPage, setCurrentPage] = useState('home');
+    const [selectedPropertyId, setSelectedPropertyId] = useState(null);
 
     if (currentPage === 'browse') {
-        return <BrowseProperties />;
+        return <BrowseProperties onViewProperty={(id) => {
+            setSelectedPropertyId(id);
+            setCurrentPage('detail');
+        }} />;
+    }
+
+    if (currentPage === 'detail' && selectedPropertyId) {
+        return <PropertyDetail
+            propertyId={selectedPropertyId}
+            onBack={() => setCurrentPage('browse')}
+        />;
     }
 
     return (
