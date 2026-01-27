@@ -1,60 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import BrowseProperties from './pages/BrowseProperties';
 import PropertyDetail from './pages/PropertyDetail';
 import './index.css';
 
-// Scroll animation observer
-const useScrollAnimation = () => {
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            },
-            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-        );
-
-        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-            observer.observe(el);
-        });
-
-        return () => observer.disconnect();
-    }, []);
-};
-
-// Floating Mascot Hook
-const useFloatingMascot = () => {
-    const [position, setPosition] = useState({ y: 100 });
-    const targetY = useRef(100);
-    const currentY = useRef(100);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-            const viewportHeight = window.innerHeight;
-            targetY.current = viewportHeight * (0.15 + scrollPercent * 0.6);
-        };
-
-        const animate = () => {
-            currentY.current += (targetY.current - currentY.current) * 0.05;
-            setPosition({ y: currentY.current });
-            requestAnimationFrame(animate);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        const animationId = requestAnimationFrame(animate);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            cancelAnimationFrame(animationId);
-        };
-    }, []);
-
-    return position;
-};
+// Lazy load VirtualTour to prevent Three.js from crashing the entire app
+const VirtualTour = lazy(() => import('./pages/VirtualTour'));
 
 // Sample property data
 const PROPERTIES = [
@@ -73,12 +23,43 @@ const FEATURED_HOMES = [
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300&h=400&fit=crop',
 ];
 
+// Loading component for virtual tour
+function TourLoading() {
+    return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#000', color: '#39FF14' }}>
+            <div style={{ textAlign: 'center' }}>
+                <h2>Loading Virtual Tour...</h2>
+                <p>Preparing 360° experience</p>
+            </div>
+        </div>
+    );
+}
+
 function App() {
-    useScrollAnimation();
-    const mascotPosition = useFloatingMascot();
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedPropertyId, setSelectedPropertyId] = useState(null);
 
+    // Scroll animation observer
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, [currentPage]);
+
+    // Handle Browse Properties page
     if (currentPage === 'browse') {
         return <BrowseProperties onViewProperty={(id) => {
             setSelectedPropertyId(id);
@@ -86,6 +67,7 @@ function App() {
         }} />;
     }
 
+    // Handle Property Detail page
     if (currentPage === 'detail' && selectedPropertyId) {
         return <PropertyDetail
             propertyId={selectedPropertyId}
@@ -93,21 +75,32 @@ function App() {
         />;
     }
 
+    // Handle Virtual Tour page with lazy loading
+    if (currentPage === 'tour') {
+        return (
+            <Suspense fallback={<TourLoading />}>
+                <VirtualTour onBack={() => setCurrentPage('home')} />
+            </Suspense>
+        );
+    }
+
+    // Home page
     return (
         <div className="app">
-            {/* Floating Mascot */}
-            <div className="floating-mascot" style={{ top: `${mascotPosition.y}px` }}>
+            {/* Floating Mascot - Fixed position */}
+            <div className="floating-mascot" style={{ top: '100px' }}>
                 <img src="/mascot.png" alt="RoomGi" />
             </div>
 
             {/* Navigation */}
             <nav className="navbar">
-                <a href="#" onClick={() => setCurrentPage('home')} className="navbar-logo">
+                <a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('home'); }} className="navbar-logo">
                     <img src="/mascot.png" alt="RoomGi" />
                     <span>RoomGi</span>
                 </a>
                 <ul className="navbar-links">
-                    <li><a href="#" onClick={() => setCurrentPage('browse')}>Browse Properties</a></li>
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('browse'); }}>Browse Properties</a></li>
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('tour'); }} className="tour-link">🏠 360° Tour</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -261,7 +254,7 @@ function App() {
                             <h2>Let's Connect with us!</h2>
                             <p>We believe in collaboration and value your input throughout the process.</p>
 
-                            <form className="contact-form">
+                            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
                                 <div className="form-group">
                                     <label>Full Name</label>
                                     <input type="text" placeholder="John Doe" />

@@ -241,6 +241,32 @@ h6 {
     color: var(--neon-green);
 }
 
+.navbar-links a.tour-link {
+    background: linear-gradient(135deg, #00ff88, #00cc6a);
+    color: #000 !important;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(0, 255, 136, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+    }
+}
+
+.navbar-links a.tour-link:hover {
+    transform: scale(1.05);
+    background: #00ff88;
+}
+
 .navbar-links a:hover::after {
     width: 80%;
     box-shadow: 0 0 10px var(--neon-green-glow);
