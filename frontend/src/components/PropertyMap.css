@@ -186,6 +186,26 @@
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
+/* Popup Actions Container */
+.map-popup-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.map-popup-actions .map-popup-btn {
+    flex: 1;
+    padding: 8px 6px;
+    font-size: 11px;
+}
+
+.street-view-btn {
+    background: linear-gradient(135deg, #34d399 0%, #059669 100%) !important;
+}
+
+.street-view-btn:hover {
+    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.4) !important;
+}
+
 /* Cluster Markers */
 .marker-cluster-small,
 .marker-cluster-medium,

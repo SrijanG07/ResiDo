@@ -1,0 +1,510 @@
+import React, { useState } from 'react';
+import './AddPropertyWizard.css';
+
+const STEPS = [
+    { id: 1, title: 'Basic Details', icon: '📝' },
+    { id: 2, title: 'Location', icon: '📍' },
+    { id: 3, title: 'Lifestyle', icon: '🌿' },
+    { id: 4, title: 'Media', icon: '📷' },
+    { id: 5, title: 'Review', icon: '✅' }
+];
+
+const PROPERTY_TYPES = [
+    { value: 'flat', label: 'Flat/Apartment' },
+    { value: 'home', label: 'Independent House' },
+    { value: 'villa', label: 'Villa' },
+    { value: 'pg', label: 'PG/Paying Guest' },
+    { value: 'hostel', label: 'Hostel' },
+    { value: 'room', label: 'Single Room' },
+    { value: 'plot', label: 'Plot' },
+    { value: 'commercial', label: 'Commercial' }
+];
+
+function AddPropertyWizard({ onComplete }) {
+    const [currentStep, setCurrentStep] = useState(1);
+    const [formData, setFormData] = useState({
+        // Basic Details
+        title: '',
+        description: '',
+        property_type: 'flat',
+        listing_type: 'sale',
+        price: '',
+        bedrooms: '',
+        bathrooms: '',
+        size: '',
+        furnished: 'unfurnished',
+        // Location
+        address: '',
+        city: '',
+        locality: '',
+        pincode: '',
+        latitude: '',
+        longitude: '',
+        // Lifestyle
+        pet_friendly: false,
+        vegetarian_only: false,
+        bachelor_friendly: true,
+        gender_preference: 'any',
+        near_metro: false,
+        near_college: '',
+        // Media
+        images: [],
+        panoramas: []
+    });
+    const [predictedPrice, setPredictedPrice] = useState(null);
+
+    const updateField = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
+
+    const nextStep = () => {
+        if (currentStep < 5) setCurrentStep(currentStep + 1);
+    };
+
+    const prevStep = () => {
+        if (currentStep > 1) setCurrentStep(currentStep - 1);
+    };
+
+    const handlePredictPrice = () => {
+        // Mock price prediction
+        const basePrice = formData.property_type === 'villa' ? 15000000 :
+            formData.property_type === 'flat' ? 8000000 : 5000000;
+        const bedroomMultiplier = (parseInt(formData.bedrooms) || 2) * 1500000;
+        const sizeMultiplier = (parseInt(formData.size) || 1000) * 5000;
+        const predicted = basePrice + bedroomMultiplier + sizeMultiplier;
+        setPredictedPrice(predicted);
+    };
+
+    const handleSubmit = () => {
+        console.log('Submitting property:', formData);
+        // TODO: API call to save property
+        onComplete();
+    };
+
+    const formatPrice = (price) => {
+        if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
+        if (price >= 100000) return `₹${(price / 100000).toFixed(2)} L`;
+        return `₹${price.toLocaleString()}`;
+    };
+
+    return (
+        <div className="add-property-wizard">
+            {/* Progress Steps */}
+            <div className="wizard-progress">
+                {STEPS.map(step => (
+                    <div
+                        key={step.id}
+                        className={`progress-step ${currentStep === step.id ? 'active' : ''} ${currentStep > step.id ? 'completed' : ''}`}
+                        onClick={() => currentStep > step.id && setCurrentStep(step.id)}
+                    >
+                        <span className="step-icon">{currentStep > step.id ? '✓' : step.icon}</span>
+                        <span className="step-title">{step.title}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Step Content */}
+            <div className="wizard-content">
+                {/* Step 1: Basic Details */}
+                {currentStep === 1 && (
+                    <div className="step-content">
+                        <h2>Basic Details</h2>
+                        <p className="step-description">Tell us about your property</p>
+
+                        <div className="form-grid">
+                            <div className="form-group full-width">
+                                <label>Property Title *</label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g., Spacious 3 BHK in Koramangala"
+                                    value={formData.title}
+                                    onChange={(e) => updateField('title', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Property Type *</label>
+                                <select
+                                    value={formData.property_type}
+                                    onChange={(e) => updateField('property_type', e.target.value)}
+                                >
+                                    {PROPERTY_TYPES.map(type => (
+                                        <option key={type.value} value={type.value}>{type.label}</option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Listing Type *</label>
+                                <div className="radio-group">
+                                    <label className={`radio-option ${formData.listing_type === 'sale' ? 'active' : ''}`}>
+                                        <input type="radio" name="listing_type" value="sale"
+                                            checked={formData.listing_type === 'sale'}
+                                            onChange={() => updateField('listing_type', 'sale')} />
+                                        For Sale
+                                    </label>
+                                    <label className={`radio-option ${formData.listing_type === 'rent' ? 'active' : ''}`}>
+                                        <input type="radio" name="listing_type" value="rent"
+                                            checked={formData.listing_type === 'rent'}
+                                            onChange={() => updateField('listing_type', 'rent')} />
+                                        For Rent
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Price (₹) *</label>
+                                <input
+                                    type="number"
+                                    placeholder="e.g., 8500000"
+                                    value={formData.price}
+                                    onChange={(e) => updateField('price', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Bedrooms</label>
+                                <select value={formData.bedrooms} onChange={(e) => updateField('bedrooms', e.target.value)}>
+                                    <option value="">Select</option>
+                                    <option value="1">1 BHK</option>
+                                    <option value="2">2 BHK</option>
+                                    <option value="3">3 BHK</option>
+                                    <option value="4">4 BHK</option>
+                                    <option value="5">5+ BHK</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Bathrooms</label>
+                                <select value={formData.bathrooms} onChange={(e) => updateField('bathrooms', e.target.value)}>
+                                    <option value="">Select</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4+</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Size (sq.ft)</label>
+                                <input
+                                    type="number"
+                                    placeholder="e.g., 1500"
+                                    value={formData.size}
+                                    onChange={(e) => updateField('size', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Furnished Status</label>
+                                <select value={formData.furnished} onChange={(e) => updateField('furnished', e.target.value)}>
+                                    <option value="unfurnished">Unfurnished</option>
+                                    <option value="semi-furnished">Semi Furnished</option>
+                                    <option value="fully-furnished">Fully Furnished</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group full-width">
+                                <label>Description</label>
+                                <textarea
+                                    rows="4"
+                                    placeholder="Describe your property..."
+                                    value={formData.description}
+                                    onChange={(e) => updateField('description', e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Step 2: Location */}
+                {currentStep === 2 && (
+                    <div className="step-content">
+                        <h2>Location Details</h2>
+                        <p className="step-description">Where is your property located?</p>
+
+                        <div className="form-grid">
+                            <div className="form-group full-width">
+                                <label>Full Address *</label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g., 123 Main Street, 4th Floor"
+                                    value={formData.address}
+                                    onChange={(e) => updateField('address', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>City *</label>
+                                <select value={formData.city} onChange={(e) => updateField('city', e.target.value)}>
+                                    <option value="">Select City</option>
+                                    <option value="Bangalore">Bangalore</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Delhi">Delhi</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Pune">Pune</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Locality *</label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g., Koramangala"
+                                    value={formData.locality}
+                                    onChange={(e) => updateField('locality', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label>Pincode</label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g., 560034"
+                                    value={formData.pincode}
+                                    onChange={(e) => updateField('pincode', e.target.value)}
+                                />
+                            </div>
+
+                            <div className="form-group full-width">
+                                <label>Map Location</label>
+                                <div className="map-placeholder">
+                                    <div className="map-message">
+                                        🗺️ Interactive map coming soon
+                                        <br />
+                                        <small>Enter coordinates manually or use the map to pick location</small>
+                                    </div>
+                                    <div className="coord-inputs">
+                                        <input
+                                            type="number"
+                                            step="0.000001"
+                                            placeholder="Latitude"
+                                            value={formData.latitude}
+                                            onChange={(e) => updateField('latitude', e.target.value)}
+                                        />
+                                        <input
+                                            type="number"
+                                            step="0.000001"
+                                            placeholder="Longitude"
+                                            value={formData.longitude}
+                                            onChange={(e) => updateField('longitude', e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Step 3: Lifestyle */}
+                {currentStep === 3 && (
+                    <div className="step-content">
+                        <h2>Lifestyle Preferences</h2>
+                        <p className="step-description">Help buyers find the right match</p>
+
+                        <div className="lifestyle-grid">
+                            <div className="lifestyle-card">
+                                <div className="lifestyle-header">
+                                    <span className="lifestyle-icon">🐾</span>
+                                    <span className="lifestyle-label">Pet Friendly</span>
+                                </div>
+                                <label className="toggle-switch">
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.pet_friendly}
+                                        onChange={(e) => updateField('pet_friendly', e.target.checked)}
+                                    />
+                                    <span className="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div className="lifestyle-card">
+                                <div className="lifestyle-header">
+                                    <span className="lifestyle-icon">🥦</span>
+                                    <span className="lifestyle-label">Vegetarian Only</span>
+                                </div>
+                                <label className="toggle-switch">
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.vegetarian_only}
+                                        onChange={(e) => updateField('vegetarian_only', e.target.checked)}
+                                    />
+                                    <span className="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div className="lifestyle-card">
+                                <div className="lifestyle-header">
+                                    <span className="lifestyle-icon">👨‍💼</span>
+                                    <span className="lifestyle-label">Bachelor Friendly</span>
+                                </div>
+                                <label className="toggle-switch">
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.bachelor_friendly}
+                                        onChange={(e) => updateField('bachelor_friendly', e.target.checked)}
+                                    />
+                                    <span className="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div className="lifestyle-card">
+                                <div className="lifestyle-header">
+                                    <span className="lifestyle-icon">🚇</span>
+                                    <span className="lifestyle-label">Near Metro</span>
+                                </div>
+                                <label className="toggle-switch">
+                                    <input
+                                        type="checkbox"
+                                        checked={formData.near_metro}
+                                        onChange={(e) => updateField('near_metro', e.target.checked)}
+                                    />
+                                    <span className="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div className="form-grid" style={{ marginTop: '2rem' }}>
+                            <div className="form-group">
+                                <label>Gender Preference (for PG/Hostel)</label>
+                                <select
+                                    value={formData.gender_preference}
+                                    onChange={(e) => updateField('gender_preference', e.target.value)}
+                                >
+                                    <option value="any">Any</option>
+                                    <option value="male">Male Only</option>
+                                    <option value="female">Female Only</option>
+                                </select>
+                            </div>
+
+                            <div className="form-group">
+                                <label>Near College/Office</label>
+                                <input
+                                    type="text"
+                                    placeholder="e.g., Christ University, Infosys"
+                                    value={formData.near_college}
+                                    onChange={(e) => updateField('near_college', e.target.value)}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Step 4: Media */}
+                {currentStep === 4 && (
+                    <div className="step-content">
+                        <h2>Property Media</h2>
+                        <p className="step-description">Add photos and virtual tours</p>
+
+                        <div className="media-section">
+                            <div className="upload-zone">
+                                <div className="upload-icon">📷</div>
+                                <h3>Property Photos</h3>
+                                <p>Drag & drop images or click to browse</p>
+                                <small>JPG, PNG up to 10MB each</small>
+                            </div>
+                        </div>
+
+                        <div className="media-section">
+                            <div className="upload-zone panorama">
+                                <div className="upload-icon">🔄</div>
+                                <h3>360° Panoramas</h3>
+                                <p>Add panoramic images for virtual tours</p>
+                                <small>Equirectangular images recommended</small>
+                            </div>
+                        </div>
+
+                        <div className="media-note">
+                            <span>💡</span>
+                            <p>Properties with 360° tours get 3x more inquiries!</p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Step 5: Review */}
+                {currentStep === 5 && (
+                    <div className="step-content">
+                        <h2>Review & Submit</h2>
+                        <p className="step-description">Review your listing before publishing</p>
+
+                        <div className="review-sections">
+                            <div className="review-card">
+                                <h3>📝 Basic Details</h3>
+                                <div className="review-grid">
+                                    <div><span>Title:</span> {formData.title || '-'}</div>
+                                    <div><span>Type:</span> {formData.property_type}</div>
+                                    <div><span>Listing:</span> For {formData.listing_type}</div>
+                                    <div><span>Price:</span> ₹{formData.price || '-'}</div>
+                                    <div><span>Size:</span> {formData.size || '-'} sqft</div>
+                                    <div><span>Rooms:</span> {formData.bedrooms || '-'} BHK</div>
+                                </div>
+                            </div>
+
+                            <div className="review-card">
+                                <h3>📍 Location</h3>
+                                <div className="review-grid">
+                                    <div><span>City:</span> {formData.city || '-'}</div>
+                                    <div><span>Locality:</span> {formData.locality || '-'}</div>
+                                    <div><span>Pincode:</span> {formData.pincode || '-'}</div>
+                                </div>
+                            </div>
+
+                            <div className="review-card">
+                                <h3>🌿 Lifestyle</h3>
+                                <div className="review-badges">
+                                    {formData.pet_friendly && <span className="badge">🐾 Pet Friendly</span>}
+                                    {formData.vegetarian_only && <span className="badge">🥦 Veg Only</span>}
+                                    {formData.bachelor_friendly && <span className="badge">👨‍💼 Bachelor OK</span>}
+                                    {formData.near_metro && <span className="badge">🚇 Near Metro</span>}
+                                </div>
+                            </div>
+
+                            {/* Price Predictor */}
+                            <div className="price-predictor">
+                                <div className="predictor-content">
+                                    <h3>🤖 AI Price Suggestion</h3>
+                                    <p>Get an optimal price based on market data</p>
+                                    {predictedPrice ? (
+                                        <div className="predicted-price">
+                                            <span>Suggested Price:</span>
+                                            <strong>{formatPrice(predictedPrice)}</strong>
+                                        </div>
+                                    ) : (
+                                        <button className="btn btn-outline" onClick={handlePredictPrice}>
+                                            Predict Optimal Price
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Navigation */}
+            <div className="wizard-navigation">
+                <button
+                    className="btn btn-outline"
+                    onClick={prevStep}
+                    disabled={currentStep === 1}
+                >
+                    ← Previous
+                </button>
+
+                {currentStep < 5 ? (
+                    <button className="btn btn-primary" onClick={nextStep}>
+                        Next →
+                    </button>
+                ) : (
+                    <button className="btn btn-primary" onClick={handleSubmit}>
+                        🚀 Publish Property
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default AddPropertyWizard;

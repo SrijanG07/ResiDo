@@ -12,6 +12,7 @@
     "dependencies": {
         "leaflet": "^1.9.4",
         "leaflet.markercluster": "^1.5.3",
+        "mapillary-js": "^4.1.2",
         "marzipano": "^0.10.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"

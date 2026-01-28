@@ -3,6 +3,7 @@ const User = require('./User');
 const Property = require('./Property');
 const Image = require('./Image');
 const Inquiry = require('./Inquiry');
+const SavedSearch = require('./SavedSearch');
 
 // Define associations
 User.hasMany(Property, { foreignKey: 'owner_id', as: 'properties' });
@@ -17,10 +18,16 @@ Inquiry.belongsTo(Property, { foreignKey: 'property_id', as: 'property' });
 User.hasMany(Inquiry, { foreignKey: 'sender_id', as: 'sent_inquiries' });
 Inquiry.belongsTo(User, { foreignKey: 'sender_id', as: 'sender' });
 
+// Saved searches association
+User.hasMany(SavedSearch, { foreignKey: 'user_id', as: 'saved_searches', onDelete: 'CASCADE' });
+SavedSearch.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
 module.exports = {
     sequelize,
     User,
     Property,
     Image,
-    Inquiry
+    Inquiry,
+    SavedSearch
 };
+

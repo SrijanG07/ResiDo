@@ -1,0 +1,179 @@
+/* Owner Dashboard Layout */
+.owner-dashboard {
+    display: flex;
+    min-height: 100vh;
+    background: #0a0a0a;
+}
+
+.dashboard-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-left: 260px;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: #0a0a0a;
+    border-bottom: 1px solid #1a1a1a;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.dashboard-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-name {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.trust-badge {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+/* Placeholder Sections */
+.placeholder-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 400px;
+    background: #111;
+    border: 1px dashed #333;
+    border-radius: 16px;
+    padding: 3rem;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.placeholder-section h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.placeholder-section p {
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.coming-soon {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .dashboard-main {
+        padding-left: 70px;
+    }
+
+    .dashboard-header {
+        padding: 1rem;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.1rem;
+    }
+
+    .dashboard-content {
+        padding: 1rem;
+    }
+
+    .user-name {
+        display: none;
+    }
+}
+
+/* Button styles for owner pages */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #00ff88;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background: #00cc6a;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #00ff88;
+    border: 1px solid #00ff88;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.btn-cta-owner {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    color: #000;
+    font-weight: 700;
+    padding: 0.6rem 1.25rem;
+    border-radius: 25px;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    transition: all 0.3s;
+}
+
+.btn-cta-owner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+}

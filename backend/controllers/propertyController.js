@@ -3,10 +3,26 @@ const { Op } = require('sequelize');
 
 exports.getAllProperties = async (req, res) => {
     try {
-        const { city, locality, min_price, max_price, property_type, listing_type, bedrooms, status } = req.query;
+        const {
+            // Basic filters
+            city, locality, min_price, max_price, property_type, listing_type, bedrooms, status,
+            // Furnished & size
+            furnished, min_size, max_size,
+            // Lifestyle filters
+            pet_friendly, vegetarian_only, gender_preference, bachelor_friendly,
+            // Availability & lease
+            min_lease_months, max_lease_months, available_from, immediate_available,
+            // Budget extras
+            max_deposit_months, maintenance_included,
+            // Location enhancements
+            near_metro, near_college,
+            // Amenities (comma separated)
+            amenities
+        } = req.query;
 
         let where = {};
 
+        // Basic filters
         if (city) where.city = { [Op.iLike]: `%${city}%` };
         if (locality) where.locality = { [Op.iLike]: `%${locality}%` };
         if (min_price) where.price = { ...where.price, [Op.gte]: parseInt(min_price) };
@@ -15,7 +31,48 @@ exports.getAllProperties = async (req, res) => {
         if (listing_type) where.listing_type = listing_type;
         if (bedrooms) where.bedrooms = parseInt(bedrooms);
         if (status) where.status = status;
-        else where.status = 'available'; // Default to available properties
+        else where.status = 'available';
+
+        // Furnished & size
+        if (furnished) where.furnished = furnished;
+        if (min_size) where.size = { ...where.size, [Op.gte]: parseInt(min_size) };
+        if (max_size) where.size = { ...where.size, [Op.lte]: parseInt(max_size) };
+
+        // Lifestyle filters (booleans)
+        if (pet_friendly === 'true') where.pet_friendly = true;
+        if (vegetarian_only === 'true') where.vegetarian_only = true;
+        if (bachelor_friendly === 'true') where.bachelor_friendly = true;
+        if (bachelor_friendly === 'false') where.bachelor_friendly = false;
+        if (gender_preference && gender_preference !== 'any') {
+            where.gender_preference = { [Op.in]: [gender_preference, 'any'] };
+        }
+
+        // Lease duration
+        if (min_lease_months) where.min_lease_months = { ...where.min_lease_months, [Op.gte]: parseInt(min_lease_months) };
+        if (max_lease_months) where.min_lease_months = { ...where.min_lease_months, [Op.lte]: parseInt(max_lease_months) };
+
+        // Deposit
+        if (max_deposit_months) where.deposit_months = { [Op.lte]: parseInt(max_deposit_months) };
+
+        // Maintenance
+        if (maintenance_included === 'true') where.maintenance_included = true;
+
+        // Availability
+        if (immediate_available === 'true') {
+            where.available_from = { [Op.lte]: new Date() };
+        } else if (available_from) {
+            where.available_from = { [Op.lte]: new Date(available_from) };
+        }
+
+        // Location enhancements
+        if (near_metro === 'true') where.near_metro = true;
+        if (near_college) where.near_college = { [Op.iLike]: `%${near_college}%` };
+
+        // Amenities filter (check if amenities array contains all requested)
+        if (amenities) {
+            const amenitiesArr = amenities.split(',').map(a => a.trim());
+            where.amenities = { [Op.contains]: amenitiesArr };
+        }
 
         const properties = await Property.findAll({
             where,

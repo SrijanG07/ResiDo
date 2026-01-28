@@ -5,6 +5,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.markercluster';
 import './PropertyMap.css';
+import StreetViewModal from './StreetViewModal';
 
 // Fix for default marker icons in Leaflet with Vite
 delete L.Icon.Default.prototype._getIconUrl;
@@ -94,6 +95,8 @@ function PropertyMap({
     const radiusCircleRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const [amenities, setAmenities] = useState([]);
+    const [showStreetView, setShowStreetView] = useState(false);
+    const [streetViewData, setStreetViewData] = useState({ lat: 0, lng: 0, title: '' });
 
     // Initialize map
     useEffect(() => {
@@ -203,9 +206,13 @@ function PropertyMap({
                             ${property.bathrooms ? `<span>🚿 ${property.bathrooms} Bath</span>` : ''}
                             ${property.size ? `<span>📏 ${property.size} sqft</span>` : ''}
                         </div>
-                        <button class="map-popup-btn" onclick="window.viewProperty(${property.id})">
-                            View Details
-                        </button>
+                        <div class="map-popup-actions">
+                            <button class="map-popup-btn" onclick="window.viewProperty(${property.id})">
+                                View Details
+                            </button>
+                            <button class="map-popup-btn street-view-btn" onclick="window.openStreetView(${lat}, ${lng}, '${property.title.replace(/'/g, "\\'")}')">🛤️ Street View
+                            </button>
+                        </div>
                     </div>
                 </div>
             `;
@@ -230,13 +237,19 @@ function PropertyMap({
             mapInstanceRef.current.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
         }
 
-        // Set up global function for popup button
+        // Set up global functions for popup buttons
         window.viewProperty = (id) => {
             if (onPropertyClick) onPropertyClick(id);
         };
 
+        window.openStreetView = (lat, lng, title) => {
+            setStreetViewData({ lat, lng, title });
+            setShowStreetView(true);
+        };
+
         return () => {
             delete window.viewProperty;
+            delete window.openStreetView;
         };
     }, [properties, onPropertyClick]);
 
@@ -378,6 +391,16 @@ function PropertyMap({
                         {radiusKm > 0 ? `${radiusKm} km` : 'No limit'}
                     </div>
                 </div>
+            )}
+
+            {/* Street View Modal */}
+            {showStreetView && (
+                <StreetViewModal
+                    latitude={streetViewData.lat}
+                    longitude={streetViewData.lng}
+                    propertyTitle={streetViewData.title}
+                    onClose={() => setShowStreetView(false)}
+                />
             )}
         </div>
     );

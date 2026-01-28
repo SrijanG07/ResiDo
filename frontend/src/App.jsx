@@ -1,10 +1,15 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
+import { useAuth } from './context/AuthContext';
 import BrowseProperties from './pages/BrowseProperties';
 import PropertyDetail from './pages/PropertyDetail';
+import OwnerLanding from './pages/owner/OwnerLanding';
+import OwnerLogin from './pages/owner/OwnerLogin';
 import './index.css';
 
-// Lazy load VirtualTour to prevent Three.js from crashing the entire app
+// Lazy load VirtualTour and OwnerDashboard
 const VirtualTour = lazy(() => import('./pages/VirtualTour'));
+const OwnerDashboard = lazy(() => import('./pages/owner/OwnerDashboard'));
+const PropertyNews = lazy(() => import('./pages/PropertyNews'));
 
 // Sample property data
 const PROPERTIES = [
@@ -84,6 +89,44 @@ function App() {
         );
     }
 
+    // Handle Owner Landing page
+    if (currentPage === 'owner-landing') {
+        return (
+            <OwnerLanding
+                onLogin={() => setCurrentPage('owner-login')}
+                onBack={() => setCurrentPage('home')}
+            />
+        );
+    }
+
+    // Handle Owner Login page
+    if (currentPage === 'owner-login') {
+        return (
+            <OwnerLogin
+                onSuccess={() => setCurrentPage('owner-dashboard')}
+                onBack={() => setCurrentPage('owner-landing')}
+            />
+        );
+    }
+
+    // Handle Owner Dashboard (protected)
+    if (currentPage === 'owner-dashboard') {
+        return (
+            <Suspense fallback={<TourLoading />}>
+                <OwnerDashboard onLogout={() => setCurrentPage('home')} />
+            </Suspense>
+        );
+    }
+
+    // Handle Property News page
+    if (currentPage === 'news') {
+        return (
+            <Suspense fallback={<TourLoading />}>
+                <PropertyNews />
+            </Suspense>
+        );
+    }
+
     // Home page
     return (
         <div className="app">
@@ -101,10 +144,13 @@ function App() {
                 <ul className="navbar-links">
                     <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('browse'); }}>Browse Properties</a></li>
                     <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('tour'); }} className="tour-link">🏠 360° Tour</a></li>
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('news'); }}>📰 News</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <button className="btn btn-primary">List Property</button>
+                <button className="btn btn-cta-owner" onClick={() => setCurrentPage('owner-landing')}>
+                    🏠 Owner's Portal
+                </button>
             </nav>
 
             {/* Hero Section - Homewide Inspired */}

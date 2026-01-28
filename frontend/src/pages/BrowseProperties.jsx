@@ -1,22 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
+import AdvancedFilters from '../components/AdvancedFilters';
 import './BrowseProperties.css';
 
 const CITIES = ['Bangalore', 'Delhi', 'Mumbai', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Chandigarh'];
-const PROPERTY_TYPES = ['flat', 'home', 'villa', 'plot', 'commercial'];
 
 function BrowseProperties({ onViewProperty }) {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
+    const [viewMode, setViewMode] = useState('list');
+    const [showFilters, setShowFilters] = useState(false);
     const [filters, setFilters] = useState({
         city: '',
         locality: '',
         min_price: '',
         max_price: '',
         property_type: '',
-        bedrooms: ''
+        listing_type: '',
+        bedrooms: '',
+        furnished: '',
+        // Lifestyle filters
+        pet_friendly: '',
+        vegetarian_only: '',
+        gender_preference: '',
+        bachelor_friendly: '',
+        // Availability
+        min_lease_months: '',
+        max_lease_months: '',
+        immediate_available: '',
+        // Budget extras
+        max_deposit_months: '',
+        maintenance_included: '',
+        // Location
+        near_metro: '',
+        near_college: '',
+        // Amenities
+        amenities: ''
     });
 
     useEffect(() => {
@@ -26,7 +46,14 @@ function BrowseProperties({ onViewProperty }) {
     const fetchProperties = async (customFilters = filters) => {
         setLoading(true);
         try {
-            const data = await propertyService.getProperties(customFilters);
+            // Remove empty filter values
+            const cleanFilters = {};
+            Object.entries(customFilters).forEach(([key, value]) => {
+                if (value && value !== '') {
+                    cleanFilters[key] = value;
+                }
+            });
+            const data = await propertyService.getProperties(cleanFilters);
             setProperties(data);
         } catch (error) {
             console.error('Error fetching properties:', error);
@@ -42,16 +69,20 @@ function BrowseProperties({ onViewProperty }) {
 
     const applyFilters = () => {
         fetchProperties(filters);
+        // On mobile, close filter panel after applying
+        if (window.innerWidth < 1024) {
+            setShowFilters(false);
+        }
     };
 
     const clearFilters = () => {
         const emptyFilters = {
-            city: '',
-            locality: '',
-            min_price: '',
-            max_price: '',
-            property_type: '',
-            bedrooms: ''
+            city: '', locality: '', min_price: '', max_price: '', property_type: '',
+            listing_type: '', bedrooms: '', furnished: '', pet_friendly: '',
+            vegetarian_only: '', gender_preference: '', bachelor_friendly: '',
+            min_lease_months: '', max_lease_months: '', immediate_available: '',
+            max_deposit_months: '', maintenance_included: '', near_metro: '',
+            near_college: '', amenities: ''
         };
         setFilters(emptyFilters);
         fetchProperties(emptyFilters);
@@ -63,14 +94,16 @@ function BrowseProperties({ onViewProperty }) {
         return `₹${price.toLocaleString()}`;
     };
 
-    // Calculate map center from properties
     const getMapCenter = () => {
         const validProperties = properties.filter(p => p.latitude && p.longitude);
-        if (validProperties.length === 0) return [20.5937, 78.9629]; // India center
-
+        if (validProperties.length === 0) return [20.5937, 78.9629];
         const avgLat = validProperties.reduce((sum, p) => sum + parseFloat(p.latitude), 0) / validProperties.length;
         const avgLng = validProperties.reduce((sum, p) => sum + parseFloat(p.longitude), 0) / validProperties.length;
         return [avgLat, avgLng];
+    };
+
+    const getActiveFilterCount = () => {
+        return Object.values(filters).filter(v => v && v !== '').length;
     };
 
     return (
@@ -79,193 +112,166 @@ function BrowseProperties({ onViewProperty }) {
             <div className="browse-header">
                 <div className="header-content">
                     <h1>Browse Properties</h1>
-                    <p>Find your dream property across {CITIES.length} cities • {properties.length} properties available</p>
+                    <p>Find your perfect property • {properties.length} results</p>
                 </div>
 
-                {/* View Toggle */}
-                <div className="view-toggle">
+                <div className="header-actions">
+                    {/* Mobile Filter Toggle */}
                     <button
-                        className={`view-toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
-                        onClick={() => setViewMode('list')}
+                        className={`filter-toggle-btn ${showFilters ? 'active' : ''}`}
+                        onClick={() => setShowFilters(!showFilters)}
                     >
-                        <span>📋</span> List View
-                    </button>
-                    <button
-                        className={`view-toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
-                        onClick={() => setViewMode('map')}
-                    >
-                        <span>🗺️</span> Map View
-                    </button>
-                </div>
-            </div>
-
-            {/* Filters Section */}
-            <div className="filters-section">
-                <div className="filters-grid">
-                    {/* City Filter */}
-                    <div className="filter-group">
-                        <label>City</label>
-                        <select value={filters.city} onChange={(e) => handleFilterChange('city', e.target.value)}>
-                            <option value="">All Cities</option>
-                            {CITIES.map(city => (
-                                <option key={city} value={city}>{city}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    {/* Locality Filter */}
-                    <div className="filter-group">
-                        <label>Locality</label>
-                        <input
-                            type="text"
-                            placeholder="e.g., Koramangala"
-                            value={filters.locality}
-                            onChange={(e) => handleFilterChange('locality', e.target.value)}
-                        />
-                    </div>
-
-                    {/* Property Type */}
-                    <div className="filter-group">
-                        <label>Property Type</label>
-                        <select value={filters.property_type} onChange={(e) => handleFilterChange('property_type', e.target.value)}>
-                            <option value="">All Types</option>
-                            {PROPERTY_TYPES.map(type => (
-                                <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
-                            ))}
-                        </select>
-                    </div>
-
-                    {/* Bedrooms */}
-                    <div className="filter-group">
-                        <label>Bedrooms</label>
-                        <select value={filters.bedrooms} onChange={(e) => handleFilterChange('bedrooms', e.target.value)}>
-                            <option value="">Any</option>
-                            <option value="1">1 BHK</option>
-                            <option value="2">2 BHK</option>
-                            <option value="3">3 BHK</option>
-                            <option value="4">4+ BHK</option>
-                        </select>
-                    </div>
-
-                    {/* Price Range */}
-                    <div className="filter-group">
-                        <label>Min Price (₹)</label>
-                        <input
-                            type="number"
-                            placeholder="Min"
-                            value={filters.min_price}
-                            onChange={(e) => handleFilterChange('min_price', e.target.value)}
-                        />
-                    </div>
-
-                    <div className="filter-group">
-                        <label>Max Price (₹)</label>
-                        <input
-                            type="number"
-                            placeholder="Max"
-                            value={filters.max_price}
-                            onChange={(e) => handleFilterChange('max_price', e.target.value)}
-                        />
-                    </div>
-                </div>
-
-                <div className="filter-actions">
-                    <button className="btn btn-primary" onClick={applyFilters}>
-                        Apply Filters
-                    </button>
-                    <button className="btn btn-outline" onClick={clearFilters}>
-                        Clear All
-                    </button>
-                </div>
-            </div>
-
-            {/* Results */}
-            {loading ? (
-                <div className="loading">Loading properties...</div>
-            ) : (
-                <>
-                    <div className="results-info">
-                        Showing {properties.length} properties
-                        {viewMode === 'map' && (
-                            <span className="map-hint"> • Click markers to view details</span>
+                        🔍 Filters
+                        {getActiveFilterCount() > 0 && (
+                            <span className="filter-badge">{getActiveFilterCount()}</span>
                         )}
+                    </button>
+
+                    {/* View Toggle */}
+                    <div className="view-toggle">
+                        <button
+                            className={`view-toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
+                            onClick={() => setViewMode('list')}
+                        >
+                            <span>📋</span> List
+                        </button>
+                        <button
+                            className={`view-toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
+                            onClick={() => setViewMode('map')}
+                        >
+                            <span>🗺️</span> Map
+                        </button>
                     </div>
+                </div>
+            </div>
 
-                    {/* Map View */}
-                    {viewMode === 'map' && (
-                        <div className="map-view-container">
-                            <PropertyMap
-                                properties={properties}
-                                center={getMapCenter()}
-                                zoom={10}
-                                onPropertyClick={onViewProperty}
-                                showAmenities={false}
-                            />
+            {/* Main Content */}
+            <div className="browse-content">
+                {/* Filters Sidebar */}
+                <aside className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
+                    <AdvancedFilters
+                        filters={filters}
+                        onFilterChange={handleFilterChange}
+                        onApply={applyFilters}
+                        onClear={clearFilters}
+                    />
+                </aside>
+
+                {/* Results Area */}
+                <main className="results-area">
+                    {loading ? (
+                        <div className="loading">
+                            <div className="loading-spinner"></div>
+                            <p>Loading properties...</p>
                         </div>
-                    )}
+                    ) : (
+                        <>
+                            {/* Results Info */}
+                            <div className="results-info">
+                                <span>Showing {properties.length} properties</span>
+                                {viewMode === 'map' && (
+                                    <span className="map-hint">• Click markers to view details</span>
+                                )}
+                            </div>
 
-                    {/* List View */}
-                    {viewMode === 'list' && (
-                        <div className="properties-grid">
-                            {properties.map(property => (
-                                <div key={property.id} className="property-card">
-                                    <div className="property-image">
-                                        <img
-                                            src={property.images?.[0]?.image_url || 'https://via.placeholder.com/400x300'}
-                                            alt={property.title}
-                                        />
-                                        <span className="property-badge">{property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}</span>
-                                        {property.latitude && property.longitude && (
-                                            <span className="location-badge" title="Location available on map">📍</span>
-                                        )}
-                                    </div>
+                            {/* Map View */}
+                            {viewMode === 'map' && (
+                                <div className="map-view-container">
+                                    <PropertyMap
+                                        properties={properties}
+                                        center={getMapCenter()}
+                                        zoom={10}
+                                        onPropertyClick={onViewProperty}
+                                        showAmenities={false}
+                                    />
+                                </div>
+                            )}
 
-                                    <div className="property-info">
-                                        <div className="property-price">
-                                            {formatPrice(property.price)}
-                                        </div>
-                                        <h3 className="property-title">{property.title}</h3>
-                                        <p className="property-location">📍 {property.locality}, {property.city}</p>
-
-                                        <div className="property-meta">
-                                            {property.bedrooms && <span>🛏️ {property.bedrooms} Bed</span>}
-                                            {property.bathrooms && <span>🚿 {property.bathrooms} Bath</span>}
-                                            {property.size && <span>📏 {property.size} sq ft</span>}
-                                        </div>
-
-                                        {property.amenities && property.amenities.length > 0 && (
-                                            <div className="property-amenities">
-                                                {property.amenities.slice(0, 3).map((amenity, idx) => (
-                                                    <span key={idx} className="amenity-tag">{amenity}</span>
-                                                ))}
-                                                {property.amenities.length > 3 && (
-                                                    <span className="amenity-tag">+{property.amenities.length - 3} more</span>
+                            {/* List View */}
+                            {viewMode === 'list' && (
+                                <div className="properties-grid">
+                                    {properties.map(property => (
+                                        <div key={property.id} className="property-card">
+                                            <div className="property-image">
+                                                <img
+                                                    src={property.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400'}
+                                                    alt={property.title}
+                                                />
+                                                <span className="property-badge">
+                                                    {property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}
+                                                </span>
+                                                {property.latitude && property.longitude && (
+                                                    <span className="location-badge" title="Location on map">📍</span>
                                                 )}
                                             </div>
-                                        )}
 
-                                        <div className="property-footer">
-                                            <span className="owner-type">{property.owner?.user_type || 'Owner'}</span>
-                                            <button
-                                                className="btn btn-sm btn-primary"
-                                                onClick={() => onViewProperty(property.id)}
-                                            >
-                                                View Details
-                                            </button>
+                                            <div className="property-info">
+                                                <div className="property-price">
+                                                    {formatPrice(property.price)}
+                                                    {property.listing_type === 'rent' && <small>/month</small>}
+                                                </div>
+                                                <h3 className="property-title">{property.title}</h3>
+                                                <p className="property-location">📍 {property.locality}, {property.city}</p>
+
+                                                <div className="property-meta">
+                                                    {property.bedrooms && <span>🛏️ {property.bedrooms} Bed</span>}
+                                                    {property.bathrooms && <span>🚿 {property.bathrooms} Bath</span>}
+                                                    {property.size && <span>📏 {property.size} sqft</span>}
+                                                </div>
+
+                                                {/* Lifestyle Badges */}
+                                                <div className="lifestyle-badges">
+                                                    {property.pet_friendly && (
+                                                        <span className="lifestyle-badge pet">🐾 Pet Friendly</span>
+                                                    )}
+                                                    {property.vegetarian_only && (
+                                                        <span className="lifestyle-badge veg">🥦 Veg Only</span>
+                                                    )}
+                                                    {property.near_metro && (
+                                                        <span className="lifestyle-badge metro">🚇 Near Metro</span>
+                                                    )}
+                                                    {property.bachelor_friendly && property.property_type !== 'pg' && (
+                                                        <span className="lifestyle-badge bachelor">👨‍💼 Bachelor OK</span>
+                                                    )}
+                                                    {property.gender_preference && property.gender_preference !== 'any' && (
+                                                        <span className="lifestyle-badge gender">
+                                                            {property.gender_preference === 'male' ? '♂️ Male Only' : '♀️ Female Only'}
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                <div className="property-footer">
+                                                    <span className="owner-type">{property.owner?.user_type || 'Owner'}</span>
+                                                    <button
+                                                        className="btn btn-sm btn-primary"
+                                                        onClick={() => onViewProperty(property.id)}
+                                                    >
+                                                        View Details
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    )}
+                            )}
 
-                    {properties.length === 0 && (
-                        <div className="no-results">
-                            <h3>No properties found</h3>
-                            <p>Try adjusting your filters to see more results</p>
-                        </div>
+                            {properties.length === 0 && (
+                                <div className="no-results">
+                                    <h3>🏠 No properties found</h3>
+                                    <p>Try adjusting your filters to see more results</p>
+                                    <button className="btn btn-primary" onClick={clearFilters}>
+                                        Clear All Filters
+                                    </button>
+                                </div>
+                            )}
+                        </>
                     )}
-                </>
+                </main>
+            </div>
+
+            {/* Mobile Filter Overlay */}
+            {showFilters && (
+                <div className="filter-overlay" onClick={() => setShowFilters(false)}></div>
             )}
         </div>
     );

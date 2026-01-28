@@ -1,0 +1,478 @@
+/* Add Property Wizard */
+.add-property-wizard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Progress Steps */
+.wizard-progress {
+    display: flex;
+    gap: 0.5rem;
+    background: #111;
+    padding: 1rem;
+    border-radius: 16px;
+    border: 1px solid #222;
+}
+
+.progress-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.progress-step:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.progress-step.active {
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.progress-step.completed {
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.step-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+.progress-step.active .step-icon {
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.progress-step.completed .step-icon {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+}
+
+.step-title {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.progress-step.active .step-title {
+    color: #00ff88;
+}
+
+/* Wizard Content */
+.wizard-content {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 2rem;
+    min-height: 400px;
+}
+
+.step-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.step-description {
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    color: #aaa;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.85rem 1rem;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00ff88;
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #555;
+}
+
+/* Radio Group */
+.radio-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.radio-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option.active {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+    color: #00ff88;
+}
+
+/* Lifestyle Grid */
+.lifestyle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.lifestyle-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+}
+
+.lifestyle-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.lifestyle-icon {
+    font-size: 1.5rem;
+}
+
+.lifestyle-label {
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #333;
+    border-radius: 26px;
+    transition: 0.2s;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background: #666;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.toggle-switch input:checked+.toggle-slider {
+    background: rgba(0, 255, 136, 0.3);
+}
+
+.toggle-switch input:checked+.toggle-slider::before {
+    background: #00ff88;
+    transform: translateX(24px);
+}
+
+/* Map Placeholder */
+.map-placeholder {
+    background: #0a0a0a;
+    border: 1px dashed #333;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.map-message {
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.map-message small {
+    color: #666;
+}
+
+.coord-inputs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.coord-inputs input {
+    width: 150px;
+    padding: 0.75rem;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Media Section */
+.media-section {
+    margin-bottom: 1.5rem;
+}
+
+.upload-zone {
+    background: #0a0a0a;
+    border: 2px dashed #333;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.upload-zone:hover {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.02);
+}
+
+.upload-zone.panorama {
+    border-color: #4a90d9;
+}
+
+.upload-zone.panorama:hover {
+    border-color: #6aafff;
+    background: rgba(74, 144, 217, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.upload-zone h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.upload-zone p {
+    color: #888;
+    margin-bottom: 0.25rem;
+}
+
+.upload-zone small {
+    color: #666;
+}
+
+.media-note {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(0, 255, 136, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+}
+
+.media-note span {
+    font-size: 1.5rem;
+}
+
+.media-note p {
+    color: #00ff88;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Review Section */
+.review-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.review-card {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.review-card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.review-grid div {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.review-grid span {
+    color: #666;
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.review-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.review-badges .badge {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* Price Predictor */
+.price-predictor {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 204, 106, 0.05) 100%);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.predictor-content h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.predictor-content p {
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+.predicted-price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.predicted-price span {
+    color: #888;
+}
+
+.predicted-price strong {
+    font-size: 1.75rem;
+    color: #00ff88;
+}
+
+/* Wizard Navigation */
+.wizard-navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wizard-navigation .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .wizard-progress {
+        flex-wrap: wrap;
+    }
+
+    .progress-step {
+        flex: 0 0 calc(33.33% - 0.5rem);
+    }
+
+    .step-title {
+        font-size: 0.7rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .lifestyle-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .review-grid {
+        grid-template-columns: 1fr;
+    }
+}

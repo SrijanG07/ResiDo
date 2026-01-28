@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
+import StreetViewModal from '../components/StreetViewModal';
 import './PropertyDetail.css';
 
 // Amenity icons configuration for nearby places
@@ -22,6 +23,7 @@ function PropertyDetail({ propertyId, onBack }) {
     const [nearbyAmenities, setNearbyAmenities] = useState([]);
     const [amenitiesLoading, setAmenitiesLoading] = useState(false);
     const [showAmenities, setShowAmenities] = useState(false);
+    const [showStreetView, setShowStreetView] = useState(false);
 
     useEffect(() => {
         fetchProperty();
@@ -279,13 +281,19 @@ function PropertyDetail({ propertyId, onBack }) {
                                 <h2>📍 Location & Nearby</h2>
                                 <div className="location-actions">
                                     <button
+                                        className="btn btn-lg btn-street-view"
+                                        onClick={() => setShowStreetView(true)}
+                                    >
+                                        🛣️ Street View
+                                    </button>
+                                    <button className="btn btn-lg btn-primary" onClick={getDirections}>
+                                        🧭 Get Directions
+                                    </button>
+                                    <button
                                         className={`btn btn-sm ${showAmenities ? 'btn-primary' : 'btn-outline'}`}
                                         onClick={() => setShowAmenities(!showAmenities)}
                                     >
-                                        {showAmenities ? 'Hide' : 'Show'} Amenities
-                                    </button>
-                                    <button className="btn btn-sm btn-primary" onClick={getDirections}>
-                                        🧭 Get Directions
+                                        {showAmenities ? 'Hide' : 'Show'} Nearby Places
                                     </button>
                                 </div>
                             </div>
@@ -395,6 +403,16 @@ function PropertyDetail({ propertyId, onBack }) {
                     <button className="btn btn-outline btn-block">Schedule Visit</button>
                 </div>
             </div>
+
+            {/* Street View Modal */}
+            {showStreetView && property?.latitude && property?.longitude && (
+                <StreetViewModal
+                    latitude={parseFloat(property.latitude)}
+                    longitude={parseFloat(property.longitude)}
+                    propertyTitle={property.title}
+                    onClose={() => setShowStreetView(false)}
+                />
+            )}
         </div>
     );
 }
