@@ -1,132 +1,153 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Marzipano from 'marzipano';
 import './VirtualTour.css';
 
-// Panorama images from public folder
+// 360° Panorama images from Poly Haven (equirectangular, CC0 license)
 const ROOMS = [
     {
         id: 'living',
         name: 'Living Room',
-        image: '/panoramas/room1.jpg',
-        description: 'Spacious living area with modern furnishings'
+        image: '/panoramas/living_room.jpg',
+        description: 'Bright and airy living space with natural sunlight'
     },
     {
-        id: 'living2',
-        name: 'Living Room (View 2)',
-        image: '/panoramas/room2.jpg',
-        description: 'Alternative angle showcasing natural lighting'
+        id: 'lounge',
+        name: 'Lounge',
+        image: '/panoramas/lounge.jpg',
+        description: 'Cozy lounge area with warm ambiance'
     },
     {
         id: 'kitchen',
-        name: 'Kitchen',
-        image: '/panoramas/room3.jpg',
-        description: 'Fully equipped modular kitchen'
+        name: 'Kitchen & Dining',
+        image: '/panoramas/kitchen.jpg',
+        description: 'Open-plan kitchen with rustic charm'
+    },
+    {
+        id: 'master-bedroom',
+        name: 'Master Bedroom',
+        image: '/panoramas/master_bedroom.jpg',
+        description: 'Spacious master suite with ensuite access'
     },
     {
         id: 'bedroom',
-        name: 'Master Bedroom',
-        image: '/panoramas/room4.jpg',
-        description: 'Luxurious bedroom with attached balcony'
+        name: 'Guest Bedroom',
+        image: '/panoramas/bedroom.jpg',
+        description: 'Modern guest room with scenic views'
     },
     {
-        id: 'dining',
-        name: 'Dining Area',
-        image: '/panoramas/room5.jpg',
-        description: 'Elegant dining space for family gatherings'
+        id: 'bathroom',
+        name: 'Bathroom',
+        image: '/panoramas/bathroom.jpg',
+        description: 'Contemporary bathroom with premium fixtures'
+    },
+    {
+        id: 'study',
+        name: 'Study Room',
+        image: '/panoramas/study_room.jpg',
+        description: 'Elegant reading room with classic architecture'
     }
 ];
 
-// 360 Panorama Viewer Component using CSS transforms
-function PanoramaViewer({ imageUrl, roomName }) {
+// Marzipano 360 Panorama Viewer Component
+function MarzipanoViewer({ imageUrl, roomName }) {
     const containerRef = useRef(null);
-    const [isDragging, setIsDragging] = useState(false);
-    const [rotation, setRotation] = useState({ x: 0, y: 0 });
-    const [startPos, setStartPos] = useState({ x: 0, y: 0 });
-    const [zoom, setZoom] = useState(1);
+    const viewerRef = useRef(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Handle mouse/touch drag for panorama rotation
-    const handleMouseDown = (e) => {
-        setIsDragging(true);
-        setStartPos({
-            x: e.clientX || e.touches?.[0]?.clientX || 0,
-            y: e.clientY || e.touches?.[0]?.clientY || 0
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        // Clean up previous viewer
+        if (viewerRef.current) {
+            viewerRef.current.destroy();
+            viewerRef.current = null;
+        }
+
+        setIsLoading(true);
+
+        // Create Marzipano viewer
+        const viewer = new Marzipano.Viewer(containerRef.current, {
+            controls: {
+                mouseViewMode: 'drag'
+            }
         });
-    };
+        viewerRef.current = viewer;
 
-    const handleMouseMove = (e) => {
-        if (!isDragging) return;
+        // Create equirectangular geometry for 360° panorama
+        const geometry = new Marzipano.EquirectGeometry([{ width: 4000 }]);
 
-        const clientX = e.clientX || e.touches?.[0]?.clientX || 0;
-        const clientY = e.clientY || e.touches?.[0]?.clientY || 0;
+        // Limit view parameters - wider FOV for realistic tour
+        const limiter = Marzipano.RectilinearView.limit.traditional(
+            4096,           // Max resolution
+            120 * Math.PI / 180  // Max FOV (120 degrees for wider view)
+        );
 
-        const deltaX = clientX - startPos.x;
-        const deltaY = clientY - startPos.y;
+        // Create the view - start zoomed out for full room overview
+        const view = new Marzipano.RectilinearView(
+            { yaw: 0, pitch: 0, fov: 100 * Math.PI / 180 }, // Initial view (100° FOV - zoomed out)
+            limiter
+        );
 
-        setRotation(prev => ({
-            x: Math.max(-30, Math.min(30, prev.x - deltaY * 0.2)),
-            y: prev.y + deltaX * 0.3
-        }));
+        // Create image source
+        const source = Marzipano.ImageUrlSource.fromString(imageUrl);
 
-        setStartPos({ x: clientX, y: clientY });
-    };
+        // Create scene
+        const scene = viewer.createScene({
+            source: source,
+            geometry: geometry,
+            view: view,
+            pinFirstLevel: true
+        });
 
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
+        // Switch to scene
+        scene.switchTo({
+            transitionDuration: 400
+        });
 
-    // Handle zoom with mouse wheel
-    const handleWheel = (e) => {
-        e.preventDefault();
-        const delta = e.deltaY > 0 ? -0.1 : 0.1;
-        setZoom(prev => Math.max(0.5, Math.min(2, prev + delta)));
-    };
+        // Handle loading
+        const img = new Image();
+        img.onload = () => setIsLoading(false);
+        img.onerror = () => setIsLoading(false);
+        img.src = imageUrl;
 
-    // Auto-rotate effect
-    useEffect(() => {
-        if (isDragging) return;
-
-        const autoRotate = setInterval(() => {
-            setRotation(prev => ({
-                ...prev,
-                y: prev.y + 0.05
-            }));
-        }, 50);
-
-        return () => clearInterval(autoRotate);
-    }, [isDragging]);
-
-    // Reset rotation when room changes
-    useEffect(() => {
-        setRotation({ x: 0, y: 0 });
-        setZoom(1);
+        // Cleanup on unmount or image change
+        return () => {
+            if (viewerRef.current) {
+                viewerRef.current.destroy();
+                viewerRef.current = null;
+            }
+        };
     }, [imageUrl]);
 
+    // Zoom controls
+    const handleZoomIn = () => {
+        if (!viewerRef.current) return;
+        const view = viewerRef.current.view();
+        const fov = view.fov();
+        view.setFov(Math.max(fov - 0.2, 0.5));
+    };
+
+    const handleZoomOut = () => {
+        if (!viewerRef.current) return;
+        const view = viewerRef.current.view();
+        const fov = view.fov();
+        view.setFov(Math.min(fov + 0.2, 2.0));
+    };
+
     return (
-        <div
-            ref={containerRef}
-            className="panorama-viewer"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            onTouchStart={handleMouseDown}
-            onTouchMove={handleMouseMove}
-            onTouchEnd={handleMouseUp}
-            onWheel={handleWheel}
-        >
+        <div className="panorama-viewer-container">
+            {isLoading && (
+                <div className="panorama-loading">
+                    <div className="loader"></div>
+                    <p>Loading {roomName}...</p>
+                </div>
+            )}
+
             <div
-                className="panorama-image-container"
-                style={{
-                    transform: `scale(${zoom}) rotateX(${rotation.x}deg)`,
-                }}
-            >
-                <div
-                    className="panorama-image"
-                    style={{
-                        backgroundImage: `url(${imageUrl})`,
-                        backgroundPositionX: `${rotation.y * 2}px`
-                    }}
-                />
-            </div>
+                ref={containerRef}
+                className="marzipano-viewer"
+                style={{ width: '100%', height: '100%' }}
+            />
 
             {/* Room indicator */}
             <div className="panorama-room-badge">
@@ -141,8 +162,8 @@ function PanoramaViewer({ imageUrl, roomName }) {
 
             {/* Zoom controls */}
             <div className="panorama-zoom-controls">
-                <button onClick={() => setZoom(prev => Math.min(2, prev + 0.2))}>+</button>
-                <button onClick={() => setZoom(prev => Math.max(0.5, prev - 0.2))}>−</button>
+                <button onClick={handleZoomIn}>+</button>
+                <button onClick={handleZoomOut}>−</button>
             </div>
         </div>
     );
@@ -152,16 +173,16 @@ function PanoramaViewer({ imageUrl, roomName }) {
 function VirtualTour({ onBack }) {
     const [currentRoom, setCurrentRoom] = useState(ROOMS[0]);
     const [showIntro, setShowIntro] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const handleRoomChange = (room) => {
-        setIsLoading(true);
-        setCurrentRoom(room);
+        if (room.id === currentRoom.id) return;
 
-        // Simulate loading for smooth transition
+        setIsTransitioning(true);
         setTimeout(() => {
-            setIsLoading(false);
-        }, 300);
+            setCurrentRoom(room);
+            setIsTransitioning(false);
+        }, 200);
     };
 
     // Intro/Landing screen
@@ -180,7 +201,7 @@ function VirtualTour({ onBack }) {
                     <div className="featured-image">
                         <img src={ROOMS[0].image} alt="Apartment Preview" />
                         <div className="image-overlay">
-                            <span>5 Rooms • Immersive 360° View</span>
+                            <span>7 Rooms • Immersive 360° View</span>
                         </div>
                     </div>
 
@@ -232,15 +253,16 @@ function VirtualTour({ onBack }) {
                 </div>
             </div>
 
-            {/* Panorama Viewer */}
+            {/* Marzipano Panorama Viewer */}
             <div className="panorama-wrapper">
-                {isLoading && (
+                {isTransitioning && (
                     <div className="panorama-loading">
                         <div className="loader"></div>
                         <p>Loading {currentRoom.name}...</p>
                     </div>
                 )}
-                <PanoramaViewer
+                <MarzipanoViewer
+                    key={currentRoom.id}
                     imageUrl={currentRoom.image}
                     roomName={currentRoom.name}
                 />

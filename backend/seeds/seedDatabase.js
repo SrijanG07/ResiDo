@@ -54,24 +54,64 @@ const cities = [
     }
 ];
 
-// Property images from Unsplash
-const propertyImages = [
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&h=600&fit=crop',
-    'https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop'
+// EXTERIOR Property images from Unsplash (400x300)
+const exteriorImages = [
+    // Modern homes exterior
+    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop&q=80',
+    // Villas & estates
+    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&h=300&fit=crop&q=80'
 ];
+
+// INTERIOR Property images from Unsplash (400x300)
+const interiorImages = [
+    // Living rooms
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop&q=80',
+    // Bedrooms
+    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560185127-6ed189bf02f4?w=400&h=300&fit=crop&q=80',
+    // Kitchens
+    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600585152915-d208bec867a1?w=400&h=300&fit=crop&q=80',
+    // Bathrooms
+    'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&q=80',
+    // Dining & other rooms
+    'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560440021-33f9b867899d?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1560185127-6a3c5d9f4c97?w=400&h=300&fit=crop&q=80'
+];
+
+// Combined for thumbnail (first image)
+const propertyImages = [...exteriorImages];
 
 const propertyTypes = ['flat', 'home', 'villa', 'plot', 'commercial'];
 const furnishedStatus = ['unfurnished', 'semi-furnished', 'fully-furnished'];
@@ -150,11 +190,11 @@ async function seedDatabase() {
 
         console.log(`✅ Created ${users.length} owners/brokers and 10 buyers`);
 
-        console.log('🔄 Creating 200+ properties across Indian cities...');
+        console.log('🔄 Creating 100 properties across Indian cities...');
         let propertyCount = 0;
 
         for (const cityData of cities) {
-            const propertiesPerCity = 20 + randomInt(0, 10);
+            const propertiesPerCity = 10; // 10 properties per city = 100 total
 
             for (let i = 0; i < propertiesPerCity; i++) {
                 const locality = randomChoice(cityData.localities);
@@ -188,14 +228,17 @@ async function seedDatabase() {
                     status: randomInt(1, 100) > 10 ? 'available' : randomChoice(['sold', 'under_negotiation'])
                 });
 
-                // Add 3-5 images per property
-                const imageCount = randomInt(3, 5);
-                const imageUrls = randomChoices(propertyImages, imageCount);
+                // Add 4-6 images per property (mix of exterior + interior)
+                const exteriorCount = randomInt(1, 2); // 1-2 exterior shots
+                const interiorCount = randomInt(3, 4); // 3-4 interior shots
+                const selectedExteriors = randomChoices(exteriorImages, exteriorCount);
+                const selectedInteriors = randomChoices(interiorImages, interiorCount);
+                const allImages = [...selectedExteriors, ...selectedInteriors];
 
-                for (let j = 0; j < imageUrls.length; j++) {
+                for (let j = 0; j < allImages.length; j++) {
                     await Image.create({
                         property_id: property.id,
-                        image_url: imageUrls[j],
+                        image_url: allImages[j],
                         display_order: j
                     });
                 }
