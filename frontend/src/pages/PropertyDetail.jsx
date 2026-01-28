@@ -1,15 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
+import PropertyMap from '../components/PropertyMap';
 import './PropertyDetail.css';
+
+// Amenity icons configuration for nearby places
+const amenityIcons = {
+    school: { emoji: '🏫', label: 'School' },
+    hospital: { emoji: '🏥', label: 'Hospital' },
+    pharmacy: { emoji: '💊', label: 'Pharmacy' },
+    supermarket: { emoji: '🛒', label: 'Supermarket' },
+    restaurant: { emoji: '🍽️', label: 'Restaurant' },
+    bank: { emoji: '🏦', label: 'Bank' },
+    bus_station: { emoji: '🚌', label: 'Bus Stop' },
+    subway_entrance: { emoji: '🚇', label: 'Metro' },
+};
 
 function PropertyDetail({ propertyId, onBack }) {
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [nearbyAmenities, setNearbyAmenities] = useState([]);
+    const [amenitiesLoading, setAmenitiesLoading] = useState(false);
+    const [showAmenities, setShowAmenities] = useState(false);
 
     useEffect(() => {
         fetchProperty();
     }, [propertyId]);
+
+    // Fetch nearby amenities when property loads
+    useEffect(() => {
+        if (property?.latitude && property?.longitude) {
+            fetchNearbyAmenities();
+        }
+    }, [property]);
 
     const fetchProperty = async () => {
         setLoading(true);
@@ -21,6 +44,71 @@ function PropertyDetail({ propertyId, onBack }) {
         } finally {
             setLoading(false);
         }
+    };
+
+    const fetchNearbyAmenities = async () => {
+        if (!property?.latitude || !property?.longitude) return;
+
+        setAmenitiesLoading(true);
+        const lat = parseFloat(property.latitude);
+        const lng = parseFloat(property.longitude);
+        const radius = 1500; // 1.5km radius
+
+        const amenityTypes = ['school', 'hospital', 'pharmacy', 'supermarket', 'restaurant', 'bank', 'bus_station', 'subway_entrance'];
+
+        const query = `
+            [out:json][timeout:25];
+            (
+                ${amenityTypes.map(type => `
+                    node["amenity"="${type}"](around:${radius},${lat},${lng});
+                `).join('')}
+            );
+            out body;
+        `;
+
+        try {
+            const response = await fetch('https://overpass-api.de/api/interpreter', {
+                method: 'POST',
+                body: query,
+            });
+            const data = await response.json();
+
+            // Process and add distance to each amenity
+            const amenitiesWithDistance = (data.elements || []).map(amenity => {
+                const distance = calculateDistance(lat, lng, amenity.lat, amenity.lon);
+                return {
+                    ...amenity,
+                    distance,
+                    type: amenity.tags?.amenity,
+                    name: amenity.tags?.name || amenityIcons[amenity.tags?.amenity]?.label || 'Place'
+                };
+            }).sort((a, b) => a.distance - b.distance);
+
+            setNearbyAmenities(amenitiesWithDistance);
+        } catch (error) {
+            console.error('Error fetching nearby amenities:', error);
+        } finally {
+            setAmenitiesLoading(false);
+        }
+    };
+
+    // Haversine formula to calculate distance between two points
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+        const R = 6371; // Earth's radius in km
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c; // Distance in km
+    };
+
+    const formatDistance = (distanceKm) => {
+        if (distanceKm < 1) {
+            return `${Math.round(distanceKm * 1000)} m`;
+        }
+        return `${distanceKm.toFixed(1)} km`;
     };
 
     const formatPrice = (price) => {
@@ -40,6 +128,24 @@ function PropertyDetail({ propertyId, onBack }) {
             setCurrentImageIndex((prev) => (prev - 1 + property.images.length) % property.images.length);
         }
     };
+
+    // Get Directions (opens in new tab with Google Maps or OSM)
+    const getDirections = () => {
+        if (property?.latitude && property?.longitude) {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${property.latitude},${property.longitude}`;
+            window.open(url, '_blank');
+        }
+    };
+
+    // Group amenities by type for display
+    const groupedAmenities = nearbyAmenities.reduce((acc, amenity) => {
+        const type = amenity.type || 'other';
+        if (!acc[type]) acc[type] = [];
+        if (acc[type].length < 3) { // Limit to 3 per type
+            acc[type].push(amenity);
+        }
+        return acc;
+    }, {});
 
     if (loading) {
         return <div className="loading">Loading property details...</div>;
@@ -163,6 +269,70 @@ function PropertyDetail({ propertyId, onBack }) {
                                     </div>
                                 ))}
                             </div>
+                        </div>
+                    )}
+
+                    {/* Location & Nearby Section */}
+                    {property.latitude && property.longitude && (
+                        <div className="location-section">
+                            <div className="location-header">
+                                <h2>📍 Location & Nearby</h2>
+                                <div className="location-actions">
+                                    <button
+                                        className={`btn btn-sm ${showAmenities ? 'btn-primary' : 'btn-outline'}`}
+                                        onClick={() => setShowAmenities(!showAmenities)}
+                                    >
+                                        {showAmenities ? 'Hide' : 'Show'} Amenities
+                                    </button>
+                                    <button className="btn btn-sm btn-primary" onClick={getDirections}>
+                                        🧭 Get Directions
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Interactive Map */}
+                            <div className="location-map-container">
+                                <PropertyMap
+                                    properties={[property]}
+                                    center={[parseFloat(property.latitude), parseFloat(property.longitude)]}
+                                    zoom={15}
+                                    showAmenities={showAmenities}
+                                />
+                            </div>
+
+                            {/* Nearby Amenities List */}
+                            {amenitiesLoading ? (
+                                <div className="amenities-loading">
+                                    <span className="loading-spinner"></span>
+                                    Loading nearby places...
+                                </div>
+                            ) : nearbyAmenities.length > 0 && (
+                                <div className="nearby-amenities">
+                                    <h3>🏪 What's Nearby</h3>
+                                    <div className="nearby-grid">
+                                        {Object.entries(groupedAmenities).map(([type, items]) => (
+                                            <div key={type} className="nearby-category">
+                                                <div className="category-header">
+                                                    <span className="category-icon">
+                                                        {amenityIcons[type]?.emoji || '📍'}
+                                                    </span>
+                                                    <span className="category-label">
+                                                        {amenityIcons[type]?.label || type}
+                                                    </span>
+                                                </div>
+                                                <div className="category-items">
+                                                    {items.map((item, idx) => (
+                                                        <div key={idx} className="nearby-item">
+                                                            <span className="item-name">{item.name}</span>
+                                                            <span className="item-distance">{formatDistance(item.distance)}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 

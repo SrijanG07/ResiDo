@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
+import PropertyMap from '../components/PropertyMap';
 import './BrowseProperties.css';
 
 const CITIES = ['Bangalore', 'Delhi', 'Mumbai', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Chandigarh'];
@@ -8,6 +9,7 @@ const PROPERTY_TYPES = ['flat', 'home', 'villa', 'plot', 'commercial'];
 function BrowseProperties({ onViewProperty }) {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [viewMode, setViewMode] = useState('list'); // 'list' or 'map'
     const [filters, setFilters] = useState({
         city: '',
         locality: '',
@@ -61,12 +63,40 @@ function BrowseProperties({ onViewProperty }) {
         return `₹${price.toLocaleString()}`;
     };
 
+    // Calculate map center from properties
+    const getMapCenter = () => {
+        const validProperties = properties.filter(p => p.latitude && p.longitude);
+        if (validProperties.length === 0) return [20.5937, 78.9629]; // India center
+
+        const avgLat = validProperties.reduce((sum, p) => sum + parseFloat(p.latitude), 0) / validProperties.length;
+        const avgLng = validProperties.reduce((sum, p) => sum + parseFloat(p.longitude), 0) / validProperties.length;
+        return [avgLat, avgLng];
+    };
+
     return (
         <div className="browse-properties">
             {/* Header */}
             <div className="browse-header">
-                <h1>Browse Properties</h1>
-                <p>Find your dream property across {CITIES.length} cities • {properties.length} properties available</p>
+                <div className="header-content">
+                    <h1>Browse Properties</h1>
+                    <p>Find your dream property across {CITIES.length} cities • {properties.length} properties available</p>
+                </div>
+
+                {/* View Toggle */}
+                <div className="view-toggle">
+                    <button
+                        className={`view-toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
+                        onClick={() => setViewMode('list')}
+                    >
+                        <span>📋</span> List View
+                    </button>
+                    <button
+                        className={`view-toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
+                        onClick={() => setViewMode('map')}
+                    >
+                        <span>🗺️</span> Map View
+                    </button>
+                </div>
             </div>
 
             {/* Filters Section */}
@@ -156,56 +186,78 @@ function BrowseProperties({ onViewProperty }) {
                 <>
                     <div className="results-info">
                         Showing {properties.length} properties
+                        {viewMode === 'map' && (
+                            <span className="map-hint"> • Click markers to view details</span>
+                        )}
                     </div>
 
-                    <div className="properties-grid">
-                        {properties.map(property => (
-                            <div key={property.id} className="property-card">
-                                <div className="property-image">
-                                    <img
-                                        src={property.images?.[0]?.image_url || 'https://via.placeholder.com/400x300'}
-                                        alt={property.title}
-                                    />
-                                    <span className="property-badge">{property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}</span>
-                                </div>
+                    {/* Map View */}
+                    {viewMode === 'map' && (
+                        <div className="map-view-container">
+                            <PropertyMap
+                                properties={properties}
+                                center={getMapCenter()}
+                                zoom={10}
+                                onPropertyClick={onViewProperty}
+                                showAmenities={false}
+                            />
+                        </div>
+                    )}
 
-                                <div className="property-info">
-                                    <div className="property-price">
-                                        {formatPrice(property.price)}
+                    {/* List View */}
+                    {viewMode === 'list' && (
+                        <div className="properties-grid">
+                            {properties.map(property => (
+                                <div key={property.id} className="property-card">
+                                    <div className="property-image">
+                                        <img
+                                            src={property.images?.[0]?.image_url || 'https://via.placeholder.com/400x300'}
+                                            alt={property.title}
+                                        />
+                                        <span className="property-badge">{property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}</span>
+                                        {property.latitude && property.longitude && (
+                                            <span className="location-badge" title="Location available on map">📍</span>
+                                        )}
                                     </div>
-                                    <h3 className="property-title">{property.title}</h3>
-                                    <p className="property-location">📍 {property.locality}, {property.city}</p>
 
-                                    <div className="property-meta">
-                                        {property.bedrooms && <span>🛏️ {property.bedrooms} Bed</span>}
-                                        {property.bathrooms && <span>🚿 {property.bathrooms} Bath</span>}
-                                        {property.size && <span>📏 {property.size} sq ft</span>}
-                                    </div>
-
-                                    {property.amenities && property.amenities.length > 0 && (
-                                        <div className="property-amenities">
-                                            {property.amenities.slice(0, 3).map((amenity, idx) => (
-                                                <span key={idx} className="amenity-tag">{amenity}</span>
-                                            ))}
-                                            {property.amenities.length > 3 && (
-                                                <span className="amenity-tag">+{property.amenities.length - 3} more</span>
-                                            )}
+                                    <div className="property-info">
+                                        <div className="property-price">
+                                            {formatPrice(property.price)}
                                         </div>
-                                    )}
+                                        <h3 className="property-title">{property.title}</h3>
+                                        <p className="property-location">📍 {property.locality}, {property.city}</p>
 
-                                    <div className="property-footer">
-                                        <span className="owner-type">{property.owner?.user_type || 'Owner'}</span>
-                                        <button
-                                            className="btn btn-sm btn-primary"
-                                            onClick={() => onViewProperty(property.id)}
-                                        >
-                                            View Details
-                                        </button>
+                                        <div className="property-meta">
+                                            {property.bedrooms && <span>🛏️ {property.bedrooms} Bed</span>}
+                                            {property.bathrooms && <span>🚿 {property.bathrooms} Bath</span>}
+                                            {property.size && <span>📏 {property.size} sq ft</span>}
+                                        </div>
+
+                                        {property.amenities && property.amenities.length > 0 && (
+                                            <div className="property-amenities">
+                                                {property.amenities.slice(0, 3).map((amenity, idx) => (
+                                                    <span key={idx} className="amenity-tag">{amenity}</span>
+                                                ))}
+                                                {property.amenities.length > 3 && (
+                                                    <span className="amenity-tag">+{property.amenities.length - 3} more</span>
+                                                )}
+                                            </div>
+                                        )}
+
+                                        <div className="property-footer">
+                                            <span className="owner-type">{property.owner?.user_type || 'Owner'}</span>
+                                            <button
+                                                className="btn btn-sm btn-primary"
+                                                onClick={() => onViewProperty(property.id)}
+                                            >
+                                                View Details
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
 
                     {properties.length === 0 && (
                         <div className="no-results">
