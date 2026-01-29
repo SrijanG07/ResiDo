@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
-import AdvancedFilters from '../components/AdvancedFilters';
+import FilterPanel from '../components/FilterPanel';
 import PropertyCard from '../components/PropertyCard';
 import './BrowseProperties.css';
 
@@ -68,37 +68,40 @@ function WishlistButton({ propertyId }) {
     );
 }
 
-function BrowseProperties({ onViewProperty }) {
+function BrowseProperties({ onViewProperty, initialFilters = '' }) {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
     const [viewMode, setViewMode] = useState('list');
     const [showFilters, setShowFilters] = useState(false);
+
+    // Parse initial filters from URL params
+    const parseInitialFilters = () => {
+        if (!initialFilters) return {};
+        const params = new URLSearchParams(initialFilters);
+        const parsed = {};
+        for (const [key, value] of params.entries()) {
+            parsed[key] = value;
+        }
+        return parsed;
+    };
+
     const [filters, setFilters] = useState({
-        city: '',
+        ...parseInitialFilters(),
+        city: parseInitialFilters().city || '',
         locality: '',
-        min_price: '',
-        max_price: '',
-        property_type: '',
+        min_price: parseInitialFilters().min_price || 0,
+        max_price: parseInitialFilters().max_price || 20000000,
+        property_type: parseInitialFilters().property_type ? [parseInitialFilters().property_type] : [],
         listing_type: '',
         bedrooms: '',
         furnished: '',
         // Lifestyle filters
-        pet_friendly: '',
-        vegetarian_only: '',
+        pet_friendly: false,
+        vegetarian_only: false,
         gender_preference: '',
-        bachelor_friendly: '',
-        // Availability
-        min_lease_months: '',
-        max_lease_months: '',
-        immediate_available: '',
-        // Budget extras
-        max_deposit_months: '',
-        maintenance_included: '',
-        // Location
-        near_metro: '',
-        near_college: '',
+        bachelor_friendly: false,
         // Amenities
-        amenities: ''
+        amenities: []
     });
 
     useEffect(() => {
@@ -108,11 +111,16 @@ function BrowseProperties({ onViewProperty }) {
     const fetchProperties = async (customFilters = filters) => {
         setLoading(true);
         try {
-            // Remove empty filter values
+            // Remove empty filter values and convert arrays
             const cleanFilters = {};
             Object.entries(customFilters).forEach(([key, value]) => {
-                if (value && value !== '') {
-                    cleanFilters[key] = value;
+                if (value && value !== '' && value !== false && !(Array.isArray(value) && value.length === 0)) {
+                    // Convert arrays to comma-separated strings for API
+                    if (Array.isArray(value)) {
+                        cleanFilters[key] = value.join(',');
+                    } else {
+                        cleanFilters[key] = value;
+                    }
                 }
             });
             const data = await propertyService.getProperties(cleanFilters);
@@ -124,27 +132,26 @@ function BrowseProperties({ onViewProperty }) {
         }
     };
 
-    const handleFilterChange = (key, value) => {
-        const newFilters = { ...filters, [key]: value };
+    const handleFilterChange = (newFilters) => {
         setFilters(newFilters);
-    };
-
-    const applyFilters = () => {
-        fetchProperties(filters);
-        // On mobile, close filter panel after applying
-        if (window.innerWidth < 1024) {
-            setShowFilters(false);
-        }
+        fetchProperties(newFilters);
     };
 
     const clearFilters = () => {
         const emptyFilters = {
-            city: '', locality: '', min_price: '', max_price: '', property_type: '',
-            listing_type: '', bedrooms: '', furnished: '', pet_friendly: '',
-            vegetarian_only: '', gender_preference: '', bachelor_friendly: '',
-            min_lease_months: '', max_lease_months: '', immediate_available: '',
-            max_deposit_months: '', maintenance_included: '', near_metro: '',
-            near_college: '', amenities: ''
+            city: '',
+            locality: '',
+            min_price: 0,
+            max_price: 20000000,
+            property_type: [],
+            listing_type: '',
+            bedrooms: '',
+            furnished: '',
+            pet_friendly: false,
+            vegetarian_only: false,
+            gender_preference: '',
+            bachelor_friendly: false,
+            amenities: []
         };
         setFilters(emptyFilters);
         fetchProperties(emptyFilters);
@@ -173,6 +180,11 @@ function BrowseProperties({ onViewProperty }) {
             {/* Header */}
             <div className="browse-header">
                 <div className="header-content">
+                    <div className="header-top">
+                        <button className="back-btn" onClick={() => window.location.href = '/'}>
+                            ← Back to Home
+                        </button>
+                    </div>
                     <h1>Browse Properties</h1>
                     <p>Find your perfect property • {properties.length} results</p>
                 </div>
@@ -211,11 +223,10 @@ function BrowseProperties({ onViewProperty }) {
             <div className="browse-content">
                 {/* Filters Sidebar */}
                 <aside className={`filters-sidebar ${showFilters ? 'show' : ''}`}>
-                    <AdvancedFilters
+                    <FilterPanel
                         filters={filters}
                         onFilterChange={handleFilterChange}
-                        onApply={applyFilters}
-                        onClear={clearFilters}
+                        propertyCount={properties.length}
                     />
                 </aside>
 

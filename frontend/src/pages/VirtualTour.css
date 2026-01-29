@@ -1,234 +1,254 @@
-/* Virtual Tour Styles */
+/* VirtualTour - Immersive Professional Design */
 
-/* ===== INTRO PAGE ===== */
+/* ===== INTRO SCREEN ===== */
 .virtual-tour-intro {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
-    padding: 2rem;
+    background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+    padding: clamp(2rem, 5vw, 4rem);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    color: #fff;
+}
+
+.virtual-tour-intro::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(0, 116, 228, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+    pointer-events: none;
 }
 
 .back-btn {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    background: rgba(57, 255, 20, 0.1);
-    border: 1px solid #39FF14;
-    color: #39FF14;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600;
     transition: all 0.3s ease;
-    z-index: 100;
+    width: fit-content;
+    z-index: 10;
 }
 
 .back-btn:hover {
-    background: #39FF14;
-    color: #000;
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-4px);
 }
 
+/* Featured Property Card */
 .featured-property {
     max-width: 900px;
-    width: 100%;
-    margin-top: 4rem;
-    text-align: center;
+    margin: 2rem auto 0;
+    position: relative;
+    z-index: 1;
 }
 
 .featured-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #39FF14, #00cc6a);
-    color: #000;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #0074E4, #00B4DB);
+    color: #fff;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
-    animation: pulse-glow 2s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-
-    0%,
-    100% {
-        box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-    }
-
-    50% {
-        box-shadow: 0 0 30px rgba(57, 255, 20, 0.8);
-    }
+    box-shadow: 0 4px 20px rgba(0, 116, 228, 0.4);
 }
 
 .featured-property h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 900;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #fff, #39FF14);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
 }
 
 .featured-location {
-    color: #888;
-    font-size: 1.1rem;
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2rem;
 }
 
+/* Featured Image */
 .featured-image {
     position: relative;
-    width: 100%;
-    height: 400px;
-    border-radius: 20px;
+    border-radius: 1.5rem;
     overflow: hidden;
     margin-bottom: 2rem;
-    border: 2px solid rgba(57, 255, 20, 0.3);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
 }
 
 .featured-image img {
     width: 100%;
-    height: 100%;
+    height: 400px;
     object-fit: cover;
-    transition: transform 0.5s ease;
 }
 
-.featured-image:hover img {
-    transform: scale(1.05);
-}
-
-.image-overlay {
+.featured-image .image-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     padding: 2rem;
-    text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-.image-overlay span {
-    color: #39FF14;
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
+/* Stats */
 .featured-stats {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
 }
 
 .featured-stats .stat {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.25rem;
     text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.featured-stats .stat:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
 }
 
 .featured-stats .stat span {
     display: block;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
-    color: #39FF14;
-    font-family: 'JetBrains Mono', monospace;
+    color: #fff;
+    margin-bottom: 0.25rem;
 }
 
+/* Start Button */
 .btn-start {
-    background: linear-gradient(135deg, #39FF14, #00cc6a);
-    color: #000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 1.5rem;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(135deg, #10B981, #059669);
     border: none;
-    padding: 1.25rem 3rem;
-    font-size: 1.2rem;
+    border-radius: 1rem;
+    color: #fff;
+    font-size: 1.125rem;
     font-weight: 700;
-    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 1rem;
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
 }
 
 .btn-start:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 40px rgba(57, 255, 20, 0.4);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(16, 185, 129, 0.5);
 }
 
 .tour-hint {
-    color: #666;
-    font-size: 0.9rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.875rem;
     margin-bottom: 3rem;
 }
 
+/* Rooms Preview */
 .rooms-preview {
     margin-top: 2rem;
 }
 
 .rooms-preview h3 {
-    color: #888;
+    color: rgba(255, 255, 255, 0.7);
     font-size: 1rem;
-    margin-bottom: 1.5rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
 }
 
 .rooms-grid {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 1rem;
-    flex-wrap: wrap;
 }
 
 .room-preview {
-    width: 140px;
-    text-align: center;
+    position: relative;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-preview:hover {
+    transform: scale(1.05);
 }
 
 .room-preview img {
     width: 100%;
     height: 80px;
     object-fit: cover;
-    border-radius: 12px;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.room-preview:hover img {
-    border-color: #39FF14;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+    filter: brightness(0.7);
 }
 
 .room-preview span {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    color: #888;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
 }
-
 
 /* ===== MAIN TOUR VIEW ===== */
 .virtual-tour-main {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #000;
+    inset: 0;
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 
+/* Tour Header */
 .tour-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7));
+    backdrop-filter: blur(20px);
+    position: relative;
     z-index: 100;
 }
 
@@ -237,31 +257,32 @@
 }
 
 .tour-title h2 {
-    font-size: 1.2rem;
-    color: #39FF14;
-    margin: 0;
-    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 0.25rem;
 }
 
 .tour-title .current-room {
-    font-size: 0.9rem;
+    display: inline-block;
+    background: linear-gradient(135deg, #0074E4, #00B4DB);
     color: #fff;
-    opacity: 0.8;
+    padding: 0.25rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
 }
 
 .tour-info {
-    color: #888;
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
 }
 
-
-/* ===== PANORAMA VIEWER ===== */
+/* Panorama Wrapper */
 .panorama-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
 }
 
 .panorama-viewer-container {
@@ -273,107 +294,28 @@
 .marzipano-viewer {
     width: 100%;
     height: 100%;
-    cursor: grab;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
-.marzipano-viewer:active {
-    cursor: grabbing;
-}
-
-.panorama-image-container {
-    width: 100%;
-    height: 100%;
-    transform-origin: center center;
-    transition: transform 0.1s ease-out;
-}
-
-.panorama-image {
-    width: 100%;
-    height: 100%;
-    background-size: auto 100%;
-    background-repeat: repeat-x;
-    background-position: center center;
-    transition: background-position 0.05s linear;
-}
-
-.panorama-room-badge {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(57, 255, 20, 0.5);
-    color: #39FF14;
-    padding: 0.5rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-}
-
-.panorama-controls-hint {
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 2rem;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    color: #ccc;
-}
-
-.panorama-zoom-controls {
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.panorama-zoom-controls button {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid #39FF14;
-    color: #39FF14;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.panorama-zoom-controls button:hover {
-    background: #39FF14;
-    color: #000;
-}
-
+/* Loading */
 .panorama-loading {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.9);
     z-index: 50;
 }
 
 .panorama-loading .loader {
     width: 50px;
     height: 50px;
-    border: 3px solid #333;
-    border-top-color: #39FF14;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #0074E4;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
 }
 
 @keyframes spin {
@@ -383,33 +325,101 @@
 }
 
 .panorama-loading p {
-    margin-top: 1rem;
-    color: #39FF14;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
 }
 
-
-/* ===== ROOM NAVIGATION ===== */
-.room-nav {
+/* Room Badge */
+.panorama-room-badge {
     position: absolute;
-    left: 2rem;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 20;
+}
+
+/* Controls Hint */
+.panorama-controls-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    z-index: 20;
+}
+
+.panorama-controls-hint span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.75rem;
+}
+
+/* Zoom Controls */
+.panorama-zoom-controls {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 20;
+}
+
+.panorama-zoom-controls button {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.panorama-zoom-controls button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Room Navigation Sidebar */
+.room-nav {
+    position: fixed;
+    left: 1.5rem;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(57, 255, 20, 0.3);
-    border-radius: 16px;
-    padding: 1.5rem;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.25rem;
     z-index: 100;
-    max-width: 220px;
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 .room-nav h3 {
-    color: #39FF14;
-    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1rem;
-    text-align: center;
 }
 
 .room-buttons {
@@ -422,86 +432,88 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    padding: 0.75rem 1rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid transparent;
-    color: #ccc;
-    padding: 0.75rem 1rem;
-    border-radius: 10px;
+    border-radius: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
 }
 
 .room-btn:hover {
-    background: rgba(57, 255, 20, 0.1);
-    border-color: rgba(57, 255, 20, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .room-btn.active {
-    background: rgba(57, 255, 20, 0.2);
-    border-color: #39FF14;
-    color: #39FF14;
+    background: linear-gradient(135deg, #0074E4, #0D3B66);
+    border-color: #0074E4;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 116, 228, 0.4);
 }
 
 .room-number {
-    width: 24px;
-    height: 24px;
-    background: rgba(57, 255, 20, 0.2);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
 .room-btn.active .room-number {
-    background: #39FF14;
-    color: #000;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .room-name {
-    font-size: 0.9rem;
+    font-weight: 500;
 }
 
-
-/* ===== ROOM DESCRIPTION ===== */
+/* Room Description */
 .room-description {
-    position: absolute;
-    bottom: 150px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    padding: 1rem 2rem;
-    border-radius: 10px;
-    max-width: 400px;
-    text-align: center;
+    position: fixed;
+    right: 1.5rem;
+    bottom: 6rem;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    max-width: 280px;
     z-index: 100;
 }
 
 .room-description p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    line-height: 1.5;
     margin: 0;
-    color: #ccc;
-    font-size: 0.95rem;
 }
 
-
-/* ===== FLOOR PLAN ===== */
+/* Floor Plan */
 .floor-plan {
-    position: absolute;
-    right: 2rem;
-    bottom: 2rem;
+    position: fixed;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-80%);
     background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(57, 255, 20, 0.3);
-    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
     padding: 1rem;
     z-index: 100;
 }
 
 .floor-plan-title {
-    color: #888;
-    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 0.75rem;
@@ -511,41 +523,40 @@
 .floor-plan-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
+    gap: 0.5rem;
 }
 
 .floor-room {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #333;
-    border-radius: 8px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
-    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .floor-room:hover {
-    border-color: rgba(57, 255, 20, 0.5);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 .floor-room.active {
-    background: #39FF14;
-    border-color: #39FF14;
-    color: #000;
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+    background: #0074E4;
+    border-color: #0074E4;
+    color: #fff;
 }
 
-
-/* ===== NAVIGATION ARROWS ===== */
+/* Navigation Arrows */
 .nav-arrows {
-    position: absolute;
-    bottom: 2rem;
+    position: fixed;
+    bottom: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -554,62 +565,52 @@
 }
 
 .nav-arrow {
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid #39FF14;
-    color: #39FF14;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
+    padding: 0.875rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .nav-arrow:hover {
-    background: #39FF14;
-    color: #000;
+    background: #0074E4;
+    border-color: #0074E4;
+    transform: scale(1.05);
 }
-
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .room-nav {
-        left: 1rem;
-        top: auto;
-        bottom: 100px;
-        transform: none;
-        max-width: calc(100% - 2rem);
-        flex-direction: row;
-        overflow-x: auto;
+    .featured-stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .room-buttons {
-        flex-direction: row;
+    .featured-image img {
+        height: 280px;
+    }
+
+    .room-nav {
+        left: 0.75rem;
+        padding: 1rem;
+        max-width: 180px;
     }
 
     .room-btn {
-        flex-shrink: 0;
         padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
     }
 
+    .room-description,
     .floor-plan {
         display: none;
     }
 
-    .panorama-controls-hint {
-        flex-direction: column;
-        gap: 0.5rem;
-        text-align: center;
-    }
-
-    .featured-property h1 {
-        font-size: 2rem;
-    }
-
-    .featured-stats {
-        gap: 1.5rem;
-    }
-
-    .featured-stats .stat span {
-        font-size: 1.5rem;
+    .nav-arrows {
+        width: calc(100% - 2rem);
+        justify-content: space-between;
     }
 }
