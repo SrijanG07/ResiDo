@@ -73,10 +73,68 @@ const QUICK_REPLIES = [
 ];
 
 function InquiryInbox() {
-    const [inquiries, setInquiries] = useState(MOCK_INQUIRIES);
+    const [inquiries, setInquiries] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [selectedInquiry, setSelectedInquiry] = useState(null);
     const [filter, setFilter] = useState('all'); // all, unread, archived
     const [replyText, setReplyText] = useState('');
+
+    // Fetch real inquiries from API
+    React.useEffect(() => {
+        fetchInquiries();
+    }, []);
+
+    const fetchInquiries = async () => {
+        const token = localStorage.getItem('roomgi_token');
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+
+        try {
+            // First get owner's properties, then get inquiries for each
+            const propsResponse = await fetch('http://localhost:5000/api/users/my-properties', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            
+            if (propsResponse.ok) {
+                const properties = await propsResponse.json();
+                
+                // Fetch inquiries for all properties
+                const allInquiries = [];
+                for (const prop of properties) {
+                    const inqResponse = await fetch(`http://localhost:5000/api/inquiries/property/${prop.id}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (inqResponse.ok) {
+                        const propInquiries = await inqResponse.json();
+                        // Format inquiries for display
+                        propInquiries.forEach(inq => {
+                            allInquiries.push({
+                                id: inq.id,
+                                sender: inq.sender?.name || 'Unknown',
+                                email: inq.sender?.email || '',
+                                phone: inq.sender?.phone || '',
+                                property: prop.title,
+                                propertyId: prop.id,
+                                message: inq.message,
+                                date: inq.created_at,
+                                isRead: inq.status === 'replied',
+                                isArchived: inq.status === 'closed'
+                            });
+                        });
+                    }
+                }
+                // Sort by date descending
+                allInquiries.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setInquiries(allInquiries);
+            }
+        } catch (error) {
+            console.error('Failed to fetch inquiries:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const unreadCount = inquiries.filter(i => !i.isRead && !i.isArchived).length;
 
@@ -105,6 +163,52 @@ function InquiryInbox() {
 
     const handleQuickReply = (reply) => {
         setReplyText(reply);
+    };
+
+    const [sending, setSending] = useState(false);
+
+    const handleSendReply = async () => {
+        if (!replyText.trim() || !selectedInquiry) return;
+        
+        const token = localStorage.getItem('roomgi_token');
+        if (!token) {
+            alert('Please login to send a reply');
+            return;
+        }
+
+        setSending(true);
+        try {
+            // First, we need to create an inquiry_id association
+            // The inquiry object has an 'id' which we'll use
+            const response = await fetch('http://localhost:5000/api/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    inquiry_id: selectedInquiry.id,
+                    content: replyText
+                })
+            });
+
+            if (response.ok) {
+                alert('Reply sent successfully!');
+                setReplyText('');
+                // Mark as replied
+                setInquiries(prev => prev.map(i =>
+                    i.id === selectedInquiry.id ? { ...i, isRead: true } : i
+                ));
+            } else {
+                const error = await response.json();
+                alert('Failed to send reply: ' + (error.error || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Send reply error:', error);
+            alert('Failed to send reply. Please try again.');
+        } finally {
+            setSending(false);
+        }
     };
 
     const formatDate = (dateStr) => {
@@ -224,8 +328,12 @@ function InquiryInbox() {
                                     onChange={(e) => setReplyText(e.target.value)}
                                     rows={3}
                                 />
-                                <button className="btn btn-primary">
-                                    ✉️ Send Reply
+                                <button 
+                                    className="btn btn-primary" 
+                                    onClick={handleSendReply}
+                                    disabled={sending || !replyText.trim()}
+                                >
+                                    {sending ? '⏳ Sending...' : '✉️ Send Reply'}
                                 </button>
                             </div>
                         </>

@@ -268,6 +268,55 @@ h6 {
     box-shadow: 0 0 10px var(--neon-green-glow);
 }
 
+/* Navbar Auth Buttons */
+.navbar-auth {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.user-greeting {
+    color: var(--neon-green);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(57, 255, 20, 0.1);
+    border-radius: var(--radius-full);
+}
+
+.btn-login {
+    background: transparent;
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-login:hover {
+    background: var(--neon-green);
+    color: var(--black);
+    box-shadow: 0 0 15px var(--neon-green-glow);
+}
+
+.btn-outline-sm {
+    background: transparent;
+    border: 1px solid var(--gray-600);
+    color: var(--gray-400);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.btn-outline-sm:hover {
+    border-color: #ff4444;
+    color: #ff4444;
+}
+
 /* Buttons */
 .btn {
     display: inline-flex;

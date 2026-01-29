@@ -65,14 +65,43 @@ function AddPropertyWizard({ onComplete }) {
         if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
-    const handlePredictPrice = () => {
-        // Mock price prediction
-        const basePrice = formData.property_type === 'villa' ? 15000000 :
-            formData.property_type === 'flat' ? 8000000 : 5000000;
-        const bedroomMultiplier = (parseInt(formData.bedrooms) || 2) * 1500000;
-        const sizeMultiplier = (parseInt(formData.size) || 1000) * 5000;
-        const predicted = basePrice + bedroomMultiplier + sizeMultiplier;
-        setPredictedPrice(predicted);
+    const handlePredictPrice = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/predict-price', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    city: formData.city,
+                    locality: formData.locality,
+                    property_type: formData.property_type,
+                    listing_type: formData.listing_type,
+                    size: parseInt(formData.size) || 1000,
+                    bedrooms: parseInt(formData.bedrooms) || 2,
+                    bathrooms: parseInt(formData.bathrooms) || 1,
+                    furnished: formData.furnished,
+                    near_metro: formData.near_metro,
+                    pet_friendly: formData.pet_friendly,
+                    bachelor_friendly: formData.bachelor_friendly
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                setPredictedPrice(data);
+            } else {
+                // Fallback to simple calculation
+                const basePrice = formData.property_type === 'villa' ? 15000000 :
+                    formData.property_type === 'flat' ? 8000000 : 5000000;
+                const predicted = basePrice + (parseInt(formData.bedrooms) || 2) * 1500000;
+                setPredictedPrice({ predictedPrice: predicted, confidence: 60 });
+            }
+        } catch (error) {
+            console.error('Prediction error:', error);
+            // Fallback calculation
+            const basePrice = formData.property_type === 'villa' ? 15000000 :
+                formData.property_type === 'flat' ? 8000000 : 5000000;
+            const predicted = basePrice + (parseInt(formData.bedrooms) || 2) * 1500000;
+            setPredictedPrice({ predictedPrice: predicted, confidence: 50 });
+        }
     };
 
     const handleSubmit = () => {
@@ -469,7 +498,27 @@ function AddPropertyWizard({ onComplete }) {
                                     {predictedPrice ? (
                                         <div className="predicted-price">
                                             <span>Suggested Price:</span>
-                                            <strong>{formatPrice(predictedPrice)}</strong>
+                                            <strong>{formatPrice(predictedPrice.predictedPrice || predictedPrice)}</strong>
+                                            {predictedPrice.confidence && (
+                                                <div className="prediction-details">
+                                                    <div className="confidence-bar">
+                                                        <span>Confidence: {predictedPrice.confidence}%</span>
+                                                        <div className="bar-bg">
+                                                            <div className="bar-fill" style={{width: `${predictedPrice.confidence}%`}}></div>
+                                                        </div>
+                                                    </div>
+                                                    {predictedPrice.priceRange && (
+                                                        <div className="price-range">
+                                                            Range: {formatPrice(predictedPrice.priceRange.low)} - {formatPrice(predictedPrice.priceRange.high)}
+                                                        </div>
+                                                    )}
+                                                    {predictedPrice.marketComparison && (
+                                                        <div className={`market-status ${predictedPrice.marketComparison.status}`}>
+                                                            {predictedPrice.marketComparison.message}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     ) : (
                                         <button className="btn btn-outline" onClick={handlePredictPrice}>

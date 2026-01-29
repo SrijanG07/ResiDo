@@ -40,6 +40,11 @@ const propertyRoutes = require('./routes/properties');
 const inquiryRoutes = require('./routes/inquiries');
 const userRoutes = require('./routes/users');
 const newsRoutes = require('./routes/news');
+const predictionRoutes = require('./routes/prediction');
+const messageRoutes = require('./routes/messages');
+const reviewRoutes = require('./routes/reviews');
+const wishlistRoutes = require('./routes/wishlist');
+const fraudRoutes = require('./routes/fraud');
 
 // Import services
 const newsService = require('./services/newsService');
@@ -50,6 +55,11 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/predict-price', predictionRoutes);
+app.use('/api/messages', messageRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/fraud', fraudRoutes);
 
 const PORT = process.env.PORT || 5000;
 

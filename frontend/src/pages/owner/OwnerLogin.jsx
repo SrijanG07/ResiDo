@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './OwnerLogin.css';
 
-function OwnerLogin({ onSuccess, onBack }) {
+function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,8 +18,8 @@ function OwnerLogin({ onSuccess, onBack }) {
         try {
             const result = await login(email, password);
 
-            // Check if user is owner/broker
-            if (result.user.user_type !== 'owner' && result.user.user_type !== 'broker') {
+            // Check if user is owner/broker (skip if allowAllUsers is true)
+            if (!allowAllUsers && result.user.user_type !== 'owner' && result.user.user_type !== 'broker') {
                 setError('Access denied. Owner or broker account required.');
                 return;
             }

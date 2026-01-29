@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
 import StreetViewModal from '../components/StreetViewModal';
+import ReviewSection from '../components/ReviewSection';
+import TrustBadge from '../components/TrustBadge';
 import './PropertyDetail.css';
 
 // Amenity icons configuration for nearby places
@@ -24,6 +26,10 @@ function PropertyDetail({ propertyId, onBack }) {
     const [amenitiesLoading, setAmenitiesLoading] = useState(false);
     const [showAmenities, setShowAmenities] = useState(false);
     const [showStreetView, setShowStreetView] = useState(false);
+    const [showMessageModal, setShowMessageModal] = useState(false);
+    const [messageText, setMessageText] = useState('');
+    const [sendingMessage, setSendingMessage] = useState(false);
+    const [messageSent, setMessageSent] = useState(false);
 
     useEffect(() => {
         fetchProperty();
@@ -119,6 +125,50 @@ function PropertyDetail({ propertyId, onBack }) {
         return `₹${price.toLocaleString()}`;
     };
 
+    const sendInquiry = async () => {
+        const token = localStorage.getItem('roomgi_token');
+        if (!token) {
+            alert('Please login to send a message');
+            return;
+        }
+        if (!messageText.trim()) {
+            alert('Please enter a message');
+            return;
+        }
+
+        setSendingMessage(true);
+        try {
+            const response = await fetch('http://localhost:5000/api/inquiries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    property_id: propertyId,
+                    message: messageText.trim()
+                })
+            });
+
+            if (response.ok) {
+                setMessageSent(true);
+                setMessageText('');
+                setTimeout(() => {
+                    setShowMessageModal(false);
+                    setMessageSent(false);
+                }, 2000);
+            } else {
+                const error = await response.json();
+                alert(error.error || 'Failed to send message');
+            }
+        } catch (error) {
+            console.error('Send inquiry error:', error);
+            alert('Failed to send message. Please try again.');
+        } finally {
+            setSendingMessage(false);
+        }
+    };
+
     const nextImage = () => {
         if (property.images && property.images.length > 0) {
             setCurrentImageIndex((prev) => (prev + 1) % property.images.length);
@@ -210,6 +260,7 @@ function PropertyDetail({ propertyId, onBack }) {
                 <div className="info-section main-info">
                     <div className="price-section">
                         <span className="price">{formatPrice(property.price)}</span>
+                        <TrustBadge propertyId={propertyId} size="normal" />
                         <span className="listing-type">{property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}</span>
                     </div>
 
@@ -369,6 +420,9 @@ function PropertyDetail({ propertyId, onBack }) {
                             )}
                         </div>
                     </div>
+
+                    {/* Reviews Section */}
+                    <ReviewSection propertyId={propertyId} />
                 </div>
 
                 {/* Owner Contact Card */}
@@ -399,10 +453,60 @@ function PropertyDetail({ propertyId, onBack }) {
                         </div>
                     )}
 
-                    <button className="btn btn-primary btn-block">Send Inquiry</button>
+                    <button className="btn btn-primary btn-block" onClick={() => setShowMessageModal(true)}>
+                        💬 Send Inquiry
+                    </button>
                     <button className="btn btn-outline btn-block">Schedule Visit</button>
                 </div>
             </div>
+
+            {/* Message Modal */}
+            {showMessageModal && (
+                <div className="modal-overlay" onClick={() => setShowMessageModal(false)}>
+                    <div className="message-modal" onClick={(e) => e.stopPropagation()}>
+                        <div className="modal-header">
+                            <h3>💬 Send Message to {property.owner?.name || 'Owner'}</h3>
+                            <button className="modal-close" onClick={() => setShowMessageModal(false)}>✕</button>
+                        </div>
+                        
+                        <div className="modal-body">
+                            <div className="property-preview">
+                                <img 
+                                    src={property.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=100'} 
+                                    alt={property.title}
+                                />
+                                <div>
+                                    <h4>{property.title}</h4>
+                                    <p>{formatPrice(property.price)}</p>
+                                </div>
+                            </div>
+
+                            {messageSent ? (
+                                <div className="message-success">
+                                    <span>✅</span>
+                                    <p>Message sent successfully!</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <textarea
+                                        value={messageText}
+                                        onChange={(e) => setMessageText(e.target.value)}
+                                        placeholder="Hi, I'm interested in this property. Is it still available?"
+                                        rows={4}
+                                    />
+                                    <button 
+                                        className="btn btn-primary btn-block"
+                                        onClick={sendInquiry}
+                                        disabled={sendingMessage}
+                                    >
+                                        {sendingMessage ? 'Sending...' : 'Send Message'}
+                                    </button>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Street View Modal */}
             {showStreetView && property?.latitude && property?.longitude && (

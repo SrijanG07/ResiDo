@@ -546,3 +546,137 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Message Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.message-modal {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #222;
+}
+
+.modal-header h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.property-preview {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: #0a0a0a;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
+}
+
+.property-preview img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.property-preview h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    margin: 0 0 0.25rem;
+}
+
+.property-preview p {
+    color: #00ff88;
+    margin: 0;
+    font-weight: 600;
+}
+
+.modal-body textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 1rem;
+    color: #fff;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+.modal-body textarea:focus {
+    outline: none;
+    border-color: #00ff88;
+}
+
+.modal-body textarea::placeholder {
+    color: #666;
+}
+
+.message-success {
+    text-align: center;
+    padding: 2rem;
+}
+
+.message-success span {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.message-success p {
+    color: #00ff88;
+    font-size: 1.1rem;
+    margin: 0;
+}

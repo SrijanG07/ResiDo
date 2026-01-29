@@ -2,9 +2,71 @@ import React, { useState, useEffect } from 'react';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
 import AdvancedFilters from '../components/AdvancedFilters';
+import PropertyCard from '../components/PropertyCard';
 import './BrowseProperties.css';
 
 const CITIES = ['Bangalore', 'Delhi', 'Mumbai', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Chandigarh'];
+
+// Wishlist Button Component
+function WishlistButton({ propertyId }) {
+    const [isWishlisted, setIsWishlisted] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        checkWishlistStatus();
+    }, [propertyId]);
+
+    const checkWishlistStatus = async () => {
+        const token = localStorage.getItem('roomgi_token');
+        if (!token) return;
+        try {
+            const response = await fetch(`http://localhost:5000/api/wishlist/check/${propertyId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setIsWishlisted(data.isWishlisted);
+            }
+        } catch (error) {
+            console.error('Check wishlist error:', error);
+        }
+    };
+
+    const toggleWishlist = async (e) => {
+        e.stopPropagation();
+        const token = localStorage.getItem('roomgi_token');
+        if (!token) {
+            alert('Please login to save properties');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            const method = isWishlisted ? 'DELETE' : 'POST';
+            const response = await fetch(`http://localhost:5000/api/wishlist/${propertyId}`, {
+                method,
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                setIsWishlisted(!isWishlisted);
+            }
+        } catch (error) {
+            console.error('Toggle wishlist error:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        <button
+            className={`wishlist-heart-btn ${isWishlisted ? 'active' : ''} ${isLoading ? 'loading' : ''}`}
+            onClick={toggleWishlist}
+            title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+        >
+            {isWishlisted ? '💚' : '🤍'}
+        </button>
+    );
+}
 
 function BrowseProperties({ onViewProperty }) {
     const [properties, setProperties] = useState([]);
@@ -203,6 +265,7 @@ function BrowseProperties({ onViewProperty }) {
                                                 {property.latitude && property.longitude && (
                                                     <span className="location-badge" title="Location on map">📍</span>
                                                 )}
+                                                <WishlistButton propertyId={property.id} />
                                             </div>
 
                                             <div className="property-info">

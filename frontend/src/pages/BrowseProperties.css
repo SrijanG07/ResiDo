@@ -221,6 +221,45 @@
     font-size: 0.85rem;
 }
 
+/* Wishlist Heart Button */
+.wishlist-heart-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.wishlist-heart-btn:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.wishlist-heart-btn.active {
+    animation: heartPop 0.3s ease;
+}
+
+.wishlist-heart-btn.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes heartPop {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+}
+
 .property-info {
     padding: 1.25rem;
 }

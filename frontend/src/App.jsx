@@ -4,12 +4,15 @@ import BrowseProperties from './pages/BrowseProperties';
 import PropertyDetail from './pages/PropertyDetail';
 import OwnerLanding from './pages/owner/OwnerLanding';
 import OwnerLogin from './pages/owner/OwnerLogin';
+import UserLogin from './pages/UserLogin';
 import './index.css';
 
 // Lazy load VirtualTour and OwnerDashboard
 const VirtualTour = lazy(() => import('./pages/VirtualTour'));
 const OwnerDashboard = lazy(() => import('./pages/owner/OwnerDashboard'));
 const PropertyNews = lazy(() => import('./pages/PropertyNews'));
+const WishlistPage = lazy(() => import('./pages/WishlistPage'));
+const MessagesPage = lazy(() => import('./pages/MessagesPage'));
 
 // Sample property data
 const PROPERTIES = [
@@ -41,8 +44,10 @@ function TourLoading() {
 }
 
 function App() {
+    const { user, logout } = useAuth();
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+    const [returnTo, setReturnTo] = useState(null);
 
     // Scroll animation observer
     useEffect(() => {
@@ -99,12 +104,31 @@ function App() {
         );
     }
 
+    // Handle User Login page (for buyers/general users)
+    if (currentPage === 'user-login') {
+        return (
+            <UserLogin
+                onSuccess={() => {
+                    const redirectTo = returnTo || 'home';
+                    setReturnTo(null);
+                    setCurrentPage(redirectTo);
+                }}
+                onBack={() => setCurrentPage('home')}
+            />
+        );
+    }
+
     // Handle Owner Login page
     if (currentPage === 'owner-login') {
         return (
             <OwnerLogin
-                onSuccess={() => setCurrentPage('owner-dashboard')}
+                onSuccess={() => {
+                    const redirectTo = returnTo || 'owner-dashboard';
+                    setReturnTo(null);
+                    setCurrentPage(redirectTo);
+                }}
                 onBack={() => setCurrentPage('owner-landing')}
+                allowAllUsers={returnTo !== null}
             />
         );
     }
@@ -127,6 +151,43 @@ function App() {
         );
     }
 
+    // Handle Wishlist page
+    if (currentPage === 'wishlist') {
+        return (
+            <Suspense fallback={<TourLoading />}>
+                <WishlistPage 
+                    onViewProperty={(id) => {
+                        setSelectedPropertyId(id);
+                        setCurrentPage('detail');
+                    }}
+                    onNavigate={(page) => {
+                        if (page === 'owner-login') {
+                            setReturnTo('wishlist');
+                        }
+                        setCurrentPage(page);
+                    }}
+                />
+            </Suspense>
+        );
+    }
+
+    // Handle Messages page
+    if (currentPage === 'messages') {
+        return (
+            <Suspense fallback={<TourLoading />}>
+                <MessagesPage 
+                    onBack={() => setCurrentPage('home')}
+                    onNavigate={(page) => {
+                        if (page === 'owner-login') {
+                            setReturnTo('messages');
+                        }
+                        setCurrentPage(page);
+                    }}
+                />
+            </Suspense>
+        );
+    }
+
     // Home page
     return (
         <div className="app">
@@ -144,10 +205,26 @@ function App() {
                 <ul className="navbar-links">
                     <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('browse'); }}>Browse Properties</a></li>
                     <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('tour'); }} className="tour-link">🏠 360° Tour</a></li>
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('wishlist'); }}>💚 Wishlist</a></li>
+                    <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('messages'); }}>💬 Messages</a></li>
                     <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage('news'); }}>📰 News</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
+                <div className="navbar-auth">
+                    {user ? (
+                        <>
+                            <span className="user-greeting">👤 {user.name?.split(' ')[0] || 'User'}</span>
+                            <button className="btn btn-outline-sm" onClick={() => { logout(); setCurrentPage('home'); }}>
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <button className="btn btn-login" onClick={() => { setReturnTo('home'); setCurrentPage('user-login'); }}>
+                            🔑 Login
+                        </button>
+                    )}
+                </div>
                 <button className="btn btn-cta-owner" onClick={() => setCurrentPage('owner-landing')}>
                     🏠 Owner's Portal
                 </button>
