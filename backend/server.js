@@ -45,6 +45,7 @@ const messageRoutes = require('./routes/messages');
 const reviewRoutes = require('./routes/reviews');
 const wishlistRoutes = require('./routes/wishlist');
 const fraudRoutes = require('./routes/fraud');
+const chatRoutes = require('./routes/chat');
 
 // Import services
 const newsService = require('./services/newsService');
@@ -60,6 +61,7 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/fraud', fraudRoutes);
+app.use('/api/chat', chatRoutes);
 
 const PORT = process.env.PORT || 5000;
 

@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { propertyService } from '../services/api';
 import PropertyMap from '../components/PropertyMap';
+import ChatWidget from '../components/ChatWidget';
 import '../styles/luxury-theme.css';
 import './LuxuryBrowseProperties.css';
 
@@ -19,7 +20,7 @@ function WishlistButton({ propertyId }) {
         if (checked) return; // Already checked
         const token = localStorage.getItem('roomgi_token');
         if (!token) return;
-        
+
         setChecked(true);
         try {
             const response = await fetch(`http://localhost:5000/api/wishlist/check/${propertyId}`, {
@@ -102,7 +103,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
         // Animate cards only once on initial load
         if (!loading && gridRef.current && properties.length > 0 && !animationRan.current) {
             animationRan.current = true;
-            gsap.fromTo('.luxury-property-card', 
+            gsap.fromTo('.luxury-property-card',
                 { y: 40, opacity: 0 },
                 { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: 'power3.out' }
             );
@@ -215,7 +216,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
 
                 {/* Quick Filters */}
                 <div className="luxury-browse__quick-filters">
-                    <button 
+                    <button
                         className={`quick-filter-btn ${showFilters ? 'active' : ''}`}
                         onClick={() => setShowFilters(!showFilters)}
                     >
@@ -226,9 +227,9 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                         </svg>
                         Filters
                     </button>
-                    
+
                     <div className="view-toggle">
-                        <button 
+                        <button
                             className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
                             onClick={() => setViewMode('grid')}
                         >
@@ -237,7 +238,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                                 <rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
                             </svg>
                         </button>
-                        <button 
+                        <button
                             className={`view-btn ${viewMode === 'map' ? 'active' : ''}`}
                             onClick={() => setViewMode('map')}
                         >
@@ -255,8 +256,8 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                 <div className="luxury-filter-panel__content">
                     <div className="filter-section">
                         <label>City</label>
-                        <select 
-                            value={filters.city} 
+                        <select
+                            value={filters.city}
                             onChange={(e) => handleFilterChange('city', e.target.value)}
                         >
                             <option value="">All Cities</option>
@@ -269,15 +270,15 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                     <div className="filter-section">
                         <label>Listing Type</label>
                         <div className="filter-buttons">
-                            <button 
+                            <button
                                 className={filters.listing_type === '' ? 'active' : ''}
                                 onClick={() => handleFilterChange('listing_type', '')}
                             >All</button>
-                            <button 
+                            <button
                                 className={filters.listing_type === 'sale' ? 'active' : ''}
                                 onClick={() => handleFilterChange('listing_type', 'sale')}
                             >Buy</button>
-                            <button 
+                            <button
                                 className={filters.listing_type === 'rent' ? 'active' : ''}
                                 onClick={() => handleFilterChange('listing_type', 'rent')}
                             >Rent</button>
@@ -288,7 +289,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                         <label>Bedrooms</label>
                         <div className="filter-buttons">
                             {['', '1', '2', '3', '4+'].map(bed => (
-                                <button 
+                                <button
                                     key={bed}
                                     className={filters.bedrooms === bed ? 'active' : ''}
                                     onClick={() => handleFilterChange('bedrooms', bed)}
@@ -302,10 +303,10 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                     <div className="filter-section">
                         <label>Price Range</label>
                         <div className="price-range">
-                            <input 
-                                type="range" 
-                                min="0" 
-                                max="20000000" 
+                            <input
+                                type="range"
+                                min="0"
+                                max="20000000"
                                 step="500000"
                                 value={filters.max_price}
                                 onChange={(e) => handleFilterChange('max_price', parseInt(e.target.value))}
@@ -318,16 +319,16 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                         <label>Preferences</label>
                         <div className="filter-checkboxes">
                             <label className="checkbox-label">
-                                <input 
-                                    type="checkbox" 
+                                <input
+                                    type="checkbox"
                                     checked={filters.pet_friendly}
                                     onChange={(e) => handleFilterChange('pet_friendly', e.target.checked)}
                                 />
                                 <span>Pet Friendly</span>
                             </label>
                             <label className="checkbox-label">
-                                <input 
-                                    type="checkbox" 
+                                <input
+                                    type="checkbox"
                                     checked={filters.bachelor_friendly}
                                     onChange={(e) => handleFilterChange('bachelor_friendly', e.target.checked)}
                                 />
@@ -365,8 +366,8 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                         ) : (
                             <div className="luxury-properties-grid" ref={gridRef}>
                                 {properties.map(property => (
-                                    <article 
-                                        key={property.id} 
+                                    <article
+                                        key={property.id}
                                         className="luxury-property-card"
                                         onClick={() => onViewProperty(property.id)}
                                     >
@@ -427,6 +428,9 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                     </>
                 )}
             </main>
+
+            {/* AI Chat Assistant */}
+            <ChatWidget onViewProperty={onViewProperty} />
         </div>
     );
 }

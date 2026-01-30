@@ -45,6 +45,30 @@ export function AuthProvider({ children }) {
         return data;
     };
 
+    const register = async (name, email, password, userType = 'buyer') => {
+        const response = await fetch(`${API_BASE_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password, user_type: userType })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Registration failed');
+        }
+
+        const data = await response.json();
+
+        // Store token and user
+        localStorage.setItem('roomgi_token', data.token);
+        localStorage.setItem('roomgi_user', JSON.stringify(data.user));
+
+        setToken(data.token);
+        setUser(data.user);
+
+        return data;
+    };
+
     const logout = () => {
         localStorage.removeItem('roomgi_token');
         localStorage.removeItem('roomgi_user');
@@ -61,6 +85,7 @@ export function AuthProvider({ children }) {
         token,
         loading,
         login,
+        register,
         logout,
         isOwner,
         isAuthenticated: !!token

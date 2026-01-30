@@ -28,9 +28,9 @@ function Navbar({ onNavigate, currentPage }) {
                                     <stop offset="100%" stopColor="#00D4FF" />
                                 </linearGradient>
                             </defs>
-                            <rect width="40" height="40" rx="10" fill="url(#logoGradient)"/>
-                            <path d="M20 8L8 18V32H16V24H24V32H32V18L20 8Z" fill="white"/>
-                            <circle cx="20" cy="18" r="3" fill="url(#logoGradient)"/>
+                            <rect width="40" height="40" rx="10" fill="url(#logoGradient)" />
+                            <path d="M20 8L8 18V32H16V24H24V32H32V18L20 8Z" fill="white" />
+                            <circle cx="20" cy="18" r="3" fill="url(#logoGradient)" />
                         </svg>
                     </div>
                     <span className="logo-text">Room<span className="logo-highlight">Gi</span></span>
@@ -116,8 +116,9 @@ function Navbar({ onNavigate, currentPage }) {
                         <button
                             className="btn btn-outline btn-sm"
                             onClick={(e) => handleNavClick(e, 'user-login')}
+                            style={{ marginRight: '8px' }}
                         >
-                            🔑 Login
+                            Sign In / Sign Up
                         </button>
                     )}
                     <button

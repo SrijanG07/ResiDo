@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useAuth } from '../context/AuthContext';
 import './LuxuryHero.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function LuxuryHero({ onNavigate }) {
+    const { user, logout } = useAuth();
     const heroRef = useRef(null);
     const bgLayerFarRef = useRef(null);
     const bgLayerMidRef = useRef(null);
@@ -87,15 +89,15 @@ function LuxuryHero({ onNavigate }) {
         <section className={`luxury-hero ${isLoaded ? 'loaded' : ''}`} ref={heroRef}>
             {/* Background Layers */}
             <div className="luxury-hero__bg">
-                <div 
-                    className="luxury-hero__bg-layer luxury-hero__bg-layer--far" 
+                <div
+                    className="luxury-hero__bg-layer luxury-hero__bg-layer--far"
                     ref={bgLayerFarRef}
                     style={{
                         backgroundImage: `url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80')`
                     }}
                 />
-                <div 
-                    className="luxury-hero__bg-layer luxury-hero__bg-layer--mid" 
+                <div
+                    className="luxury-hero__bg-layer luxury-hero__bg-layer--mid"
                     ref={bgLayerMidRef}
                 />
                 <div className="luxury-hero__overlay" />
@@ -111,16 +113,36 @@ function LuxuryHero({ onNavigate }) {
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('tour'); }}>Virtual Tours</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('news'); }}>News</a>
                 </div>
-                <button className="luxury-hero__nav-cta" onClick={() => onNavigate('owner-landing')}>
-                    <span>List Property</span>
-                </button>
+                <div className="luxury-hero__nav-actions">
+                    {user ? (
+                        <>
+                            <button className="luxury-hero__nav-user" onClick={() => onNavigate('wishlist')}>
+                                <span>❤️ Wishlist</span>
+                            </button>
+                            <button className="luxury-hero__nav-user" onClick={() => onNavigate('messages')}>
+                                <span>💬 Messages</span>
+                            </button>
+                            <span className="luxury-hero__nav-greeting">👤 {user.name?.split(' ')[0] || 'User'}</span>
+                            <button className="luxury-hero__nav-signin" onClick={() => { logout(); onNavigate('home'); }}>
+                                <span>Logout</span>
+                            </button>
+                        </>
+                    ) : (
+                        <button className="luxury-hero__nav-signin" onClick={() => onNavigate('user-login')}>
+                            <span>Sign In / Sign Up</span>
+                        </button>
+                    )}
+                    <button className="luxury-hero__nav-cta" onClick={() => onNavigate('owner-landing')}>
+                        <span>List Property</span>
+                    </button>
+                </div>
             </nav>
 
             {/* Main Content */}
             <div className="luxury-hero__content" ref={contentRef}>
                 <div className="luxury-hero__text">
                     <p className="luxury-hero__tagline">Find Your Perfect Home, Hassle-Free</p>
-                    
+
                     <h1 className="luxury-hero__title" ref={titleRef}>
                         <span className="luxury-hero__title-main">ROOM</span>
                         <span className="luxury-hero__title-accent">Gi</span>

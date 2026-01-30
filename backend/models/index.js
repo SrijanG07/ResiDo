@@ -7,6 +7,8 @@ const SavedSearch = require('./SavedSearch');
 const Message = require('./Message');
 const Review = require('./Review');
 const Wishlist = require('./Wishlist');
+const ChatSession = require('./ChatSession');
+const ChatMessage = require('./ChatMessage');
 
 // Define associations
 User.hasMany(Property, { foreignKey: 'owner_id', as: 'properties' });
@@ -43,6 +45,12 @@ Wishlist.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 Property.hasMany(Wishlist, { foreignKey: 'property_id', as: 'wishlisted_by', onDelete: 'CASCADE' });
 Wishlist.belongsTo(Property, { foreignKey: 'property_id', as: 'property' });
 
+// Chat associations
+User.hasMany(ChatSession, { foreignKey: 'user_id', as: 'chat_sessions', onDelete: 'SET NULL' });
+ChatSession.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+ChatSession.hasMany(ChatMessage, { foreignKey: 'session_id', as: 'messages', onDelete: 'CASCADE' });
+ChatMessage.belongsTo(ChatSession, { foreignKey: 'session_id', as: 'session' });
+
 module.exports = {
     sequelize,
     User,
@@ -52,6 +60,7 @@ module.exports = {
     SavedSearch,
     Message,
     Review,
-    Wishlist
+    Wishlist,
+    ChatSession,
+    ChatMessage
 };
-
