@@ -84,36 +84,36 @@ const cities = [
     }
 ];
 
-// Property images
+// Property images - HIGH RESOLUTION (1600px width for crisp display)
 const exteriorImages = [
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&h=300&fit=crop&q=80'
+    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=1600&h=1000&fit=crop&q=90'
 ];
 
 const interiorImages = [
-    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400&h=300&fit=crop&q=80',
-    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=400&h=300&fit=crop&q=80'
+    'https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1554995207-c18c203602cb?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=1600&h=1000&fit=crop&q=90',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1600&h=1000&fit=crop&q=90'
 ];
 
 // Enhanced property types including PG/Hostel

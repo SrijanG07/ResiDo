@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import LuxuryHero from '../components/LuxuryHero';
 import LuxuryAbout from '../components/LuxuryAbout';
 import LuxuryProjects from '../components/LuxuryProjects';
+import Luxury3DShowcase from '../components/Luxury3DShowcase';
 import LuxuryAmenities from '../components/LuxuryAmenities';
+import LuxuryInvestment from '../components/LuxuryInvestment';
+import LuxuryLifestyle from '../components/LuxuryLifestyle';
 import LuxuryFooter from '../components/LuxuryFooter';
 import '../styles/luxury-theme.css';
 import './LuxuryHomePage.css';
@@ -52,8 +55,17 @@ function LuxuryHomePage({ onNavigate, onViewProperty }) {
                 onNavigate={onNavigate}
             />
 
+            {/* 3D House Showcase */}
+            <Luxury3DShowcase />
+
             {/* Amenities Section */}
             <LuxuryAmenities />
+
+            {/* Investment Section */}
+            <LuxuryInvestment />
+
+            {/* Lifestyle Section */}
+            <LuxuryLifestyle />
 
             {/* CTA Section */}
             <section className="luxury-cta">

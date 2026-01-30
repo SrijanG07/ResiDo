@@ -227,6 +227,42 @@
     margin-left: 4px;
 }
 
+/* Virtual Tour Button */
+.btn-virtual-tour {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding: 14px 28px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #0b0d0f;
+    background: linear-gradient(135deg, var(--color-accent-gold) 0%, #f4d684 50%, var(--color-accent-gold) 100%);
+    background-size: 200% 200%;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: goldShimmer 3s ease infinite;
+}
+
+@keyframes goldShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-virtual-tour:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 169, 98, 0.4);
+}
+
+.btn-virtual-tour svg {
+    stroke: #0b0d0f;
+}
+
 /* Stats */
 .property-stats {
     display: flex;
@@ -439,6 +475,38 @@
     padding: 12px 0;
     font-size: 14px;
     color: var(--color-text-secondary);
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 16px;
+    background: #25D366;
+    border: none;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn svg {
+    flex-shrink: 0;
 }
 
 .btn-luxury--full {

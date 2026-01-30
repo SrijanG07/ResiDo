@@ -163,6 +163,18 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
         return `₹${price.toLocaleString()}`;
     };
 
+    // Upgrade Unsplash image URLs to high resolution
+    const upgradeImageUrl = (url) => {
+        if (!url) return url;
+        if (url.includes('unsplash.com')) {
+            return url
+                .replace(/w=\d+/, 'w=800')
+                .replace(/h=\d+/, 'h=600')
+                .replace(/q=\d+/, 'q=85');
+        }
+        return url;
+    };
+
     const getMapCenter = () => {
         const validProperties = properties.filter(p => p.latitude && p.longitude);
         if (validProperties.length === 0) return [20.5937, 78.9629];
@@ -184,6 +196,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                     <a href="#" className="active">Properties</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('tour'); }}>Virtual Tours</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('news'); }}>News</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('wishlist'); }}>Compare Properties</a>
                 </div>
                 <div className="luxury-browse__nav-actions">
                     <button className="nav-icon-btn" onClick={() => onNavigate('wishlist')} title="Wishlist">
@@ -376,12 +389,20 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                                     >
                                         <div className="luxury-property-card__image">
                                             <img
-                                                src={property.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800'}
+                                                src={upgradeImageUrl(property.images?.[0]?.image_url) || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop&q=85'}
                                                 alt={property.title}
                                                 loading="lazy"
                                             />
                                             <span className="property-badge">
                                                 {property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}
+                                            </span>
+                                            <span className="tour-badge" title="360° Virtual Tour Available">
+                                                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2">
+                                                    <circle cx="12" cy="12" r="10"/>
+                                                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                                                    <path d="M2 12h20"/>
+                                                </svg>
+                                                360°
                                             </span>
                                             <WishlistButton propertyId={property.id} />
                                         </div>

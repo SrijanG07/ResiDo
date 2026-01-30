@@ -1,0 +1,437 @@
+/* ===========================================
+   LUXURY LIFESTYLE SECTION STYLES
+   Premium living block - Content Left, Image Right
+   Mirrored layout from Investment section
+   =========================================== */
+
+.luxury-lifestyle {
+    position: relative;
+    padding: 120px 0;
+    background: var(--color-bg-primary, #0b0d0f);
+    overflow: hidden;
+    z-index: 150;
+}
+
+.luxury-lifestyle__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ============ LEFT CONTENT ============ */
+.luxury-lifestyle__content {
+    padding: 80px 80px;
+    background: var(--color-bg-secondary, #13151a);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 1;
+}
+
+.luxury-lifestyle__label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+.luxury-lifestyle__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+}
+
+.luxury-lifestyle__title .text-italic {
+    font-style: italic;
+    color: var(--color-accent-gold);
+}
+
+.luxury-lifestyle__description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 450px;
+    margin-bottom: 32px;
+}
+
+/* ============ FEATURES LIST ============ */
+.luxury-lifestyle__features {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.lifestyle-feature {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+    transition: all 0.3s ease;
+}
+
+.lifestyle-feature:first-child {
+    border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.lifestyle-feature:hover {
+    padding-left: 12px;
+    background: rgba(201, 165, 77, 0.02);
+}
+
+.feature-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 165, 77, 0.1);
+    border: 1px solid rgba(201, 165, 77, 0.2);
+    transition: all 0.3s ease;
+}
+
+.lifestyle-feature:hover .feature-icon {
+    background: rgba(201, 165, 77, 0.15);
+    border-color: rgba(201, 165, 77, 0.4);
+}
+
+.feature-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.feature-content h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.lifestyle-feature:hover .feature-content h4 {
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.feature-content p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+/* ============ TRUST INDICATORS ============ */
+.luxury-lifestyle__trust {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.luxury-lifestyle__trust .trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.luxury-lifestyle__trust .trust-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+}
+
+.luxury-lifestyle__trust .trust-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+.luxury-lifestyle__trust .trust-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+/* ============ RIGHT IMAGE ============ */
+.luxury-lifestyle__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    order: 2;
+}
+
+/* Decorative elements */
+.lifestyle-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.lifestyle-decor .decor-frame {
+    position: absolute;
+    top: 30px;
+    left: -15px;
+    right: 30px;
+    bottom: 30px;
+    border: 1px solid rgba(201, 165, 77, 0.2);
+    transition: all 0.5s ease;
+}
+
+.luxury-lifestyle__image-wrapper:hover .decor-frame {
+    top: 20px;
+    left: -20px;
+    border-color: rgba(201, 165, 77, 0.4);
+}
+
+.lifestyle-decor .decor-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+}
+
+.lifestyle-decor .decor-corner::before,
+.lifestyle-decor .decor-corner::after {
+    content: '';
+    position: absolute;
+    background: var(--color-accent-gold, #c9a54d);
+    transition: all 0.4s ease;
+}
+
+.lifestyle-decor .decor-corner::before {
+    width: 40px;
+    height: 2px;
+}
+
+.lifestyle-decor .decor-corner::after {
+    width: 2px;
+    height: 40px;
+}
+
+.lifestyle-decor .decor-corner.corner-tr {
+    top: 15px;
+    right: 15px;
+}
+
+.lifestyle-decor .decor-corner.corner-tr::before {
+    top: 0;
+    right: 0;
+}
+
+.lifestyle-decor .decor-corner.corner-tr::after {
+    top: 0;
+    right: 0;
+}
+
+.lifestyle-decor .decor-corner.corner-bl {
+    bottom: 15px;
+    left: -30px;
+}
+
+.lifestyle-decor .decor-corner.corner-bl::before {
+    bottom: 0;
+    left: 0;
+}
+
+.lifestyle-decor .decor-corner.corner-bl::after {
+    bottom: 0;
+    left: 0;
+}
+
+.luxury-lifestyle__image-wrapper:hover .decor-corner::before {
+    width: 60px;
+}
+
+.luxury-lifestyle__image-wrapper:hover .decor-corner::after {
+    height: 60px;
+}
+
+/* Award Badge */
+.lifestyle-decor .decor-badge {
+    position: absolute;
+    top: 50px;
+    left: -50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--color-bg-primary, #0b0d0f);
+    border: 1px solid rgba(201, 165, 77, 0.3);
+    z-index: 4;
+}
+
+.lifestyle-decor .decor-badge span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+}
+
+.lifestyle-decor .decor-badge strong {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.luxury-lifestyle__image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 700px;
+    overflow: hidden;
+}
+
+.luxury-lifestyle__image {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    transition: transform 0.8s ease, filter 0.5s ease;
+    filter: brightness(0.9) contrast(1.05) saturate(1.1);
+}
+
+.luxury-lifestyle__image-wrapper:hover .luxury-lifestyle__image {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.1) saturate(1.15);
+}
+
+/* Shine effect */
+.lifestyle-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.luxury-lifestyle__image-wrapper:hover .lifestyle-shine {
+    animation: lifestyleShine 1.2s ease forwards;
+}
+
+@keyframes lifestyleShine {
+    0% { left: -100%; }
+    100% { left: 150%; }
+}
+
+.luxury-lifestyle__image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(11, 13, 15, 0.95) 0%, rgba(11, 13, 15, 0.7) 50%, transparent 100%);
+    z-index: 2;
+}
+
+.luxury-lifestyle__image-overlay .overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.luxury-lifestyle__image-overlay .overlay-number {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--color-accent-gold, #c9a54d);
+    line-height: 1;
+}
+
+.luxury-lifestyle__image-overlay .overlay-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .luxury-lifestyle__container {
+        grid-template-columns: 1fr;
+    }
+    
+    .luxury-lifestyle__content {
+        order: 2;
+        padding: 60px 40px;
+    }
+    
+    .luxury-lifestyle__image-wrapper {
+        order: 1;
+        min-height: 500px;
+    }
+    
+    .luxury-lifestyle__image-container {
+        min-height: 500px;
+    }
+    
+    .lifestyle-decor .decor-frame {
+        left: 30px;
+    }
+    
+    .lifestyle-decor .decor-badge {
+        left: 30px;
+    }
+    
+    .lifestyle-decor .decor-corner.corner-bl {
+        left: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .luxury-lifestyle {
+        padding: 80px 0;
+    }
+    
+    .luxury-lifestyle__content {
+        padding: 48px 24px;
+    }
+    
+    .luxury-lifestyle__trust {
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    
+    .luxury-lifestyle__trust .trust-divider {
+        display: none;
+    }
+    
+    .luxury-lifestyle__trust .trust-item {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .luxury-lifestyle__title {
+        font-size: 2rem;
+    }
+    
+    .lifestyle-feature {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .luxury-lifestyle__image-overlay .overlay-number {
+        font-size: 42px;
+    }
+}

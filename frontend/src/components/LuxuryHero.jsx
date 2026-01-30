@@ -112,6 +112,7 @@ function LuxuryHero({ onNavigate }) {
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('browse'); }}>Properties</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('tour'); }}>Virtual Tours</a>
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('news'); }}>News</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('wishlist'); }}>Compare Properties</a>
                 </div>
                 <div className="luxury-hero__nav-actions">
                     {user ? (

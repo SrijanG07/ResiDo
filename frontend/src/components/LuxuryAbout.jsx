@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './LuxuryAbout.css';
@@ -9,6 +9,30 @@ function LuxuryAbout() {
     const sectionRef = useRef(null);
     const imageRef = useRef(null);
     const statsRef = useRef(null);
+    const parallaxRef = useRef(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    // Mouse parallax effect for image
+    const handleMouseMove = (e) => {
+        if (!imageRef.current) return;
+        const rect = imageRef.current.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        setMousePosition({ x, y });
+    };
+
+    const handleMouseLeave = () => {
+        setMousePosition({ x: 0, y: 0 });
+    };
+
+    // Apply parallax transform
+    useEffect(() => {
+        if (parallaxRef.current) {
+            const translateX = mousePosition.x * 15;
+            const translateY = mousePosition.y * 15;
+            parallaxRef.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
+        }
+    }, [mousePosition]);
 
     useEffect(() => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -82,15 +106,47 @@ function LuxuryAbout() {
                     </h2>
                 </div>
 
-                {/* Center - Image */}
-                <div className="luxury-about__center" ref={imageRef}>
-                    <div className="luxury-about__image-wrapper">
-                        <img 
-                            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&h=800&fit=crop" 
-                            alt="Luxury Interior"
-                            className="luxury-about__image"
-                        />
+                {/* Center - Image with Animated Frame */}
+                <div 
+                    className="luxury-about__center" 
+                    ref={imageRef}
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {/* Decorative floating elements */}
+                    <div className="about-float-elements">
+                        <div className="float-square float-1"></div>
+                        <div className="float-square float-2"></div>
+                        <div className="float-line float-3"></div>
+                        <div className="float-dot float-4"></div>
+                        <div className="float-dot float-5"></div>
                     </div>
+                    
+                    {/* Animated corner accents */}
+                    <div className="image-corner corner-tl"></div>
+                    <div className="image-corner corner-tr"></div>
+                    <div className="image-corner corner-bl"></div>
+                    <div className="image-corner corner-br"></div>
+                    
+                    <div className="luxury-about__image-wrapper">
+                        {/* Inner parallax container */}
+                        <div className="image-parallax-inner" ref={parallaxRef}>
+                            <img 
+                                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=1000&fit=crop&q=90" 
+                                alt="Luxury Interior"
+                                className="luxury-about__image"
+                            />
+                        </div>
+                        
+                        {/* Overlay gradient */}
+                        <div className="image-overlay"></div>
+                        
+                        {/* Shine effect */}
+                        <div className="image-shine"></div>
+                    </div>
+                    
+                    {/* Orbit ring */}
+                    <div className="about-orbit-ring"></div>
                 </div>
 
                 {/* Right Column - Description */}

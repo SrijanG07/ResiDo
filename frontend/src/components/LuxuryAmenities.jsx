@@ -96,18 +96,37 @@ function LuxuryAmenities() {
 
                 {/* Right Image */}
                 <div className="luxury-amenities__image-wrapper">
+                    {/* Decorative elements */}
+                    <div className="amenities-decor">
+                        <div className="decor-frame"></div>
+                        <div className="decor-corner corner-tl"></div>
+                        <div className="decor-corner corner-br"></div>
+                        <div className="decor-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    
                     <div className="luxury-amenities__image-container" ref={imageRef}>
                         <img 
-                            src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=1000&fit=crop" 
+                            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1000&h=1200&fit=crop&q=90" 
                             alt="Luxury Amenities"
                             className="luxury-amenities__image"
                             loading="lazy"
                         />
+                        {/* Shine effect */}
+                        <div className="amenities-shine"></div>
                     </div>
+                    
                     <div className="luxury-amenities__image-overlay">
                         <div className="overlay-stat">
                             <span className="stat-value">24/7</span>
                             <span className="stat-label">Concierge Service</span>
+                        </div>
+                        <div className="overlay-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <span>Premium</span>
                         </div>
                     </div>
                 </div>

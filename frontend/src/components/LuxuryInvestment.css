@@ -1,0 +1,428 @@
+/* ===========================================
+   LUXURY INVESTMENT SECTION STYLES
+   Premium investment block with reversed layout
+   =========================================== */
+
+.luxury-investment {
+    position: relative;
+    padding: 120px 0;
+    background: var(--color-bg-secondary, #13151a);
+    overflow: hidden;
+    z-index: 140;
+}
+
+.luxury-investment__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ============ LEFT IMAGE ============ */
+.luxury-investment__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    order: 1;
+}
+
+/* Decorative elements */
+.investment-decor {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.investment-decor .decor-frame {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    right: -15px;
+    bottom: 30px;
+    border: 1px solid rgba(201, 165, 77, 0.2);
+    transition: all 0.5s ease;
+}
+
+.luxury-investment__image-wrapper:hover .decor-frame {
+    top: 20px;
+    right: -20px;
+    border-color: rgba(201, 165, 77, 0.4);
+}
+
+.investment-decor .decor-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+}
+
+.investment-decor .decor-corner::before,
+.investment-decor .decor-corner::after {
+    content: '';
+    position: absolute;
+    background: var(--color-accent-gold, #c9a54d);
+    transition: all 0.4s ease;
+}
+
+.investment-decor .decor-corner::before {
+    width: 40px;
+    height: 2px;
+}
+
+.investment-decor .decor-corner::after {
+    width: 2px;
+    height: 40px;
+}
+
+.investment-decor .decor-corner.corner-tl {
+    top: 15px;
+    left: 15px;
+}
+
+.investment-decor .decor-corner.corner-tl::before,
+.investment-decor .decor-corner.corner-tl::after {
+    top: 0;
+    left: 0;
+}
+
+.investment-decor .decor-corner.corner-br {
+    bottom: 15px;
+    right: -30px;
+}
+
+.investment-decor .decor-corner.corner-br::before {
+    bottom: 0;
+    right: 0;
+}
+
+.investment-decor .decor-corner.corner-br::after {
+    bottom: 0;
+    right: 0;
+}
+
+.luxury-investment__image-wrapper:hover .decor-corner::before {
+    width: 60px;
+}
+
+.luxury-investment__image-wrapper:hover .decor-corner::after {
+    height: 60px;
+}
+
+/* Year Badge */
+.decor-badge {
+    position: absolute;
+    top: 50px;
+    right: -50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: var(--color-bg-primary, #0b0d0f);
+    border: 1px solid rgba(201, 165, 77, 0.3);
+    z-index: 4;
+}
+
+.decor-badge span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+}
+
+.decor-badge strong {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.luxury-investment__image-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 700px;
+    overflow: hidden;
+}
+
+.luxury-investment__image {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    transition: transform 0.8s ease, filter 0.5s ease;
+    filter: brightness(0.9) contrast(1.05) saturate(1.1);
+}
+
+.luxury-investment__image-wrapper:hover .luxury-investment__image {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.1) saturate(1.15);
+}
+
+/* Shine effect */
+.investment-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+.luxury-investment__image-wrapper:hover .investment-shine {
+    animation: investmentShine 1.2s ease forwards;
+}
+
+@keyframes investmentShine {
+    0% { left: -100%; }
+    100% { left: 150%; }
+}
+
+.luxury-investment__image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(11, 13, 15, 0.95) 0%, rgba(11, 13, 15, 0.7) 50%, transparent 100%);
+    z-index: 2;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.overlay-number {
+    font-family: var(--font-display);
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--color-accent-gold, #c9a54d);
+    line-height: 1;
+}
+
+.overlay-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-muted);
+}
+
+/* ============ RIGHT CONTENT ============ */
+.luxury-investment__content {
+    padding: 80px 80px;
+    background: var(--color-bg-primary, #0b0d0f);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    order: 2;
+}
+
+.luxury-investment__label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+.luxury-investment__title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+}
+
+.luxury-investment__title .text-italic {
+    font-style: italic;
+    color: var(--color-accent-gold);
+}
+
+.luxury-investment__description {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 450px;
+    margin-bottom: 32px;
+}
+
+/* ============ BENEFITS LIST ============ */
+.luxury-investment__benefits {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.investment-benefit {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+    transition: all 0.3s ease;
+}
+
+.investment-benefit:first-child {
+    border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.investment-benefit:hover {
+    padding-left: 12px;
+    background: rgba(201, 165, 77, 0.02);
+}
+
+.benefit-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(201, 165, 77, 0.1);
+    border: 1px solid rgba(201, 165, 77, 0.2);
+    transition: all 0.3s ease;
+}
+
+.investment-benefit:hover .benefit-icon {
+    background: rgba(201, 165, 77, 0.15);
+    border-color: rgba(201, 165, 77, 0.4);
+}
+
+.benefit-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.benefit-content h4 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: 6px;
+    transition: color 0.3s ease;
+}
+
+.investment-benefit:hover .benefit-content h4 {
+    color: var(--color-accent-gold, #c9a54d);
+}
+
+.benefit-content p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+}
+
+/* ============ TRUST INDICATORS ============ */
+.luxury-investment__trust {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.trust-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.trust-value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+}
+
+.trust-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+.trust-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .luxury-investment__container {
+        grid-template-columns: 1fr;
+    }
+    
+    .luxury-investment__image-wrapper {
+        order: 1;
+        min-height: 500px;
+    }
+    
+    .luxury-investment__content {
+        order: 2;
+        padding: 60px 40px;
+    }
+    
+    .investment-decor .decor-frame {
+        right: 30px;
+    }
+    
+    .decor-badge {
+        right: 30px;
+    }
+    
+    .investment-decor .decor-corner.corner-br {
+        right: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .luxury-investment {
+        padding: 80px 0;
+    }
+    
+    .luxury-investment__content {
+        padding: 48px 24px;
+    }
+    
+    .luxury-investment__trust {
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+    
+    .trust-divider {
+        display: none;
+    }
+    
+    .trust-item {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .luxury-investment__title {
+        font-size: 2rem;
+    }
+    
+    .investment-benefit {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .overlay-number {
+        font-size: 42px;
+    }
+}

@@ -58,6 +58,7 @@ function App() {
     const { user, logout } = useAuth();
     const [currentPage, setCurrentPage] = useState('home');
     const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+    const [selectedPropertyInfo, setSelectedPropertyInfo] = useState(null);
     const [returnTo, setReturnTo] = useState(null);
     const [searchFilters, setSearchFilters] = useState('');
 
@@ -73,6 +74,13 @@ function App() {
     const handleViewProperty = (id) => {
         setSelectedPropertyId(id);
         setCurrentPage('detail');
+    };
+
+    // Handle virtual tour with property info
+    const handleStartTour = (propertyId, propertyInfo = null) => {
+        setSelectedPropertyId(propertyId);
+        setSelectedPropertyInfo(propertyInfo);
+        setCurrentPage('tour');
     };
 
     // Scroll animation observer
@@ -113,6 +121,7 @@ function App() {
                 propertyId={selectedPropertyId}
                 onBack={() => setCurrentPage('browse')}
                 onNavigate={handleNavigate}
+                onStartTour={handleStartTour}
             />
         );
     }
@@ -121,7 +130,17 @@ function App() {
     if (currentPage === 'tour') {
         return (
             <Suspense fallback={<LuxuryLoading />}>
-                <VirtualTour onBack={() => setCurrentPage('home')} />
+                <VirtualTour 
+                    onBack={() => {
+                        if (selectedPropertyId) {
+                            setCurrentPage('detail');
+                        } else {
+                            setCurrentPage('home');
+                        }
+                    }}
+                    propertyId={selectedPropertyId}
+                    propertyInfo={selectedPropertyInfo}
+                />
             </Suspense>
         );
     }
