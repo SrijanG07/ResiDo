@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Marzipano from 'marzipano';
+import '../styles/luxury-theme.css';
 import './VirtualTour.css';
 
 // 360° Panorama images from Poly Haven (equirectangular, CC0 license)
@@ -38,7 +39,7 @@ const ROOMS = [
         id: 'bathroom',
         name: 'Bathroom',
         image: '/panoramas/bathroom.jpg',
-        description: 'Contemporary bathroom with premium fixtures'
+        description: 'Contemporary bathroom with modern fixtures'
     },
     {
         id: 'study',
@@ -195,7 +196,7 @@ function VirtualTour({ onBack }) {
 
                 <div className="featured-property">
                     <div className="featured-badge">🏠 360° Virtual Tour</div>
-                    <h1>Luxury 3BHK Apartment</h1>
+                    <h1>Spacious 3BHK Apartment</h1>
                     <p className="featured-location">📍 Koramangala, Bangalore</p>
 
                     <div className="featured-image">
@@ -249,7 +250,7 @@ function VirtualTour({ onBack }) {
                     <span className="current-room">{currentRoom.name}</span>
                 </div>
                 <div className="tour-info">
-                    Luxury 3BHK • Koramangala
+                    Spacious 3BHK • Koramangala
                 </div>
             </div>
 

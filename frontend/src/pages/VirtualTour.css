@@ -1,9 +1,10 @@
 /* VirtualTour - Immersive Professional Design */
+/* Uses luxury theme variables for consistency */
 
 /* ===== INTRO SCREEN ===== */
 .virtual-tour-intro {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0a1628 0%, #1a365d 50%, #0f172a 100%);
+    background: var(--color-bg-primary, #0b0d0f);
     position: relative;
     overflow: hidden;
     padding: clamp(2rem, 5vw, 4rem);

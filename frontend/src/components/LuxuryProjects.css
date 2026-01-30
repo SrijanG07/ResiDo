@@ -1,0 +1,197 @@
+/* ===========================================
+   LUXURY PROJECTS CAROUSEL STYLES
+   =========================================== */
+
+.luxury-projects {
+    position: relative;
+    min-height: 100vh;
+    padding: 80px 48px;
+    background: var(--color-bg-secondary);
+    overflow: hidden;
+    /* Ensure this section appears above the pinned hero */
+    z-index: 100;
+}
+
+/* ============ HEADER ============ */
+.luxury-projects__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.luxury-projects__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+}
+
+.luxury-projects__pagination {
+    display: flex;
+    gap: 24px;
+}
+
+.pagination-dot {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: color var(--transition-base);
+    position: relative;
+}
+
+.pagination-dot::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-text-primary);
+    transition: width var(--transition-base);
+}
+
+.pagination-dot.active {
+    color: var(--color-text-primary);
+}
+
+.pagination-dot.active::after {
+    width: 100%;
+}
+
+/* ============ TITLE ============ */
+.luxury-projects__title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: -0.02em;
+}
+
+/* ============ CAROUSEL ============ */
+.luxury-projects__carousel {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    will-change: transform;
+}
+
+.luxury-project-card {
+    flex: 0 0 400px;
+    min-width: 320px;
+    cursor: pointer;
+    transition: transform var(--transition-slow);
+}
+
+.luxury-project-card:hover {
+    transform: translateY(-8px);
+}
+
+.luxury-project-card__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--color-bg-elevated);
+}
+
+.luxury-project-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease-smooth);
+}
+
+.luxury-project-card:hover .luxury-project-card__image {
+    transform: scale(1.08);
+}
+
+.luxury-project-card__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.luxury-project-card:hover .luxury-project-card__overlay {
+    transform: translateY(0);
+}
+
+.luxury-project-card__overlay h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.luxury-project-card__overlay p {
+    font-size: 13px;
+    color: var(--color-accent-gold);
+}
+
+/* ============ FOOTER ============ */
+.luxury-projects__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-border);
+}
+
+.luxury-projects__description {
+    max-width: 400px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .luxury-projects {
+        padding: 60px 32px;
+    }
+    
+    .luxury-project-card {
+        flex: 0 0 320px;
+    }
+    
+    .luxury-projects__footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .luxury-projects {
+        padding: 40px 20px;
+        min-height: auto;
+    }
+    
+    .luxury-projects__carousel {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .luxury-project-card {
+        flex: 1;
+        min-width: 100%;
+    }
+    
+    .luxury-projects__title {
+        text-align: left;
+        margin-bottom: 40px;
+    }
+    
+    .luxury-project-card__overlay {
+        transform: translateY(0);
+    }
+}

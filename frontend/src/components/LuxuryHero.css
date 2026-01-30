@@ -1,0 +1,344 @@
+/* ===========================================
+   LUXURY HERO COMPONENT STYLES
+   =========================================== */
+
+.luxury-hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-bg-primary);
+}
+
+.luxury-hero.loaded .luxury-hero__content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============ BACKGROUND LAYERS ============ */
+.luxury-hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.luxury-hero__bg-layer {
+    position: absolute;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+}
+
+.luxury-hero__bg-layer--far {
+    z-index: 1;
+    filter: brightness(0.7);
+}
+
+.luxury-hero__bg-layer--mid {
+    z-index: 2;
+    background: radial-gradient(ellipse at 30% 50%, transparent 0%, var(--color-bg-primary) 70%);
+}
+
+.luxury-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(
+        180deg,
+        rgba(11, 13, 15, 0.4) 0%,
+        rgba(11, 13, 15, 0.2) 40%,
+        rgba(11, 13, 15, 0.6) 80%,
+        rgba(11, 13, 15, 0.95) 100%
+    );
+}
+
+/* ============ NAVIGATION ============ */
+.luxury-hero__nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+}
+
+.luxury-hero__logo {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: opacity var(--transition-base);
+}
+
+.luxury-hero__logo:hover {
+    opacity: 0.8;
+}
+
+.luxury-hero__nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.luxury-hero__nav-links a {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color var(--transition-base);
+    position: relative;
+}
+
+.luxury-hero__nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-accent-gold);
+    transition: width var(--transition-base);
+}
+
+.luxury-hero__nav-links a:hover {
+    color: var(--color-text-primary);
+}
+
+.luxury-hero__nav-links a:hover::after {
+    width: 100%;
+}
+
+.luxury-hero__nav-cta {
+    padding: 12px 24px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.luxury-hero__nav-cta:hover {
+    background: var(--color-text-primary);
+    color: var(--color-bg-primary);
+    border-color: var(--color-text-primary);
+}
+
+/* ============ MAIN CONTENT ============ */
+.luxury-hero__content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s var(--ease-smooth), transform 1s var(--ease-smooth);
+    transition-delay: 0.3s;
+}
+
+.luxury-hero__text {
+    max-width: 700px;
+}
+
+.luxury-hero__tagline {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-text-muted);
+    margin-bottom: 24px;
+}
+
+.luxury-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 15vw, 180px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: baseline;
+}
+
+.luxury-hero__title-main {
+    color: var(--color-text-primary);
+}
+
+.luxury-hero__title-accent {
+    font-style: italic;
+    color: var(--color-accent-gold);
+}
+
+.luxury-hero__subtitle {
+    max-width: 420px;
+    margin-bottom: 40px;
+}
+
+.luxury-hero__subtitle p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+.luxury-hero__actions {
+    display: flex;
+    gap: 16px;
+}
+
+/* ============ INFO CARD ============ */
+.luxury-hero__info-card {
+    position: absolute;
+    right: 48px;
+    bottom: 120px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 28px 36px;
+    border-radius: 4px;
+}
+
+.luxury-hero__info-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.luxury-hero__info-stat .stat-value {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+}
+
+.luxury-hero__info-stat .stat-label {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.luxury-hero__info-divider {
+    width: 1px;
+    height: 50px;
+    background: var(--color-border);
+}
+
+/* ============ SCROLL INDICATOR ============ */
+.luxury-hero__scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.luxury-hero__scroll span {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-text-muted);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}
+
+.luxury-hero__scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-text-muted), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+    0%, 100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scaleY(0.5);
+        opacity: 0.5;
+    }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+    .luxury-hero__nav {
+        padding: 20px 32px;
+    }
+    
+    .luxury-hero__content {
+        padding: 0 32px;
+    }
+    
+    .luxury-hero__info-card {
+        right: 32px;
+        bottom: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .luxury-hero__nav {
+        padding: 16px 20px;
+    }
+    
+    .luxury-hero__nav-links {
+        display: none;
+    }
+    
+    .luxury-hero__content {
+        padding: 0 20px;
+        justify-content: flex-end;
+        padding-bottom: 160px;
+    }
+    
+    .luxury-hero__title {
+        font-size: 64px;
+    }
+    
+    .luxury-hero__subtitle {
+        max-width: 100%;
+    }
+    
+    .luxury-hero__actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .luxury-hero__actions .btn-luxury,
+    .luxury-hero__actions .btn-luxury-gold {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .luxury-hero__info-card {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 40px;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .luxury-hero__scroll {
+        display: none;
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/luxury-theme.css';
 import './WishlistPage.css';
 
 function WishlistPage({ onViewProperty, onNavigate }) {

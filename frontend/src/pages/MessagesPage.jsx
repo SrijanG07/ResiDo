@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import '../styles/luxury-theme.css';
 import './MessagesPage.css';
 
 function MessagesPage({ onBack, onNavigate }) {

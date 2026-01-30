@@ -1,12 +1,13 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { useAuth } from './context/AuthContext';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import BrowseProperties from './pages/BrowseProperties';
-import PropertyDetail from './pages/PropertyDetail';
+import LuxuryHomePage from './pages/LuxuryHomePage';
+import LuxuryBrowseProperties from './pages/LuxuryBrowseProperties';
+import LuxuryPropertyDetail from './pages/LuxuryPropertyDetail';
 import OwnerLanding from './pages/owner/OwnerLanding';
 import OwnerLogin from './pages/owner/OwnerLogin';
 import UserLogin from './pages/UserLogin';
+import './styles/luxury-theme.css';
 import './index.css';
 
 // Lazy load VirtualTour and OwnerDashboard
@@ -33,13 +34,20 @@ const FEATURED_HOMES = [
     'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300&h=400&fit=crop',
 ];
 
-// Loading component for virtual tour
-function TourLoading() {
+// Loading component for lazy loaded pages
+function LuxuryLoading() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#000', color: '#39FF14' }}>
+        <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '100vh', 
+            background: 'var(--color-bg-primary, #0b0d0f)', 
+            color: 'var(--color-text-primary, #fff)' 
+        }}>
             <div style={{ textAlign: 'center' }}>
-                <h2>Loading Virtual Tour...</h2>
-                <p>Preparing 360° experience</p>
+                <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 400 }}>Loading...</h2>
+                <p style={{ color: 'var(--color-text-muted, #64748b)' }}>Please wait</p>
             </div>
         </div>
     );
@@ -89,33 +97,29 @@ function App() {
     // Handle Browse Properties page
     if (currentPage === 'browse') {
         return (
-            <>
-                <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-                <BrowseProperties
-                    onViewProperty={handleViewProperty}
-                    initialFilters={searchFilters}
-                />
-            </>
+            <LuxuryBrowseProperties
+                onViewProperty={handleViewProperty}
+                onNavigate={handleNavigate}
+                initialFilters={searchFilters}
+            />
         );
     }
 
     // Handle Property Detail page
     if (currentPage === 'detail' && selectedPropertyId) {
         return (
-            <>
-                <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-                <PropertyDetail
-                    propertyId={selectedPropertyId}
-                    onBack={() => setCurrentPage('browse')}
-                />
-            </>
+            <LuxuryPropertyDetail
+                propertyId={selectedPropertyId}
+                onBack={() => setCurrentPage('browse')}
+                onNavigate={handleNavigate}
+            />
         );
     }
 
     // Handle Virtual Tour page with lazy loading
     if (currentPage === 'tour') {
         return (
-            <Suspense fallback={<TourLoading />}>
+            <Suspense fallback={<LuxuryLoading />}>
                 <VirtualTour onBack={() => setCurrentPage('home')} />
             </Suspense>
         );
@@ -163,7 +167,7 @@ function App() {
     // Handle Owner Dashboard (protected)
     if (currentPage === 'owner-dashboard') {
         return (
-            <Suspense fallback={<TourLoading />}>
+            <Suspense fallback={<LuxuryLoading />}>
                 <OwnerDashboard onLogout={() => setCurrentPage('home')} />
             </Suspense>
         );
@@ -172,7 +176,7 @@ function App() {
     // Handle Property News page
     if (currentPage === 'news') {
         return (
-            <Suspense fallback={<TourLoading />}>
+            <Suspense fallback={<LuxuryLoading />}>
                 <PropertyNews />
             </Suspense>
         );
@@ -181,7 +185,7 @@ function App() {
     // Handle Wishlist page
     if (currentPage === 'wishlist') {
         return (
-            <Suspense fallback={<TourLoading />}>
+            <Suspense fallback={<LuxuryLoading />}>
                 <WishlistPage
                     onViewProperty={(id) => {
                         setSelectedPropertyId(id);
@@ -201,7 +205,7 @@ function App() {
     // Handle Messages page
     if (currentPage === 'messages') {
         return (
-            <Suspense fallback={<TourLoading />}>
+            <Suspense fallback={<LuxuryLoading />}>
                 <MessagesPage
                     onBack={() => setCurrentPage('home')}
                     onNavigate={(page) => {
@@ -215,15 +219,12 @@ function App() {
         );
     }
 
-    // Home page
+    // Home page - Luxury Version
     return (
-        <>
-            <Navbar onNavigate={handleNavigate} currentPage={currentPage} />
-            <HomePage
-                onNavigate={handleNavigate}
-                onViewProperty={handleViewProperty}
-            />
-        </>
+        <LuxuryHomePage
+            onNavigate={handleNavigate}
+            onViewProperty={handleViewProperty}
+        />
     );
 }
 

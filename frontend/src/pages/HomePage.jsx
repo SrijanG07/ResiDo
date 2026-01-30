@@ -176,7 +176,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                     <div className="section-header-vibrant">
                         <div className="section-badge">🔥 Hot Picks</div>
                         <h2>Featured Properties</h2>
-                        <p>Handpicked premium properties just for you</p>
+                        <p>Handpicked properties just for you</p>
                     </div>
 
                     {loading ? (

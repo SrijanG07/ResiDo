@@ -1,0 +1,162 @@
+/* ===========================================
+   LUXURY HOME PAGE STYLES
+   =========================================== */
+
+.luxury-homepage {
+    background: var(--color-bg-primary);
+    min-height: 100vh;
+    /* Ensure sections stack properly with GSAP ScrollTrigger pin */
+    position: relative;
+}
+
+/* Section stacking context for GSAP pinning */
+.luxury-homepage > section,
+.luxury-homepage > .luxury-hero,
+.luxury-homepage > div {
+    position: relative;
+    background: var(--color-bg-primary);
+}
+
+.luxury-hero {
+    z-index: 10;
+}
+
+.luxury-about {
+    z-index: 20;
+    background: var(--color-bg-primary);
+}
+
+.luxury-projects {
+    z-index: 30;
+    background: var(--color-bg-secondary);
+}
+
+.luxury-amenities {
+    z-index: 40;
+    background: var(--color-bg-primary);
+}
+
+.luxury-cta {
+    z-index: 50;
+}
+
+.luxury-footer {
+    z-index: 60;
+}
+
+/* ============ CTA SECTION ============ */
+.luxury-cta {
+    position: relative;
+    padding: 160px 48px;
+    background: var(--color-bg-primary);
+    text-align: center;
+    overflow: hidden;
+}
+
+.luxury-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--color-accent-gold) 0%, transparent 70%);
+    opacity: 0.03;
+    pointer-events: none;
+}
+
+.luxury-cta__container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.luxury-cta__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+}
+
+.luxury-cta__title .text-italic {
+    font-style: italic;
+    color: var(--color-accent-gold);
+}
+
+.luxury-cta__description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: 48px;
+}
+
+.luxury-cta__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+/* Button variations for CTA */
+.btn-luxury-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-8);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-gold);
+    background: transparent;
+    border: 1px solid var(--color-accent-gold);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-luxury-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--color-accent-gold);
+    transform: translateY(100%);
+    transition: transform var(--transition-base);
+}
+
+.btn-luxury-gold:hover {
+    color: var(--color-bg-primary);
+}
+
+.btn-luxury-gold:hover::before {
+    transform: translateY(0);
+}
+
+.btn-luxury-gold span {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+    .luxury-cta {
+        padding: 100px 20px;
+    }
+    
+    .luxury-cta__buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .luxury-cta__buttons .btn-luxury,
+    .luxury-cta__buttons .btn-luxury-gold {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+}

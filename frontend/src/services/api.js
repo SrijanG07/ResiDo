@@ -12,6 +12,8 @@ export const propertyService = {
         if (filters.property_type) queryParams.append('property_type', filters.property_type);
         if (filters.listing_type) queryParams.append('listing_type', filters.listing_type);
         if (filters.bedrooms) queryParams.append('bedrooms', filters.bedrooms);
+        if (filters.pet_friendly) queryParams.append('pet_friendly', filters.pet_friendly);
+        if (filters.bachelor_friendly) queryParams.append('bachelor_friendly', filters.bachelor_friendly);
 
         const response = await fetch(`${API_BASE_URL}/properties?${queryParams}`);
         if (!response.ok) throw new Error('Failed to fetch properties');
