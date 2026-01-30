@@ -120,7 +120,7 @@ function ReviewSection({ propertyId, isOwner = false }) {
                         className="btn btn-primary"
                         onClick={() => setShowForm(!showForm)}
                     >
-                        {showForm ? '✕ Cancel' : '✍️ Write Review'}
+                        {showForm ? 'Cancel' : 'Write Review'}
                     </button>
                 )}
             </div>
@@ -159,7 +159,7 @@ function ReviewSection({ propertyId, isOwner = false }) {
             <div className="reviews-list">
                 {reviews.length === 0 ? (
                     <div className="no-reviews">
-                        <span>📝</span>
+                        <span>R</span>
                         <p>No reviews yet. Be the first to review!</p>
                     </div>
                 ) : (
@@ -183,7 +183,7 @@ function ReviewSection({ propertyId, isOwner = false }) {
                             {/* Owner Response */}
                             {review.owner_response && (
                                 <div className="owner-response">
-                                    <span className="response-label">🏠 Owner's Response:</span>
+                                    <span className="response-label">Owner's Response:</span>
                                     <p>{review.owner_response}</p>
                                     <span className="response-date">{formatDate(review.response_date)}</span>
                                 </div>

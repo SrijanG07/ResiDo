@@ -1,0 +1,580 @@
+/* ===========================================
+   EMI CALCULATOR STYLES
+   Luxury Design for RoomGi
+   =========================================== */
+
+.emi-calculator {
+    background: linear-gradient(135deg, rgba(201, 165, 77, 0.08) 0%, rgba(11, 13, 15, 0.95) 100%);
+    border: 1px solid rgba(201, 165, 77, 0.3);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 30px 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Header */
+.emi-calculator__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.emi-calculator__title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.emi-icon {
+    font-size: 32px;
+}
+
+.emi-calculator__title h2 {
+    margin: 0;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.emi-calculator__title p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.emi-calculator__toggle {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid rgba(201, 165, 77, 0.5);
+    border-radius: 20px;
+    color: #c9a54d;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.emi-calculator__toggle:hover {
+    background: rgba(201, 165, 77, 0.15);
+}
+
+/* Main EMI Display */
+.emi-main-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.emi-big-number {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.emi-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.emi-value {
+    font-size: 42px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #c9a54d 0%, #f4d684 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+}
+
+.emi-sublabel {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 8px;
+}
+
+/* Pie Chart */
+.emi-breakdown-visual {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.emi-pie-chart {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.emi-pie-chart svg {
+    width: 100%;
+    height: 100%;
+}
+
+.emi-pie-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.emi-pie-center span {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.emi-pie-center small {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.emi-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.emi-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-dot.principal {
+    background: #c9a54d;
+}
+
+.legend-dot.interest {
+    background: #ff6b6b;
+}
+
+.emi-legend-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.legend-value {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Loan Schemes */
+.emi-schemes {
+    margin-bottom: 20px;
+}
+
+.emi-schemes h3 {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 12px;
+    font-weight: 500;
+}
+
+.scheme-cards {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.scheme-card {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 180px;
+}
+
+.scheme-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(201, 165, 77, 0.3);
+}
+
+.scheme-card.selected {
+    background: rgba(201, 165, 77, 0.15);
+    border-color: #c9a54d;
+}
+
+.scheme-icon {
+    font-size: 24px;
+}
+
+.scheme-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.scheme-name {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.scheme-rate {
+    font-size: 14px;
+    color: #c9a54d;
+    font-weight: 600;
+}
+
+.scheme-subsidy {
+    font-size: 10px;
+    background: #27ae60;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+/* EMI Details (Collapsible) */
+.emi-details {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Controls */
+.emi-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.emi-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.control-header label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.control-value {
+    font-size: 14px;
+    color: #c9a54d;
+    font-weight: 600;
+}
+
+.emi-control input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+}
+
+.emi-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #c9a54d 0%, #f4d684 100%);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(201, 165, 77, 0.4);
+}
+
+.control-range {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.income-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.income-input:focus {
+    border-color: rgba(201, 165, 77, 0.5);
+}
+
+.income-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Affordability Card */
+.affordability-card {
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.affordability-card.excellent {
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.2) 0%, rgba(39, 174, 96, 0.05) 100%);
+    border: 1px solid rgba(39, 174, 96, 0.4);
+}
+
+.affordability-card.good {
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.2) 0%, rgba(46, 204, 113, 0.05) 100%);
+    border: 1px solid rgba(46, 204, 113, 0.4);
+}
+
+.affordability-card.stretched {
+    background: linear-gradient(135deg, rgba(241, 196, 15, 0.2) 0%, rgba(241, 196, 15, 0.05) 100%);
+    border: 1px solid rgba(241, 196, 15, 0.4);
+}
+
+.affordability-card.risky {
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 0.05) 100%);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+}
+
+.affordability-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.affordability-icon {
+    font-size: 28px;
+}
+
+.affordability-status {
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.affordability-ratio {
+    display: block;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 2px;
+}
+
+.affordability-bar {
+    position: relative;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.affordability-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #27ae60, #f1c40f, #e74c3c);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.affordability-markers {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+}
+
+.affordability-markers span {
+    position: absolute;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    transform: translateX(-50%);
+}
+
+/* Tax Benefits */
+.tax-benefits {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.tax-benefits h3 {
+    margin: 0 0 16px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.tax-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.tax-item {
+    text-align: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+
+.tax-item.highlight {
+    background: rgba(39, 174, 96, 0.15);
+    border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.tax-section {
+    display: block;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.tax-amount {
+    display: block;
+    font-size: 18px;
+    color: #c9a54d;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.tax-item.highlight .tax-amount {
+    color: #27ae60;
+}
+
+.tax-desc {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Scheme Details */
+.scheme-details {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+}
+
+.scheme-details h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.scheme-eligibility {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 16px;
+}
+
+.scheme-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.summary-item.subsidy {
+    color: #27ae60;
+}
+
+.summary-item.total {
+    border-bottom: none;
+    padding-top: 14px;
+    border-top: 2px solid rgba(201, 165, 77, 0.3);
+}
+
+.summary-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.summary-value {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.summary-item.total .summary-value {
+    font-size: 18px;
+    color: #c9a54d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .emi-main-display {
+        grid-template-columns: 1fr;
+    }
+
+    .emi-value {
+        font-size: 32px;
+    }
+
+    .emi-breakdown-visual {
+        justify-content: center;
+    }
+
+    .tax-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .scheme-cards {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}

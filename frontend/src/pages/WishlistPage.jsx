@@ -79,7 +79,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
         return (
             <div className="wishlist-page empty">
                 <div className="empty-state">
-                    <span className="empty-icon">🔒</span>
+                    <span className="empty-icon">⚿</span>
                     <h2>Please Login</h2>
                     <p>Login to view and manage your saved properties</p>
                     <button className="btn btn-primary" onClick={() => onNavigate && onNavigate('owner-login')}>Login</button>
@@ -92,7 +92,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
         <div className="wishlist-page">
             <div className="wishlist-header">
                 <div>
-                    <h1>💚 My Wishlist</h1>
+                    <h1>My Wishlist</h1>
                     <p>{wishlist.length} saved properties</p>
                 </div>
                 <div className="header-actions">
@@ -104,7 +104,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
                                 setSelectedForCompare([]);
                             }}
                         >
-                            {compareMode ? '✕ Exit Compare' : '⚖️ Compare Properties'}
+                            {compareMode ? 'Exit Compare' : 'Compare Properties'}
                         </button>
                     )}
                 </div>
@@ -112,7 +112,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
 
             {wishlist.length === 0 ? (
                 <div className="empty-state">
-                    <span className="empty-icon">💚</span>
+                    <span className="empty-icon">♥</span>
                     <h2>Your wishlist is empty</h2>
                     <p>Browse properties and click the heart icon to save them</p>
                     <button className="btn btn-primary" onClick={() => onNavigate && onNavigate('browse')}>Browse Properties</button>
@@ -160,7 +160,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
                                 </div>
                                 <div className="card-content">
                                     <h3>{property.title}</h3>
-                                    <p className="location">📍 {property.locality}, {property.city}</p>
+                                    <p className="location">{property.locality}, {property.city}</p>
                                     <div className="card-meta">
                                         <span className="price">{formatPrice(property.price)}</span>
                                         <span className="details">

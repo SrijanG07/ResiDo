@@ -89,11 +89,11 @@ function MyProperties({ onAddProperty }) {
                         <div className="property-content">
                             <div className="property-price">{formatPrice(property.price)}</div>
                             <h3 className="property-title">{property.title}</h3>
-                            <p className="property-location">📍 {property.locality}, {property.city}</p>
+                            <p className="property-location">{property.locality}, {property.city}</p>
 
                             <div className="property-stats">
-                                <span>👁️ {property.views} views</span>
-                                <span>💬 {property.inquiries} inquiries</span>
+                                <span>{property.views} views</span>
+                                <span>{property.inquiries} inquiries</span>
                             </div>
 
                             <div className="property-actions">
@@ -108,7 +108,7 @@ function MyProperties({ onAddProperty }) {
 
             {properties.length === 0 && (
                 <div className="empty-state">
-                    <div className="empty-icon">🏠</div>
+                    <div className="empty-icon">⌂</div>
                     <h3>No properties yet</h3>
                     <p>Add your first property to start getting inquiries</p>
                     <button className="btn btn-primary" onClick={onAddProperty}>

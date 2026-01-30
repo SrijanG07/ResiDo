@@ -152,13 +152,13 @@ function MarzipanoViewer({ imageUrl, roomName }) {
 
             {/* Room indicator */}
             <div className="panorama-room-badge">
-                📍 {roomName}
+                {roomName}
             </div>
 
             {/* Controls hint */}
             <div className="panorama-controls-hint">
-                <span>🖱️ Drag to look around</span>
-                <span>🔍 Scroll to zoom</span>
+                <span>Drag to look around</span>
+                <span>Scroll to zoom</span>
             </div>
 
             {/* Zoom controls */}
@@ -195,9 +195,9 @@ function VirtualTour({ onBack }) {
                 </button>
 
                 <div className="featured-property">
-                    <div className="featured-badge">🏠 360° Virtual Tour</div>
+                    <div className="featured-badge">360° Virtual Tour</div>
                     <h1>Spacious 3BHK Apartment</h1>
-                    <p className="featured-location">📍 Koramangala, Bangalore</p>
+                    <p className="featured-location">Koramangala, Bangalore</p>
 
                     <div className="featured-image">
                         <img src={ROOMS[0].image} alt="Apartment Preview" />
@@ -214,7 +214,7 @@ function VirtualTour({ onBack }) {
                     </div>
 
                     <button className="btn-start" onClick={() => setShowIntro(false)}>
-                        🚪 Start Virtual Tour
+                        Start Virtual Tour
                     </button>
 
                     <p className="tour-hint">

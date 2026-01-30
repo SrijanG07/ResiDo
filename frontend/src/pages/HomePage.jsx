@@ -60,24 +60,22 @@ function HomePage({ onNavigate, onViewProperty }) {
                     <div className="gradient-orb orb-2"></div>
                     <div className="gradient-orb orb-3"></div>
                     <div className="floating-shapes">
-                        <div className="shape shape-1">🏠</div>
-                        <div className="shape shape-2">🏢</div>
-                        <div className="shape shape-3">🌳</div>
-                        <div className="shape shape-4">🔑</div>
-                        <div className="shape shape-5">✨</div>
+                        <div className="shape shape-1"></div>
+                        <div className="shape shape-2"></div>
+                        <div className="shape shape-3"></div>
+                        <div className="shape shape-4"></div>
+                        <div className="shape shape-5"></div>
                     </div>
                 </div>
                 
                 <div className="hero-content-vibrant">
                     <div className="hero-badge animate-fade-in">
-                        <span className="badge-icon">🎯</span>
                         <span>India's Most Trusted Property Platform</span>
                     </div>
                     
                     <h1 className="hero-title-vibrant animate-slide-up">
                         Find Your Perfect
                         <span className="title-gradient"> Dream Home</span>
-                        <span className="title-sparkle">✨</span>
                     </h1>
                     
                     <p className="hero-subtitle animate-slide-up-delay">
@@ -88,7 +86,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                     {/* Enhanced Search Bar */}
                     <form className="search-bar-vibrant animate-scale-in" onSubmit={handleSearch}>
                         <div className="search-input-group">
-                            <span className="search-icon">📍</span>
+                            <span className="search-icon">◉</span>
                             <input
                                 type="text"
                                 placeholder="Enter city, locality or landmark..."
@@ -98,7 +96,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="search-divider"></div>
                         <div className="search-select-group">
-                            <span className="search-icon">🏠</span>
+                            <span className="search-icon">⌂</span>
                             <select
                                 value={propertyType}
                                 onChange={(e) => setPropertyType(e.target.value)}
@@ -112,7 +110,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="search-divider"></div>
                         <div className="search-select-group">
-                            <span className="search-icon">💰</span>
+                            <span className="search-icon">₹</span>
                             <select
                                 value={priceRange}
                                 onChange={(e) => setPriceRange(e.target.value)}
@@ -144,17 +142,14 @@ function HomePage({ onNavigate, onViewProperty }) {
                 {/* Floating Stats Cards */}
                 <div className="floating-stats">
                     <div className="floating-stat-card stat-card-1">
-                        <span className="stat-emoji">🏠</span>
                         <span className="stat-value">10K+</span>
                         <span className="stat-label">Properties</span>
                     </div>
                     <div className="floating-stat-card stat-card-2">
-                        <span className="stat-emoji">😊</span>
                         <span className="stat-value">50K+</span>
                         <span className="stat-label">Happy Users</span>
                     </div>
                     <div className="floating-stat-card stat-card-3">
-                        <span className="stat-emoji">🌆</span>
                         <span className="stat-value">50+</span>
                         <span className="stat-label">Cities</span>
                     </div>
@@ -174,7 +169,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                 <div className="section-glow"></div>
                 <div className="container">
                     <div className="section-header-vibrant">
-                        <div className="section-badge">🔥 Hot Picks</div>
+                        <div className="section-badge">Hot Picks</div>
                         <h2>Featured Properties</h2>
                         <p>Handpicked properties just for you</p>
                     </div>
@@ -213,7 +208,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                             onClick={() => onNavigate('browse')}
                         >
                             <span>Explore All Properties</span>
-                            <span className="btn-icon">🏠</span>
+                            <span className="btn-icon">→</span>
                         </button>
                     </div>
                 </div>
@@ -226,7 +221,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                     <div className="stats-grid-vibrant">
                         <div className={`stat-item-vibrant ${activeStatIndex === 0 ? 'active' : ''}`}>
                             <div className="stat-icon-wrapper">
-                                <span className="stat-icon">🏠</span>
+                                <span className="stat-icon">⌂</span>
                             </div>
                             <div className="stat-content">
                                 <h3 className="counter">500+</h3>
@@ -236,7 +231,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className={`stat-item-vibrant ${activeStatIndex === 1 ? 'active' : ''}`}>
                             <div className="stat-icon-wrapper">
-                                <span className="stat-icon">😊</span>
+                                <span className="stat-icon">✓</span>
                             </div>
                             <div className="stat-content">
                                 <h3 className="counter">1000+</h3>
@@ -246,7 +241,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className={`stat-item-vibrant ${activeStatIndex === 2 ? 'active' : ''}`}>
                             <div className="stat-icon-wrapper">
-                                <span className="stat-icon">🌆</span>
+                                <span className="stat-icon">■</span>
                             </div>
                             <div className="stat-content">
                                 <h3 className="counter">50+</h3>
@@ -256,7 +251,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className={`stat-item-vibrant ${activeStatIndex === 3 ? 'active' : ''}`}>
                             <div className="stat-icon-wrapper">
-                                <span className="stat-icon">🎧</span>
+                                <span className="stat-icon">☎</span>
                             </div>
                             <div className="stat-content">
                                 <h3 className="counter">24/7</h3>
@@ -272,7 +267,7 @@ function HomePage({ onNavigate, onViewProperty }) {
             <section className="why-choose-section">
                 <div className="container">
                     <div className="section-header-vibrant centered">
-                        <div className="section-badge">✨ Why RoomGi</div>
+                        <div className="section-badge">Why RoomGi</div>
                         <h2>The Smarter Way to Find Your Home</h2>
                         <p>Experience property search like never before</p>
                     </div>
@@ -280,7 +275,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                     <div className="features-grid">
                         <div className="feature-card feature-card-1">
                             <div className="feature-icon-wrapper">
-                                <span className="feature-icon">🔍</span>
+                                <span className="feature-icon">⌕</span>
                             </div>
                             <h3>AI-Powered Search</h3>
                             <p>Smart recommendations based on your preferences and budget</p>
@@ -288,7 +283,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="feature-card feature-card-2">
                             <div className="feature-icon-wrapper">
-                                <span className="feature-icon">🎥</span>
+                                <span className="feature-icon">▶</span>
                             </div>
                             <h3>Virtual Tours</h3>
                             <p>360° property tours from the comfort of your home</p>
@@ -296,7 +291,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="feature-card feature-card-3">
                             <div className="feature-icon-wrapper">
-                                <span className="feature-icon">✅</span>
+                                <span className="feature-icon">✓</span>
                             </div>
                             <h3>Verified Listings</h3>
                             <p>Every property is verified for authenticity and accuracy</p>
@@ -304,7 +299,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="feature-card feature-card-4">
                             <div className="feature-icon-wrapper">
-                                <span className="feature-icon">💬</span>
+                                <span className="feature-icon">✉</span>
                             </div>
                             <h3>Direct Chat</h3>
                             <p>Connect instantly with property owners - no middlemen</p>
@@ -318,7 +313,7 @@ function HomePage({ onNavigate, onViewProperty }) {
             <section className="categories-section-vibrant">
                 <div className="container">
                     <div className="section-header-vibrant centered">
-                        <div className="section-badge">🎯 Explore</div>
+                        <div className="section-badge">Explore</div>
                         <h2>Find Your Perfect Space</h2>
                         <p>Whether buying or renting, we've got you covered</p>
                     </div>
@@ -337,7 +332,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                             <div className="category-overlay"></div>
                             <div className="category-content-vibrant">
                                 <div className="category-icon-vibrant">
-                                    <span>🏠</span>
+                                    <span>⌂</span>
                                 </div>
                                 <h3>Buy a Home</h3>
                                 <p>Find your dream home from 1000+ listings</p>
@@ -361,7 +356,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                             <div className="category-overlay"></div>
                             <div className="category-content-vibrant">
                                 <div className="category-icon-vibrant">
-                                    <span>🔑</span>
+                                    <span>⚿</span>
                                 </div>
                                 <h3>Rent a Home</h3>
                                 <p>Flexible rentals that match your lifestyle</p>
@@ -388,10 +383,10 @@ function HomePage({ onNavigate, onViewProperty }) {
                             <p>Join thousands of happy homeowners who found their perfect property with RoomGi</p>
                             <div className="cta-buttons">
                                 <button className="btn-vibrant btn-white" onClick={() => onNavigate('browse')}>
-                                    <span>🏠</span> Browse Properties
+                                    Browse Properties
                                 </button>
                                 <button className="btn-vibrant btn-outline-white" onClick={() => onNavigate('owner-landing')}>
-                                    <span>📝</span> List Your Property
+                                    List Your Property
                                 </button>
                             </div>
                         </div>
@@ -400,7 +395,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                                 <div className="phone-screen">
                                     <div className="app-preview">
                                         <div className="preview-header">
-                                            <span>🏠</span> RoomGi
+                                            RoomGi
                                         </div>
                                         <div className="preview-card"></div>
                                         <div className="preview-card"></div>
@@ -416,17 +411,17 @@ function HomePage({ onNavigate, onViewProperty }) {
             <section className="testimonials-section">
                 <div className="container">
                     <div className="section-header-vibrant centered">
-                        <div className="section-badge">💬 Testimonials</div>
+                        <div className="section-badge">Testimonials</div>
                         <h2>What Our Users Say</h2>
                         <p>Real stories from real home buyers</p>
                     </div>
 
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
-                            <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                            <div className="testimonial-rating">★★★★★</div>
                             <p>"Found my dream apartment in just 2 weeks! The virtual tour feature saved me so much time."</p>
                             <div className="testimonial-author">
-                                <div className="author-avatar">👩</div>
+                                <div className="author-avatar">PS</div>
                                 <div className="author-info">
                                     <strong>Priya Sharma</strong>
                                     <span>Mumbai</span>
@@ -434,10 +429,10 @@ function HomePage({ onNavigate, onViewProperty }) {
                             </div>
                         </div>
                         <div className="testimonial-card featured">
-                            <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                            <div className="testimonial-rating">★★★★★</div>
                             <p>"The best property platform I've used. Transparent pricing, verified listings, and amazing support!"</p>
                             <div className="testimonial-author">
-                                <div className="author-avatar">👨</div>
+                                <div className="author-avatar">RK</div>
                                 <div className="author-info">
                                     <strong>Rahul Kumar</strong>
                                     <span>Bangalore</span>
@@ -445,10 +440,10 @@ function HomePage({ onNavigate, onViewProperty }) {
                             </div>
                         </div>
                         <div className="testimonial-card">
-                            <div className="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                            <div className="testimonial-rating">★★★★★</div>
                             <p>"Listed my property and got genuine inquiries within days. Highly recommend RoomGi!"</p>
                             <div className="testimonial-author">
-                                <div className="author-avatar">👨‍💼</div>
+                                <div className="author-avatar">AP</div>
                                 <div className="author-info">
                                     <strong>Amit Patel</strong>
                                     <span>Delhi</span>
@@ -481,10 +476,10 @@ function HomePage({ onNavigate, onViewProperty }) {
                             </div>
                             <p>Your trusted partner in finding the perfect property. We connect property seekers with their dream homes using cutting-edge technology.</p>
                             <div className="social-links">
-                                <a href="#" className="social-link">📘</a>
-                                <a href="#" className="social-link">📸</a>
-                                <a href="#" className="social-link">🐦</a>
-                                <a href="#" className="social-link">💼</a>
+                                <a href="#" className="social-link">FB</a>
+                                <a href="#" className="social-link">IG</a>
+                                <a href="#" className="social-link">TW</a>
+                                <a href="#" className="social-link">LI</a>
                             </div>
                         </div>
                         <div className="footer-links-grid">
@@ -501,14 +496,14 @@ function HomePage({ onNavigate, onViewProperty }) {
                             </div>
                             <div className="footer-col-vibrant">
                                 <h4>Contact Us</h4>
-                                <a href="mailto:contact@roomgi.com">📧 contact@roomgi.com</a>
-                                <a href="tel:+918909309988">📞 +91 890 930 9988</a>
-                                <a href="#">📍 Mumbai, India</a>
+                                <a href="mailto:contact@roomgi.com">contact@roomgi.com</a>
+                                <a href="tel:+918909309988">+91 890 930 9988</a>
+                                <a href="#">Mumbai, India</a>
                             </div>
                         </div>
                     </div>
                     <div className="footer-bottom-vibrant">
-                        <p>© 2026 RoomGi. Made with ❤️ in India. All rights reserved.</p>
+                        <p>© 2026 RoomGi. Made in India. All rights reserved.</p>
                     </div>
                 </div>
             </footer>

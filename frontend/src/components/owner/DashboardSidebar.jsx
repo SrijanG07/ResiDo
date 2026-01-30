@@ -3,19 +3,19 @@ import './DashboardSidebar.css';
 
 function DashboardSidebar({ activeSection, onSectionChange, onLogout }) {
     const menuItems = [
-        { id: 'analytics', icon: '📊', label: 'Analytics' },
-        { id: 'properties', icon: '🏠', label: 'My Properties' },
-        { id: 'add-property', icon: '➕', label: 'Add Property' },
-        { id: 'inquiries', icon: '💬', label: 'Inquiries', badge: 3 },
-        { id: 'calendar', icon: '📅', label: 'Calendar' },
-        { id: 'settings', icon: '⚙️', label: 'Settings' }
+        { id: 'analytics', icon: '◈', label: 'Analytics' },
+        { id: 'properties', icon: '⌂', label: 'My Properties' },
+        { id: 'add-property', icon: '+', label: 'Add Property' },
+        { id: 'inquiries', icon: '✉', label: 'Inquiries', badge: 3 },
+        { id: 'calendar', icon: '▦', label: 'Calendar' },
+        { id: 'settings', icon: '⚙', label: 'Settings' }
     ];
 
     return (
         <aside className="dashboard-sidebar">
             <div className="sidebar-header">
                 <div className="sidebar-logo">
-                    <span className="logo-icon">🏠</span>
+                    <span className="logo-icon">R</span>
                     <span className="logo-text">Owner Hub</span>
                 </div>
             </div>
@@ -38,7 +38,7 @@ function DashboardSidebar({ activeSection, onSectionChange, onLogout }) {
 
             <div className="sidebar-footer">
                 <button className="logout-btn" onClick={onLogout}>
-                    <span>🚪</span>
+                    <span>→</span>
                     <span>Logout</span>
                 </button>
             </div>

@@ -94,9 +94,12 @@ function ChatWidget({ onViewProperty }) {
                         <path d="M18 6L6 18M6 6l12 12" />
                     </svg>
                 ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                    </svg>
+                    <>
+                        <svg className="chat-widget__sparkle" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0L14.59 8.41L23 12L14.59 15.59L12 24L9.41 15.59L1 12L9.41 8.41L12 0Z" />
+                        </svg>
+                        <span className="chat-widget__text">ASK AI</span>
+                    </>
                 )}
             </button>
 
@@ -105,7 +108,7 @@ function ChatWidget({ onViewProperty }) {
                 <div className="chat-widget__window">
                     <div className="chat-widget__header">
                         <div className="chat-widget__header-info">
-                            <span className="chat-widget__avatar">🏠</span>
+                            <span className="chat-widget__avatar">R</span>
                             <div>
                                 <h4>RoomGi Assistant</h4>
                                 <span className="chat-widget__status">AI-Powered Search</span>

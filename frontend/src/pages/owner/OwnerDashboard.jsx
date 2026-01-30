@@ -70,12 +70,12 @@ function OwnerDashboard({ onLogout }) {
 
 function getSectionTitle(section) {
     const titles = {
-        'analytics': '📊 Analytics Dashboard',
-        'properties': '🏠 My Properties',
-        'add-property': '➕ Add New Property',
-        'inquiries': '💬 Inquiries',
-        'calendar': '📅 Calendar',
-        'settings': '⚙️ Settings'
+        'analytics': 'Analytics Dashboard',
+        'properties': 'My Properties',
+        'add-property': 'Add New Property',
+        'inquiries': 'Inquiries',
+        'calendar': 'Calendar',
+        'settings': 'Settings'
     };
     return titles[section] || 'Dashboard';
 }

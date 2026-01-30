@@ -211,11 +211,11 @@ function VisitCalendar() {
 
                 {/* Upcoming Visits Panel */}
                 <div className="visits-panel">
-                    <h3>📅 Upcoming Visits</h3>
+                    <h3>Upcoming Visits</h3>
                     <div className="visits-list">
                         {upcomingVisits.length === 0 ? (
                             <div className="no-visits">
-                                <span>📭</span>
+                                <span>✉</span>
                                 <p>No upcoming visits scheduled</p>
                             </div>
                         ) : (
@@ -237,19 +237,19 @@ function VisitCalendar() {
                                         </span>
                                     </div>
                                     <div className="visit-details">
-                                        <div className="visitor-name">👤 {visit.visitorName}</div>
-                                        <div className="visit-property">🏠 {visit.property}</div>
-                                        <div className="visit-phone">📞 {visit.phone}</div>
-                                        {visit.notes && <div className="visit-notes">📝 {visit.notes}</div>}
+                                        <div className="visitor-name">{visit.visitorName}</div>
+                                        <div className="visit-property">{visit.property}</div>
+                                        <div className="visit-phone">{visit.phone}</div>
+                                        {visit.notes && <div className="visit-notes">{visit.notes}</div>}
                                     </div>
                                     <div className="visit-actions">
                                         {visit.status === 'pending' && (
                                             <button className="btn btn-primary btn-sm" onClick={() => handleConfirm(visit.id)}>
-                                                ✓ Confirm
+                                                Confirm
                                             </button>
                                         )}
                                         <button className="btn btn-outline btn-sm" onClick={() => handleCancel(visit.id)}>
-                                            ✕ Cancel
+                                            Cancel
                                         </button>
                                     </div>
                                 </div>

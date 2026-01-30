@@ -32,7 +32,7 @@ function NewsCard({ article }) {
                         <img src={article.image_url} alt={article.title} loading="lazy" />
                     ) : (
                         <div className="news-placeholder-image">
-                            <span>📰</span>
+                            <span>N</span>
                         </div>
                     )}
                     <span

@@ -48,7 +48,7 @@ function OwnerSettings() {
 
             {/* Profile Section */}
             <div className="settings-section">
-                <h3>👤 Profile Information</h3>
+                <h3>Profile Information</h3>
                 <div className="form-grid">
                     <div className="form-group">
                         <label>Full Name</label>
@@ -103,7 +103,7 @@ function OwnerSettings() {
 
             {/* Notification Settings */}
             <div className="settings-section">
-                <h3>🔔 Notification Preferences</h3>
+                <h3>Notification Preferences</h3>
                 <div className="toggle-grid">
                     <div className="toggle-item">
                         <div className="toggle-info">
@@ -184,7 +184,7 @@ function OwnerSettings() {
 
             {/* Listing Preferences */}
             <div className="settings-section">
-                <h3>⚙️ Listing Preferences</h3>
+                <h3>Listing Preferences</h3>
                 <div className="toggle-grid">
                     <div className="toggle-item">
                         <div className="toggle-info">
@@ -263,7 +263,7 @@ function OwnerSettings() {
 
             {/* Verification Section */}
             <div className="settings-section">
-                <h3>✅ Account Verification</h3>
+                <h3>Account Verification</h3>
                 <div className="verification-status">
                     <div className="verification-item verified">
                         <span className="v-icon">✓</span>
@@ -294,7 +294,7 @@ function OwnerSettings() {
             {/* Save Button */}
             <div className="settings-actions">
                 <button className="btn btn-primary btn-lg" onClick={handleSave}>
-                    💾 Save Settings
+                    Save Settings
                 </button>
             </div>
         </div>

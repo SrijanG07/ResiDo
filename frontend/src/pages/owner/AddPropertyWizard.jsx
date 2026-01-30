@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './AddPropertyWizard.css';
 
 const STEPS = [
-    { id: 1, title: 'Basic Details', icon: '📝' },
-    { id: 2, title: 'Location', icon: '📍' },
-    { id: 3, title: 'Lifestyle', icon: '🌿' },
-    { id: 4, title: 'Media', icon: '📷' },
-    { id: 5, title: 'Review', icon: '✅' }
+    { id: 1, title: 'Basic Details', icon: '1' },
+    { id: 2, title: 'Location', icon: '2' },
+    { id: 3, title: 'Lifestyle', icon: '3' },
+    { id: 4, title: 'Media', icon: '4' },
+    { id: 5, title: 'Review', icon: '5' }
 ];
 
 const PROPERTY_TYPES = [
@@ -301,7 +301,7 @@ function AddPropertyWizard({ onComplete }) {
                                 <label>Map Location</label>
                                 <div className="map-placeholder">
                                     <div className="map-message">
-                                        🗺️ Interactive map coming soon
+                                        Interactive map coming soon
                                         <br />
                                         <small>Enter coordinates manually or use the map to pick location</small>
                                     </div>
@@ -336,7 +336,7 @@ function AddPropertyWizard({ onComplete }) {
                         <div className="lifestyle-grid">
                             <div className="lifestyle-card">
                                 <div className="lifestyle-header">
-                                    <span className="lifestyle-icon">🐾</span>
+                                    <span className="lifestyle-icon">P</span>
                                     <span className="lifestyle-label">Pet Friendly</span>
                                 </div>
                                 <label className="toggle-switch">
@@ -351,7 +351,7 @@ function AddPropertyWizard({ onComplete }) {
 
                             <div className="lifestyle-card">
                                 <div className="lifestyle-header">
-                                    <span className="lifestyle-icon">🥦</span>
+                                    <span className="lifestyle-icon">V</span>
                                     <span className="lifestyle-label">Vegetarian Only</span>
                                 </div>
                                 <label className="toggle-switch">
@@ -366,7 +366,7 @@ function AddPropertyWizard({ onComplete }) {
 
                             <div className="lifestyle-card">
                                 <div className="lifestyle-header">
-                                    <span className="lifestyle-icon">👨‍💼</span>
+                                    <span className="lifestyle-icon">B</span>
                                     <span className="lifestyle-label">Bachelor Friendly</span>
                                 </div>
                                 <label className="toggle-switch">
@@ -381,7 +381,7 @@ function AddPropertyWizard({ onComplete }) {
 
                             <div className="lifestyle-card">
                                 <div className="lifestyle-header">
-                                    <span className="lifestyle-icon">🚇</span>
+                                    <span className="lifestyle-icon">M</span>
                                     <span className="lifestyle-label">Near Metro</span>
                                 </div>
                                 <label className="toggle-switch">
@@ -429,7 +429,7 @@ function AddPropertyWizard({ onComplete }) {
 
                         <div className="media-section">
                             <div className="upload-zone">
-                                <div className="upload-icon">📷</div>
+                                <div className="upload-icon">□</div>
                                 <h3>Property Photos</h3>
                                 <p>Drag & drop images or click to browse</p>
                                 <small>JPG, PNG up to 10MB each</small>
@@ -438,7 +438,7 @@ function AddPropertyWizard({ onComplete }) {
 
                         <div className="media-section">
                             <div className="upload-zone panorama">
-                                <div className="upload-icon">🔄</div>
+                                <div className="upload-icon">○</div>
                                 <h3>360° Panoramas</h3>
                                 <p>Add panoramic images for virtual tours</p>
                                 <small>Equirectangular images recommended</small>
@@ -446,7 +446,7 @@ function AddPropertyWizard({ onComplete }) {
                         </div>
 
                         <div className="media-note">
-                            <span>💡</span>
+                            <span>i</span>
                             <p>Properties with 360° tours get 3x more inquiries!</p>
                         </div>
                     </div>
@@ -460,7 +460,7 @@ function AddPropertyWizard({ onComplete }) {
 
                         <div className="review-sections">
                             <div className="review-card">
-                                <h3>📝 Basic Details</h3>
+                                <h3>Basic Details</h3>
                                 <div className="review-grid">
                                     <div><span>Title:</span> {formData.title || '-'}</div>
                                     <div><span>Type:</span> {formData.property_type}</div>
@@ -472,7 +472,7 @@ function AddPropertyWizard({ onComplete }) {
                             </div>
 
                             <div className="review-card">
-                                <h3>📍 Location</h3>
+                                <h3>Location</h3>
                                 <div className="review-grid">
                                     <div><span>City:</span> {formData.city || '-'}</div>
                                     <div><span>Locality:</span> {formData.locality || '-'}</div>
@@ -481,19 +481,19 @@ function AddPropertyWizard({ onComplete }) {
                             </div>
 
                             <div className="review-card">
-                                <h3>🌿 Lifestyle</h3>
+                                <h3>Lifestyle</h3>
                                 <div className="review-badges">
-                                    {formData.pet_friendly && <span className="badge">🐾 Pet Friendly</span>}
-                                    {formData.vegetarian_only && <span className="badge">🥦 Veg Only</span>}
-                                    {formData.bachelor_friendly && <span className="badge">👨‍💼 Bachelor OK</span>}
-                                    {formData.near_metro && <span className="badge">🚇 Near Metro</span>}
+                                    {formData.pet_friendly && <span className="badge">Pet Friendly</span>}
+                                    {formData.vegetarian_only && <span className="badge">Veg Only</span>}
+                                    {formData.bachelor_friendly && <span className="badge">Bachelor OK</span>}
+                                    {formData.near_metro && <span className="badge">Near Metro</span>}
                                 </div>
                             </div>
 
                             {/* Price Predictor */}
                             <div className="price-predictor">
                                 <div className="predictor-content">
-                                    <h3>🤖 AI Price Suggestion</h3>
+                                    <h3>AI Price Suggestion</h3>
                                     <p>Get an optimal price based on market data</p>
                                     {predictedPrice ? (
                                         <div className="predicted-price">
@@ -548,7 +548,7 @@ function AddPropertyWizard({ onComplete }) {
                     </button>
                 ) : (
                     <button className="btn btn-primary" onClick={handleSubmit}>
-                        🚀 Publish Property
+                        Publish Property
                     </button>
                 )}
             </div>

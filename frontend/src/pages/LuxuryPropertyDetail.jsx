@@ -9,14 +9,14 @@ import '../styles/luxury-theme.css';
 import './LuxuryPropertyDetail.css';
 
 const amenityIcons = {
-    school: { emoji: '🏫', label: 'School' },
-    hospital: { emoji: '🏥', label: 'Hospital' },
-    pharmacy: { emoji: '💊', label: 'Pharmacy' },
-    supermarket: { emoji: '🛒', label: 'Supermarket' },
-    restaurant: { emoji: '🍽️', label: 'Restaurant' },
-    bank: { emoji: '🏦', label: 'Bank' },
-    bus_station: { emoji: '🚌', label: 'Bus Stop' },
-    subway_entrance: { emoji: '🚇', label: 'Metro' },
+    school: { emoji: 'S', label: 'School' },
+    hospital: { emoji: 'H', label: 'Hospital' },
+    pharmacy: { emoji: 'Rx', label: 'Pharmacy' },
+    supermarket: { emoji: 'M', label: 'Supermarket' },
+    restaurant: { emoji: 'R', label: 'Restaurant' },
+    bank: { emoji: 'B', label: 'Bank' },
+    bus_station: { emoji: 'BS', label: 'Bus Stop' },
+    subway_entrance: { emoji: 'MT', label: 'Metro' },
 };
 
 function LuxuryPropertyDetail({ propertyId, onBack, onNavigate }) {
@@ -293,10 +293,10 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate }) {
                                 <h2>Location</h2>
                                 <div className="section-actions">
                                     <button className="btn-action" onClick={() => setShowStreetView(true)}>
-                                        🛣️ Street View
+                                        Street View
                                     </button>
                                     <button className="btn-action btn-action--primary" onClick={getDirections}>
-                                        🧭 Directions
+                                        Directions
                                     </button>
                                 </div>
                             </div>
@@ -314,7 +314,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate }) {
                                     <div className="nearby-grid">
                                         {Object.entries(groupedAmenities).slice(0, 4).map(([type, items]) => (
                                             <div key={type} className="nearby-category">
-                                                <span className="category-icon">{amenityIcons[type]?.emoji || '📍'}</span>
+                                                <span className="category-icon">{amenityIcons[type]?.emoji || '●'}</span>
                                                 <span className="category-label">{amenityIcons[type]?.label || type}</span>
                                                 <span className="category-distance">{formatDistance(items[0].distance)}</span>
                                             </div>
@@ -345,7 +345,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate }) {
                         </div>
                         {property.owner?.phone && (
                             <div className="contact-row">
-                                <span>📞</span>
+                                <span>P</span>
                                 <span>{property.owner.phone}</span>
                             </div>
                         )}

@@ -115,10 +115,10 @@ function MessagesPage({ onBack, onNavigate }) {
             <div className="messages-page">
                 <div className="messages-header">
                     <button className="back-btn" onClick={onBack}>← Back</button>
-                    <h1>💬 Messages</h1>
+                    <h1>Messages</h1>
                 </div>
                 <div className="empty-state">
-                    <span className="empty-icon">🔒</span>
+                    <span className="empty-icon">⚿</span>
                     <h2>Please Login</h2>
                     <p>Login to view your messages</p>
                     <button className="btn btn-primary" onClick={() => onNavigate && onNavigate('owner-login')}>
@@ -134,7 +134,7 @@ function MessagesPage({ onBack, onNavigate }) {
             <div className="messages-page">
                 <div className="messages-header">
                     <button className="back-btn" onClick={onBack}>← Back</button>
-                    <h1>💬 Messages</h1>
+                    <h1>Messages</h1>
                 </div>
                 <div className="loading-state">Loading conversations...</div>
             </div>
@@ -145,7 +145,7 @@ function MessagesPage({ onBack, onNavigate }) {
         <div className="messages-page">
             <div className="messages-header">
                 <button className="back-btn" onClick={onBack}>← Back</button>
-                <h1>💬 Messages</h1>
+                <h1>Messages</h1>
                 <span className="conversation-count">{conversations.length} conversations</span>
             </div>
 
@@ -154,7 +154,7 @@ function MessagesPage({ onBack, onNavigate }) {
                 <div className={`conversations-list ${selectedInquiry ? 'hide-mobile' : ''}`}>
                     {conversations.length === 0 ? (
                         <div className="no-conversations">
-                            <span>📭</span>
+                            <span>✉</span>
                             <p>No conversations yet</p>
                             <small>Start a conversation by contacting a property owner</small>
                         </div>
@@ -166,7 +166,7 @@ function MessagesPage({ onBack, onNavigate }) {
                                 onClick={() => selectConversation(inquiry)}
                             >
                                 <div className="conversation-avatar">
-                                    {inquiry.property?.title?.charAt(0) || '🏠'}
+                                    {inquiry.property?.title?.charAt(0) || 'P'}
                                 </div>
                                 <div className="conversation-info">
                                     <div className="conversation-header">
@@ -191,7 +191,7 @@ function MessagesPage({ onBack, onNavigate }) {
                 <div className={`message-thread ${selectedInquiry ? 'show-mobile' : ''}`}>
                     {!selectedInquiry ? (
                         <div className="no-selection">
-                            <span>💬</span>
+                            <span>✉</span>
                             <p>Select a conversation to view messages</p>
                         </div>
                     ) : (

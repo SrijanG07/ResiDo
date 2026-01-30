@@ -4,18 +4,19 @@ import PropertyMap from '../components/PropertyMap';
 import StreetViewModal from '../components/StreetViewModal';
 import ReviewSection from '../components/ReviewSection';
 import TrustBadge from '../components/TrustBadge';
+import EMICalculator from '../components/EMICalculator';
 import './PropertyDetail.css';
 
 // Amenity icons configuration for nearby places
 const amenityIcons = {
-    school: { emoji: '🏫', label: 'School' },
-    hospital: { emoji: '🏥', label: 'Hospital' },
-    pharmacy: { emoji: '💊', label: 'Pharmacy' },
-    supermarket: { emoji: '🛒', label: 'Supermarket' },
-    restaurant: { emoji: '🍽️', label: 'Restaurant' },
-    bank: { emoji: '🏦', label: 'Bank' },
-    bus_station: { emoji: '🚌', label: 'Bus Stop' },
-    subway_entrance: { emoji: '🚇', label: 'Metro' },
+    school: { emoji: 'S', label: 'School' },
+    hospital: { emoji: 'H', label: 'Hospital' },
+    pharmacy: { emoji: 'Rx', label: 'Pharmacy' },
+    supermarket: { emoji: 'M', label: 'Supermarket' },
+    restaurant: { emoji: 'R', label: 'Restaurant' },
+    bank: { emoji: 'B', label: 'Bank' },
+    bus_station: { emoji: 'BS', label: 'Bus Stop' },
+    subway_entrance: { emoji: 'MT', label: 'Metro' },
 };
 
 function PropertyDetail({ propertyId, onBack }) {
@@ -265,12 +266,12 @@ function PropertyDetail({ propertyId, onBack }) {
                     </div>
 
                     <h1>{property.title}</h1>
-                    <p className="location">📍 {property.address}, {property.locality}, {property.city}, {property.state} - {property.postal_code}</p>
+                    <p className="location">{property.address}, {property.locality}, {property.city}, {property.state} - {property.postal_code}</p>
 
                     <div className="quick-stats">
                         {property.bedrooms && (
                             <div className="stat">
-                                <span className="stat-icon">🛏️</span>
+                                <span className="stat-icon">BD</span>
                                 <div>
                                     <div className="stat-value">{property.bedrooms}</div>
                                     <div className="stat-label">Bedrooms</div>
@@ -279,7 +280,7 @@ function PropertyDetail({ propertyId, onBack }) {
                         )}
                         {property.bathrooms && (
                             <div className="stat">
-                                <span className="stat-icon">🚿</span>
+                                <span className="stat-icon">BA</span>
                                 <div>
                                     <div className="stat-value">{property.bathrooms}</div>
                                     <div className="stat-label">Bathrooms</div>
@@ -288,7 +289,7 @@ function PropertyDetail({ propertyId, onBack }) {
                         )}
                         {property.size && (
                             <div className="stat">
-                                <span className="stat-icon">📏</span>
+                                <span className="stat-icon">SQ</span>
                                 <div>
                                     <div className="stat-value">{property.size}</div>
                                     <div className="stat-label">Sq Ft</div>
@@ -297,7 +298,7 @@ function PropertyDetail({ propertyId, onBack }) {
                         )}
                         {property.furnished && (
                             <div className="stat">
-                                <span className="stat-icon">🪑</span>
+                                <span className="stat-icon">F</span>
                                 <div>
                                     <div className="stat-value">{property.furnished.split('-').join(' ')}</div>
                                     <div className="stat-label">Furnishing</div>
@@ -325,20 +326,26 @@ function PropertyDetail({ propertyId, onBack }) {
                         </div>
                     )}
 
+                    {/* EMI Calculator - Only for sale properties */}
+                    <EMICalculator
+                        propertyPrice={property.price}
+                        listingType={property.listing_type}
+                    />
+
                     {/* Location & Nearby Section */}
                     {property.latitude && property.longitude && (
                         <div className="location-section">
                             <div className="location-header">
-                                <h2>📍 Location & Nearby</h2>
+                                <h2>Location & Nearby</h2>
                                 <div className="location-actions">
                                     <button
                                         className="btn btn-lg btn-street-view"
                                         onClick={() => setShowStreetView(true)}
                                     >
-                                        🛣️ Street View
+                                        Street View
                                     </button>
                                     <button className="btn btn-lg btn-primary" onClick={getDirections}>
-                                        🧭 Get Directions
+                                        Get Directions
                                     </button>
                                     <button
                                         className={`btn btn-sm ${showAmenities ? 'btn-primary' : 'btn-outline'}`}
@@ -367,13 +374,13 @@ function PropertyDetail({ propertyId, onBack }) {
                                 </div>
                             ) : nearbyAmenities.length > 0 && (
                                 <div className="nearby-amenities">
-                                    <h3>🏪 What's Nearby</h3>
+                                    <h3>What's Nearby</h3>
                                     <div className="nearby-grid">
                                         {Object.entries(groupedAmenities).map(([type, items]) => (
                                             <div key={type} className="nearby-category">
                                                 <div className="category-header">
                                                     <span className="category-icon">
-                                                        {amenityIcons[type]?.emoji || '📍'}
+                                                        {amenityIcons[type]?.emoji || '●'}
                                                     </span>
                                                     <span className="category-label">
                                                         {amenityIcons[type]?.label || type}
@@ -441,20 +448,20 @@ function PropertyDetail({ propertyId, onBack }) {
 
                     {property.owner?.phone && (
                         <div className="contact-detail">
-                            <span className="contact-icon">📞</span>
+                            <span className="contact-icon">P</span>
                             <span>{property.owner.phone}</span>
                         </div>
                     )}
 
                     {property.owner?.email && (
                         <div className="contact-detail">
-                            <span className="contact-icon">✉️</span>
+                            <span className="contact-icon">E</span>
                             <span>{property.owner.email}</span>
                         </div>
                     )}
 
                     <button className="btn btn-primary btn-block" onClick={() => setShowMessageModal(true)}>
-                        💬 Send Inquiry
+                        Send Inquiry
                     </button>
                     <button className="btn btn-outline btn-block">Schedule Visit</button>
                 </div>
@@ -465,14 +472,14 @@ function PropertyDetail({ propertyId, onBack }) {
                 <div className="modal-overlay" onClick={() => setShowMessageModal(false)}>
                     <div className="message-modal" onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
-                            <h3>💬 Send Message to {property.owner?.name || 'Owner'}</h3>
+                            <h3>Send Message to {property.owner?.name || 'Owner'}</h3>
                             <button className="modal-close" onClick={() => setShowMessageModal(false)}>✕</button>
                         </div>
-                        
+
                         <div className="modal-body">
                             <div className="property-preview">
-                                <img 
-                                    src={property.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=100'} 
+                                <img
+                                    src={property.images?.[0]?.image_url || 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=100'}
                                     alt={property.title}
                                 />
                                 <div>
@@ -494,7 +501,7 @@ function PropertyDetail({ propertyId, onBack }) {
                                         placeholder="Hi, I'm interested in this property. Is it still available?"
                                         rows={4}
                                     />
-                                    <button 
+                                    <button
                                         className="btn btn-primary btn-block"
                                         onClick={sendInquiry}
                                         disabled={sendingMessage}

@@ -91,16 +91,16 @@ function Navbar({ onNavigate, currentPage }) {
                                 className="btn btn-outline btn-sm"
                                 onClick={(e) => handleNavClick(e, 'wishlist')}
                             >
-                                ❤️ Wishlist
+                                Wishlist
                             </button>
                             <button
                                 className="btn btn-outline btn-sm"
                                 onClick={(e) => handleNavClick(e, 'messages')}
                             >
-                                💬 Messages
+                                Messages
                             </button>
                             <span className="user-greeting">
-                                👤 {user.name?.split(' ')[0] || 'User'}
+                                {user.name?.split(' ')[0] || 'User'}
                             </span>
                             <button
                                 className="btn btn-outline btn-sm"
@@ -126,6 +126,12 @@ function Navbar({ onNavigate, currentPage }) {
                         onClick={(e) => handleNavClick(e, 'owner-landing')}
                     >
                         List Property
+                    </button>
+                    <button
+                        className="btn btn-emi"
+                        onClick={(e) => handleNavClick(e, 'emi-calculator')}
+                    >
+                        Calculate EMI
                     </button>
 
                     {/* Mobile Menu Toggle */}

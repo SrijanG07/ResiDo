@@ -117,12 +117,12 @@ function LuxuryHero({ onNavigate }) {
                     {user ? (
                         <>
                             <button className="luxury-hero__nav-user" onClick={() => onNavigate('wishlist')}>
-                                <span>❤️ Wishlist</span>
+                                <span>Wishlist</span>
                             </button>
                             <button className="luxury-hero__nav-user" onClick={() => onNavigate('messages')}>
-                                <span>💬 Messages</span>
+                                <span>Messages</span>
                             </button>
-                            <span className="luxury-hero__nav-greeting">👤 {user.name?.split(' ')[0] || 'User'}</span>
+                            <span className="luxury-hero__nav-greeting">{user.name?.split(' ')[0] || 'User'}</span>
                             <button className="luxury-hero__nav-signin" onClick={() => { logout(); onNavigate('home'); }}>
                                 <span>Logout</span>
                             </button>

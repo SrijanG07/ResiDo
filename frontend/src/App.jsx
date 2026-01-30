@@ -16,6 +16,7 @@ const OwnerDashboard = lazy(() => import('./pages/owner/OwnerDashboard'));
 const PropertyNews = lazy(() => import('./pages/PropertyNews'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const MessagesPage = lazy(() => import('./pages/MessagesPage'));
+const EMICalculatorPage = lazy(() => import('./pages/EMICalculatorPage'));
 
 // Sample property data
 const PROPERTIES = [
@@ -37,13 +38,13 @@ const FEATURED_HOMES = [
 // Loading component for lazy loaded pages
 function LuxuryLoading() {
     return (
-        <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '100vh', 
-            background: 'var(--color-bg-primary, #0b0d0f)', 
-            color: 'var(--color-text-primary, #fff)' 
+        <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            background: 'var(--color-bg-primary, #0b0d0f)',
+            color: 'var(--color-text-primary, #fff)'
         }}>
             <div style={{ textAlign: 'center' }}>
                 <h2 style={{ fontFamily: 'Playfair Display, serif', fontWeight: 400 }}>Loading...</h2>
@@ -215,6 +216,15 @@ function App() {
                         setCurrentPage(page);
                     }}
                 />
+            </Suspense>
+        );
+    }
+
+    // Handle EMI Calculator page
+    if (currentPage === 'emi-calculator') {
+        return (
+            <Suspense fallback={<LuxuryLoading />}>
+                <EMICalculatorPage onBack={() => setCurrentPage('home')} />
             </Suspense>
         );
     }

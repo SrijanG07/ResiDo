@@ -7,12 +7,12 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 
 const CATEGORIES = [
     { id: 'all', label: 'All News' },
-    { id: 'Market Trends', label: '📈 Market Trends' },
-    { id: 'Legal & Tax Updates', label: '⚖️ Legal & Tax' },
-    { id: 'Buying & Selling Tips', label: '🏠 Buying & Selling' },
-    { id: 'Rental Market', label: '🔑 Rentals' },
-    { id: 'Infrastructure & Development', label: '🏗️ Infrastructure' },
-    { id: 'Home Investment Advice', label: '💰 Investment' }
+    { id: 'Market Trends', label: 'Market Trends' },
+    { id: 'Legal & Tax Updates', label: 'Legal & Tax' },
+    { id: 'Buying & Selling Tips', label: 'Buying & Selling' },
+    { id: 'Rental Market', label: 'Rentals' },
+    { id: 'Infrastructure & Development', label: 'Infrastructure' },
+    { id: 'Home Investment Advice', label: 'Investment' }
 ];
 
 function PropertyNews() {
@@ -111,7 +111,7 @@ function PropertyNews() {
                 <div className="container">
                     {error && (
                         <div className="news-error">
-                            <span>⚠️</span>
+                            <span>!</span>
                             <p>{error}</p>
                             <button onClick={fetchNews}>Try Again</button>
                         </div>
@@ -119,7 +119,7 @@ function PropertyNews() {
 
                     {!error && articles.length === 0 && !loading && (
                         <div className="news-empty">
-                            <span>📰</span>
+                            <span>N</span>
                             <p>No news articles available yet.</p>
                             <small>News will be fetched automatically. Check back soon!</small>
                         </div>

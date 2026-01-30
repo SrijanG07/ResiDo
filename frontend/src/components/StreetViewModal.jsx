@@ -26,7 +26,7 @@ function StreetViewModal({ latitude, longitude, onClose, propertyTitle }) {
                 {/* Header */}
                 <div className="street-view-header">
                     <div className="street-view-title">
-                        <span className="street-view-icon">🛣️</span>
+                        <span className="street-view-icon">SV</span>
                         <span>Street View{propertyTitle ? ` - ${propertyTitle}` : ''}</span>
                     </div>
                     <button className="street-view-close" onClick={onClose}>
@@ -60,7 +60,7 @@ function StreetViewModal({ latitude, longitude, onClose, propertyTitle }) {
                 {/* Footer info */}
                 <div className="street-view-footer">
                     <span className="street-view-hint">
-                        💡 Click &amp; drag to look around • Double-click to move
+                        Click & drag to look around • Double-click to move
                     </span>
                     <div className="street-view-actions">
                         <a

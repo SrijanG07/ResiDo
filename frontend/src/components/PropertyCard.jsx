@@ -81,7 +81,7 @@ function PropertyCard({ property, onViewProperty, compact = false }) {
                     onClick={handleWishlistToggle}
                     aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
                 >
-                    {isWishlisted ? '❤️' : '🤍'}
+                    {isWishlisted ? '♥' : '♡'}
                 </button>
             </div>
 
@@ -96,29 +96,42 @@ function PropertyCard({ property, onViewProperty, compact = false }) {
                     {property.title || `${property.bedrooms} BHK in ${property.locality}`}
                 </h3>
                 <p className="property-location">
-                    📍 {property.locality}, {property.city}
+                    {property.locality}, {property.city}
                 </p>
 
                 {/* Lifestyle badges */}
                 {(property.pet_friendly || property.vegetarian_only || property.near_metro) && (
                     <div className="lifestyle-badges">
                         {property.pet_friendly && (
-                            <span className="lifestyle-badge pet">🐾 Pet-friendly</span>
+                            <span className="lifestyle-badge pet">Pet-friendly</span>
                         )}
                         {property.vegetarian_only && (
-                            <span className="lifestyle-badge veg">🥗 Veg-only</span>
+                            <span className="lifestyle-badge veg">Veg-only</span>
                         )}
                         {property.near_metro && (
-                            <span className="lifestyle-badge metro">🚇 Near Metro</span>
+                            <span className="lifestyle-badge metro">Near Metro</span>
                         )}
                     </div>
                 )}
 
                 <div className="property-meta">
-                    {property.bedrooms && <span>🛏️ {property.bedrooms} Beds</span>}
-                    {property.bathrooms && <span>🚿 {property.bathrooms} Baths</span>}
-                    {property.size && <span>📐 {property.size} sq ft</span>}
+                    {property.bedrooms && <span>{property.bedrooms} Beds</span>}
+                    {property.bathrooms && <span>{property.bathrooms} Baths</span>}
+                    {property.size && <span>{property.size} sq ft</span>}
                 </div>
+
+                {/* Calculate EMI Button for Sale Properties */}
+                {property.listing_type === 'sale' && (
+                    <button
+                        className="calculate-emi-btn"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onViewProperty(property.id);
+                        }}
+                    >
+                        <span>Calculate EMI</span>
+                    </button>
+                )}
             </div>
         </div>
     );

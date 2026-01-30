@@ -43,14 +43,14 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
             <div className="login-container">
                 <div className="login-card">
                     <div className="login-header">
-                        <div className="login-icon">🏠</div>
+                        <div className="login-icon">O</div>
                         <h1>Owner Hub</h1>
                         <p>Sign in to manage your properties</p>
                     </div>
 
                     {error && (
                         <div className="login-error">
-                            ⚠️ {error}
+                            ! {error}
                         </div>
                     )}
 

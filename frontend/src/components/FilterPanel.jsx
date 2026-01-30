@@ -137,19 +137,19 @@ function FilterPanel({ filters, onFilterChange, propertyCount }) {
                         className={`lifestyle-toggle pet ${filters.pet_friendly ? 'active' : ''}`}
                         onClick={() => onFilterChange({ ...filters, pet_friendly: !filters.pet_friendly })}
                     >
-                        🐾 Pet-friendly
+                        Pet-friendly
                     </button>
                     <button
                         className={`lifestyle-toggle veg ${filters.vegetarian_only ? 'active' : ''}`}
                         onClick={() => onFilterChange({ ...filters, vegetarian_only: !filters.vegetarian_only })}
                     >
-                        🥦 Veg-only
+                        Veg-only
                     </button>
                     <button
                         className={`lifestyle-toggle bachelor ${filters.bachelor_friendly ? 'active' : ''}`}
                         onClick={() => onFilterChange({ ...filters, bachelor_friendly: !filters.bachelor_friendly })}
                     >
-                        🎓 Bachelor-friendly
+                        Bachelor-friendly
                     </button>
                 </div>
             </div>

@@ -58,7 +58,7 @@ function UserLogin({ onSuccess, onBack }) {
         <div className="owner-login-page">
             <div className="login-container">
                 <div className="login-header">
-                    <div className="login-icon">👤</div>
+                    <div className="login-icon">U</div>
                     <h1>{activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}</h1>
                     <p>{activeTab === 'signin' ? 'Sign in to access your account' : 'Join RoomGi to save properties and connect with owners'}</p>
                 </div>
@@ -81,7 +81,7 @@ function UserLogin({ onSuccess, onBack }) {
 
                 {error && (
                     <div className="login-error">
-                        <span>⚠️</span> {error}
+                        <span>!</span> {error}
                     </div>
                 )}
 
@@ -171,14 +171,14 @@ function UserLogin({ onSuccess, onBack }) {
                                     className={`login-tab ${userType === 'buyer' ? 'active' : ''}`}
                                     onClick={() => setUserType('buyer')}
                                 >
-                                    🏠 Buyer / Renter
+                                    Buyer / Renter
                                 </button>
                                 <button
                                     type="button"
                                     className={`login-tab ${userType === 'owner' ? 'active' : ''}`}
                                     onClick={() => setUserType('owner')}
                                 >
-                                    🔑 Property Owner
+                                    Property Owner
                                 </button>
                             </div>
                         </div>

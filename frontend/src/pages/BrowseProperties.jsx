@@ -63,7 +63,7 @@ function WishlistButton({ propertyId }) {
             onClick={toggleWishlist}
             title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
-            {isWishlisted ? '💚' : '🤍'}
+            {isWishlisted ? '♥' : '♡'}
         </button>
     );
 }
@@ -195,7 +195,7 @@ function BrowseProperties({ onViewProperty, initialFilters = '' }) {
                         className={`filter-toggle-btn ${showFilters ? 'active' : ''}`}
                         onClick={() => setShowFilters(!showFilters)}
                     >
-                        🔍 Filters
+                        Filters
                         {getActiveFilterCount() > 0 && (
                             <span className="filter-badge">{getActiveFilterCount()}</span>
                         )}
@@ -207,13 +207,13 @@ function BrowseProperties({ onViewProperty, initialFilters = '' }) {
                             className={`view-toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
                             onClick={() => setViewMode('list')}
                         >
-                            <span>📋</span> List
+                            <span>List</span>
                         </button>
                         <button
                             className={`view-toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
                             onClick={() => setViewMode('map')}
                         >
-                            <span>🗺️</span> Map
+                            <span>Map</span>
                         </button>
                     </div>
                 </div>
@@ -274,7 +274,7 @@ function BrowseProperties({ onViewProperty, initialFilters = '' }) {
                                                     {property.listing_type === 'sale' ? 'For Sale' : 'For Rent'}
                                                 </span>
                                                 {property.latitude && property.longitude && (
-                                                    <span className="location-badge" title="Location on map">📍</span>
+                                                    <span className="location-badge" title="Location on map"></span>
                                                 )}
                                                 <WishlistButton propertyId={property.id} />
                                             </div>
@@ -285,31 +285,31 @@ function BrowseProperties({ onViewProperty, initialFilters = '' }) {
                                                     {property.listing_type === 'rent' && <small>/month</small>}
                                                 </div>
                                                 <h3 className="property-title">{property.title}</h3>
-                                                <p className="property-location">📍 {property.locality}, {property.city}</p>
+                                                <p className="property-location">{property.locality}, {property.city}</p>
 
                                                 <div className="property-meta">
-                                                    {property.bedrooms && <span>🛏️ {property.bedrooms} Bed</span>}
-                                                    {property.bathrooms && <span>🚿 {property.bathrooms} Bath</span>}
-                                                    {property.size && <span>📏 {property.size} sqft</span>}
+                                                    {property.bedrooms && <span>{property.bedrooms} Bed</span>}
+                                                    {property.bathrooms && <span>{property.bathrooms} Bath</span>}
+                                                    {property.size && <span>{property.size} sqft</span>}
                                                 </div>
 
                                                 {/* Lifestyle Badges */}
                                                 <div className="lifestyle-badges">
                                                     {property.pet_friendly && (
-                                                        <span className="lifestyle-badge pet">🐾 Pet Friendly</span>
+                                                        <span className="lifestyle-badge pet">Pet Friendly</span>
                                                     )}
                                                     {property.vegetarian_only && (
-                                                        <span className="lifestyle-badge veg">🥦 Veg Only</span>
+                                                        <span className="lifestyle-badge veg">Veg Only</span>
                                                     )}
                                                     {property.near_metro && (
-                                                        <span className="lifestyle-badge metro">🚇 Near Metro</span>
+                                                        <span className="lifestyle-badge metro">Near Metro</span>
                                                     )}
                                                     {property.bachelor_friendly && property.property_type !== 'pg' && (
-                                                        <span className="lifestyle-badge bachelor">👨‍💼 Bachelor OK</span>
+                                                        <span className="lifestyle-badge bachelor">Bachelor OK</span>
                                                     )}
                                                     {property.gender_preference && property.gender_preference !== 'any' && (
                                                         <span className="lifestyle-badge gender">
-                                                            {property.gender_preference === 'male' ? '♂️ Male Only' : '♀️ Female Only'}
+                                                            {property.gender_preference === 'male' ? 'Male Only' : 'Female Only'}
                                                         </span>
                                                     )}
                                                 </div>
@@ -331,7 +331,7 @@ function BrowseProperties({ onViewProperty, initialFilters = '' }) {
 
                             {properties.length === 0 && (
                                 <div className="no-results">
-                                    <h3>🏠 No properties found</h3>
+                                    <h3>No properties found</h3>
                                     <p>Try adjusting your filters to see more results</p>
                                     <button className="btn btn-primary" onClick={clearFilters}>
                                         Clear All Filters

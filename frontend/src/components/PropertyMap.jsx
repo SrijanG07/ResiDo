@@ -45,36 +45,39 @@ const createPropertyIcon = (price) => {
 
 // Amenity icons configuration
 const amenityIcons = {
-    school: { emoji: '🏫', color: '#4ade80', label: 'Schools' },
-    hospital: { emoji: '🏥', color: '#f87171', label: 'Hospitals' },
-    pharmacy: { emoji: '💊', color: '#fb7185', label: 'Pharmacy' },
-    supermarket: { emoji: '🛒', color: '#fbbf24', label: 'Supermarket' },
-    restaurant: { emoji: '🍽️', color: '#f472b6', label: 'Restaurants' },
-    bank: { emoji: '🏦', color: '#60a5fa', label: 'Banks' },
-    bus_station: { emoji: '🚌', color: '#34d399', label: 'Bus Stop' },
-    subway_entrance: { emoji: '🚇', color: '#818cf8', label: 'Metro' },
+    school: { label: 'S', color: '#4ade80', name: 'Schools' },
+    hospital: { label: 'H', color: '#f87171', name: 'Hospitals' },
+    pharmacy: { label: 'Rx', color: '#fb7185', name: 'Pharmacy' },
+    supermarket: { label: 'M', color: '#fbbf24', name: 'Supermarket' },
+    restaurant: { label: 'R', color: '#f472b6', name: 'Restaurants' },
+    bank: { label: 'B', color: '#60a5fa', name: 'Banks' },
+    bus_station: { label: 'BS', color: '#34d399', name: 'Bus Stop' },
+    subway_entrance: { label: 'M', color: '#818cf8', name: 'Metro' },
 };
 
 const createAmenityIcon = (type) => {
-    const config = amenityIcons[type] || { emoji: '📍', color: '#888' };
+    const config = amenityIcons[type] || { label: '•', color: '#888' };
     return L.divIcon({
         className: 'custom-amenity-marker',
         html: `
             <div style="
-                background: ${config.color}22;
-                width: 32px;
-                height: 32px;
+                background: ${config.color};
+                width: 28px;
+                height: 28px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 16px;
-                border: 2px solid ${config.color};
-                box-shadow: 0 2px 8px ${config.color}44;
-            ">${config.emoji}</div>
+                font-size: 10px;
+                font-weight: 600;
+                color: #fff;
+                border: 2px solid #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                letter-spacing: -0.5px;
+            ">${config.label}</div>
         `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
     });
 };
 
@@ -200,17 +203,18 @@ function PropertyMap({
                     : `₹${(property.price / 100000).toFixed(2)} L`}
                         </div>
                         <div class="map-popup-title">${property.title}</div>
-                        <div class="map-popup-location">📍 ${property.locality || ''}, ${property.city}</div>
+                        <div class="map-popup-location">${property.locality || ''}, ${property.city}</div>
                         <div class="map-popup-meta">
-                            ${property.bedrooms ? `<span>🛏️ ${property.bedrooms} Bed</span>` : ''}
-                            ${property.bathrooms ? `<span>🚿 ${property.bathrooms} Bath</span>` : ''}
-                            ${property.size ? `<span>📏 ${property.size} sqft</span>` : ''}
+                            ${property.bedrooms ? `<span>${property.bedrooms} Bed</span>` : ''}
+                            ${property.bathrooms ? `<span>${property.bathrooms} Bath</span>` : ''}
+                            ${property.size ? `<span>${property.size} sqft</span>` : ''}
                         </div>
                         <div class="map-popup-actions">
                             <button class="map-popup-btn" onclick="window.viewProperty(${property.id})">
                                 View Details
                             </button>
-                            <button class="map-popup-btn street-view-btn" onclick="window.openStreetView(${lat}, ${lng}, '${property.title.replace(/'/g, "\\'")}')">🛤️ Street View
+                            <button class="map-popup-btn street-view-btn" onclick="window.openStreetView(${lat}, ${lng}, '${property.title.replace(/'/g, "\\'")}')">
+                                Street View
                             </button>
                         </div>
                     </div>

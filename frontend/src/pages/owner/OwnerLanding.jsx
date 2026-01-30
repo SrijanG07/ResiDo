@@ -14,7 +14,7 @@ function OwnerLanding({ onLogin, onBack }) {
             {/* Hero Section */}
             <section className="owner-hero">
                 <div className="hero-content">
-                    <div className="hero-badge">🏠 Owner Hub</div>
+                    <div className="hero-badge">Owner Hub</div>
                     <h1>
                         Turn Your Property Into
                         <span className="text-gradient"> Passive Income</span>
@@ -67,32 +67,32 @@ function OwnerLanding({ onLogin, onBack }) {
                 <h2>Everything You Need to Succeed</h2>
                 <div className="features-grid">
                     <div className="feature-card">
-                        <div className="feature-icon">📊</div>
+                        <div className="feature-icon">◈</div>
                         <h3>Smart Analytics</h3>
                         <p>Track views, inquiries, and conversion rates. Understand your market with real-time data.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">💰</div>
+                        <div className="feature-icon">₹</div>
                         <h3>AI Price Predictor</h3>
                         <p>Get optimal pricing suggestions based on location, amenities, and market trends.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">🏠</div>
+                        <div className="feature-icon">○</div>
                         <h3>360° Virtual Tours</h3>
                         <p>Create immersive virtual tours that attract more qualified buyers.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">📍</div>
+                        <div className="feature-icon">●</div>
                         <h3>Location Intelligence</h3>
                         <p>Showcase nearby amenities, metro stations, and colleges automatically.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">💬</div>
+                        <div className="feature-icon">✉</div>
                         <h3>Inquiry Management</h3>
                         <p>Manage all buyer inquiries in one place with quick-reply templates.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">✅</div>
+                        <div className="feature-icon">✓</div>
                         <h3>Trust Verification</h3>
                         <p>Build credibility with verified badges that boost buyer confidence.</p>
                     </div>

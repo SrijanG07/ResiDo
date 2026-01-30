@@ -199,6 +199,9 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                     <button className="luxury-browse__nav-cta" onClick={() => onNavigate('owner-landing')}>
                         <span>List Property</span>
                     </button>
+                    <button className="luxury-browse__nav-emi" onClick={() => onNavigate('emi-calculator')}>
+                        <span>Calculate EMI</span>
+                    </button>
                 </div>
             </nav>
 
@@ -401,13 +404,13 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
 
                                             <div className="property-tags">
                                                 {property.pet_friendly && (
-                                                    <span className="tag">🐾 Pets</span>
+                                                    <span className="tag">Pets OK</span>
                                                 )}
                                                 {property.bachelor_friendly && (
-                                                    <span className="tag">👨‍💼 Bachelor</span>
+                                                    <span className="tag">Bachelor</span>
                                                 )}
                                                 {property.near_metro && (
-                                                    <span className="tag">🚇 Metro</span>
+                                                    <span className="tag">Metro</span>
                                                 )}
                                             </div>
                                         </div>

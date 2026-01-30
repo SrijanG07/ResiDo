@@ -56,7 +56,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
     return (
         <div className="advanced-filters">
             <div className="filters-header">
-                <h3>🔍 Advanced Filters</h3>
+                <h3>Advanced Filters</h3>
                 {getActiveFilterCount() > 0 && (
                     <span className="active-count">{getActiveFilterCount()} active</span>
                 )}
@@ -65,7 +65,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* LOCATION SECTION */}
             <div className="filter-section">
                 <button className="section-header" onClick={() => toggleSection('location')}>
-                    <span>📍 Location</span>
+                    <span>Location</span>
                     <span className="toggle-icon">{isExpanded('location') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('location') && (
@@ -115,7 +115,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* PROPERTY SECTION */}
             <div className="filter-section">
                 <button className="section-header" onClick={() => toggleSection('property')}>
-                    <span>🏠 Property</span>
+                    <span>Property</span>
                     <span className="toggle-icon">{isExpanded('property') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('property') && (
@@ -175,7 +175,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* BUDGET SECTION */}
             <div className="filter-section">
                 <button className="section-header" onClick={() => toggleSection('budget')}>
-                    <span>💰 Budget</span>
+                    <span>Budget</span>
                     <span className="toggle-icon">{isExpanded('budget') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('budget') && (
@@ -226,13 +226,13 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* LIFESTYLE SECTION (Indian Market Specific) */}
             <div className="filter-section lifestyle-section">
                 <button className="section-header" onClick={() => toggleSection('lifestyle')}>
-                    <span>🌿 Lifestyle <span className="new-badge">Indian Market</span></span>
+                    <span>Lifestyle <span className="new-badge">Indian Market</span></span>
                     <span className="toggle-icon">{isExpanded('lifestyle') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('lifestyle') && (
                     <div className="section-content">
                         <div className="filter-row toggle-row">
-                            <label>🐾 Pet Friendly</label>
+                            <label>Pet Friendly</label>
                             <label className="toggle-switch">
                                 <input
                                     type="checkbox"
@@ -243,7 +243,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
                             </label>
                         </div>
                         <div className="filter-row toggle-row">
-                            <label>🥦 Vegetarian Only</label>
+                            <label>Vegetarian Only</label>
                             <label className="toggle-switch">
                                 <input
                                     type="checkbox"
@@ -254,7 +254,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
                             </label>
                         </div>
                         <div className="filter-row toggle-row">
-                            <label>👨‍👩‍👧 Bachelor Friendly</label>
+                            <label>Bachelor Friendly</label>
                             <label className="toggle-switch">
                                 <input
                                     type="checkbox"
@@ -265,7 +265,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
                             </label>
                         </div>
                         <div className="filter-row">
-                            <label>👥 Gender Preference</label>
+                            <label>Gender Preference</label>
                             <div className="radio-group">
                                 <label className={`radio-option ${!filters.gender_preference || filters.gender_preference === 'any' ? 'active' : ''}`}>
                                     <input type="radio" name="gender" value="any" checked={!filters.gender_preference || filters.gender_preference === 'any'} onChange={() => handleChange('gender_preference', '')} />
@@ -288,7 +288,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* AVAILABILITY SECTION */}
             <div className="filter-section">
                 <button className="section-header" onClick={() => toggleSection('availability')}>
-                    <span>📅 Availability</span>
+                    <span>Availability</span>
                     <span className="toggle-icon">{isExpanded('availability') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('availability') && (
@@ -321,7 +321,7 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
             {/* AMENITIES SECTION */}
             <div className="filter-section">
                 <button className="section-header" onClick={() => toggleSection('amenities')}>
-                    <span>✨ Amenities</span>
+                    <span>Amenities</span>
                     <span className="toggle-icon">{isExpanded('amenities') ? '−' : '+'}</span>
                 </button>
                 {isExpanded('amenities') && (

@@ -253,7 +253,7 @@ function InquiryInbox() {
                 <div className="inquiry-list">
                     {filteredInquiries.length === 0 ? (
                         <div className="empty-list">
-                            <span>📭</span>
+                            <span>✉</span>
                             <p>No inquiries found</p>
                         </div>
                     ) : (
@@ -293,7 +293,7 @@ function InquiryInbox() {
                                 </div>
                                 <div className="detail-actions">
                                     <button className="btn btn-outline btn-sm" onClick={() => handleArchive(selectedInquiry.id)}>
-                                        📥 Archive
+                                        Archive
                                     </button>
                                 </div>
                             </div>
@@ -333,13 +333,13 @@ function InquiryInbox() {
                                     onClick={handleSendReply}
                                     disabled={sending || !replyText.trim()}
                                 >
-                                    {sending ? '⏳ Sending...' : '✉️ Send Reply'}
+                                    {sending ? 'Sending...' : 'Send Reply'}
                                 </button>
                             </div>
                         </>
                     ) : (
                         <div className="no-selection">
-                            <span>📬</span>
+                            <span>✉</span>
                             <p>Select an inquiry to view details</p>
                         </div>
                     )}

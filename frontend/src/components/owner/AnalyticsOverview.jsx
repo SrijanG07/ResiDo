@@ -4,10 +4,10 @@ import './AnalyticsOverview.css';
 function AnalyticsOverview() {
     // Mock data - will be replaced with real API data
     const metrics = [
-        { label: 'Total Views', value: '12,847', change: '+24%', positive: true, icon: '👁️' },
-        { label: 'Unique Visitors', value: '4,392', change: '+18%', positive: true, icon: '👥' },
-        { label: 'Inquiries', value: '156', change: '+32%', positive: true, icon: '💬' },
-        { label: 'Conversion Rate', value: '3.6%', change: '+0.5%', positive: true, icon: '📈' }
+        { label: 'Total Views', value: '12,847', change: '+24%', positive: true, icon: '◎' },
+        { label: 'Unique Visitors', value: '4,392', change: '+18%', positive: true, icon: '⚇' },
+        { label: 'Inquiries', value: '156', change: '+32%', positive: true, icon: '✉' },
+        { label: 'Conversion Rate', value: '3.6%', change: '+0.5%', positive: true, icon: '↑' }
     ];
 
     const properties = [
@@ -37,7 +37,7 @@ function AnalyticsOverview() {
             {/* Market Pulse Section */}
             <div className="analytics-row">
                 <div className="card market-pulse">
-                    <h3>🌡️ Local Market Pulse</h3>
+                    <h3>Local Market Pulse</h3>
                     <div className="market-indicator">
                         <div className="market-temp seller">
                             <span className="temp-label">Market Type</span>
@@ -61,14 +61,14 @@ function AnalyticsOverview() {
 
                 {/* Price Context Card */}
                 <div className="card price-context">
-                    <h3>💰 Listing Price Context</h3>
+                    <h3>Listing Price Context</h3>
                     <div className="price-list">
                         {properties.map((prop, index) => (
                             <div key={index} className="price-item">
                                 <div className="price-info">
                                     <span className="price-title">{prop.title}</span>
                                     <span className="price-stats">
-                                        👁️ {prop.views} views • 💬 {prop.inquiries} inquiries
+                                        {prop.views} views • {prop.inquiries} inquiries
                                     </span>
                                 </div>
                                 <span className={`price-status ${prop.statusColor}`}>
@@ -82,7 +82,7 @@ function AnalyticsOverview() {
 
             {/* Performance Chart Placeholder */}
             <div className="card performance-chart">
-                <h3>📊 Views Over Time</h3>
+                <h3>Views Over Time</h3>
                 <div className="chart-placeholder">
                     <div className="chart-bars">
                         {[65, 80, 55, 90, 75, 85, 95, 70, 88, 92, 78, 100].map((height, i) => (

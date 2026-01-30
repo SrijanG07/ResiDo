@@ -44,67 +44,37 @@ router.post('/', async (req, res) => {
             content: message
         });
 
-        // Extract search intent using Groq
+        // Extract search intent and get matching property IDs from AI
         const intentResult = await extractSearchIntent(message, conversationHistory);
+
+        // Fetch properties by the IDs that AI selected
+        let properties = [];
+        if (intentResult.matching_ids && intentResult.matching_ids.length > 0) {
+            properties = await Property.findAll({
+                where: {
+                    id: { [Op.in]: intentResult.matching_ids }
+                },
+                include: [{
+                    model: Image,
+                    as: 'images',
+                    limit: 1
+                }],
+                limit: 6
+            });
+        }
 
         // Merge with existing context for follow-up queries
         const currentContext = session.search_context || {};
         const mergedFilters = { ...currentContext, ...intentResult.filters };
 
-        // Build property query
-        const whereClause = {};
-
-        if (mergedFilters.city) {
-            whereClause.city = { [Op.iLike]: `%${mergedFilters.city}%` };
-        }
-        if (mergedFilters.bedrooms) {
-            whereClause.bedrooms = mergedFilters.bedrooms;
-        }
-        if (mergedFilters.min_price) {
-            whereClause.price = { ...whereClause.price, [Op.gte]: mergedFilters.min_price };
-        }
-        if (mergedFilters.max_price) {
-            whereClause.price = { ...whereClause.price, [Op.lte]: mergedFilters.max_price };
-        }
-        if (mergedFilters.listing_type) {
-            whereClause.listing_type = mergedFilters.listing_type;
-        }
-        if (mergedFilters.property_type) {
-            whereClause.property_type = { [Op.iLike]: `%${mergedFilters.property_type}%` };
-        }
-        if (mergedFilters.near_metro === true) {
-            whereClause.near_metro = true;
-        }
-        if (mergedFilters.pet_friendly === true) {
-            whereClause.pet_friendly = true;
-        }
-        if (mergedFilters.bachelor_friendly === true) {
-            whereClause.bachelor_friendly = true;
-        }
-        if (mergedFilters.locality) {
-            whereClause.locality = { [Op.iLike]: `%${mergedFilters.locality}%` };
-        }
-
-        // Search properties
-        const properties = await Property.findAll({
-            where: whereClause,
-            include: [{
-                model: Image,
-                as: 'images',
-                limit: 1
-            }],
-            limit: 6,
-            order: [['created_at', 'DESC']]
-        });
-
         // Update session context
         await session.update({ search_context: mergedFilters });
 
-        // Generate friendly response
+        // Generate friendly response with actual property details
         const aiResponse = await generateResponse(
             message,
             mergedFilters,
-            properties.length,
+            properties,
             conversationHistory
         );
 
