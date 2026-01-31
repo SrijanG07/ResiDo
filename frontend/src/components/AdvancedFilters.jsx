@@ -136,10 +136,6 @@ function AdvancedFilters({ filters, onFilterChange, onApply, onClear }) {
                                     <input type="radio" name="listing_type" value="" checked={!filters.listing_type} onChange={() => handleChange('listing_type', '')} />
                                     All
                                 </label>
-                                <label className={`radio-option ${filters.listing_type === 'rent' ? 'active' : ''}`}>
-                                    <input type="radio" name="listing_type" value="rent" checked={filters.listing_type === 'rent'} onChange={() => handleChange('listing_type', 'rent')} />
-                                    Rent
-                                </label>
                                 <label className={`radio-option ${filters.listing_type === 'sale' ? 'active' : ''}`}>
                                     <input type="radio" name="listing_type" value="sale" checked={filters.listing_type === 'sale'} onChange={() => handleChange('listing_type', 'sale')} />
                                     Buy

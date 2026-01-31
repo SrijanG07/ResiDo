@@ -206,11 +206,6 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
                     </form>
                 )}
 
-                <div className="login-demo">
-                    <p>Demo credentials:</p>
-                    <code>owner1@roomgi.com</code> / <code>Password123!</code>
-                </div>
-
                 <button 
                     type="button"
                     className="btn-back-landing"

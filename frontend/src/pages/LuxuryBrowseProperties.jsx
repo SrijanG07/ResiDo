@@ -294,10 +294,6 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
                                 className={filters.listing_type === 'sale' ? 'active' : ''}
                                 onClick={() => handleFilterChange('listing_type', 'sale')}
                             >Buy</button>
-                            <button
-                                className={filters.listing_type === 'rent' ? 'active' : ''}
-                                onClick={() => handleFilterChange('listing_type', 'rent')}
-                            >Rent</button>
                         </div>
                     </div>
 
