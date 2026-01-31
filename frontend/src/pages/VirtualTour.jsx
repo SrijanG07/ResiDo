@@ -257,12 +257,13 @@ function getRoomsForProperty(propertyId, bedrooms = 3) {
 // Default property info when no propertyId is provided
 const DEFAULT_PROPERTY = {
   id: 1,
-  title: "Spacious 3BHK Apartment",
-  location: "Koramangala, Bangalore",
+  title: "Virtual Tour Demo",
+  location: "Experience our 360° Virtual Tour feature",
   bedrooms: 3,
   bathrooms: 2,
   sqft: "1,850",
-  price: "₹1.2 Crore",
+  price: "Available on all properties",
+  isDemo: true,
 };
 
 // Marzipano 360 Panorama Viewer Component
@@ -423,13 +424,19 @@ function VirtualTour({ onBack, propertyId = null, propertyInfo = null }) {
         </button>
 
         <div className="featured-property">
-          <div className="featured-badge">360° Virtual Tour</div>
+          <div className="featured-badge">
+            360° Virtual Tour{property.isDemo ? " Demo" : ""}
+          </div>
           <h1>
-            {property.title ||
-              `${property.bedrooms || 3}BHK ${property.type || "Apartment"}`}
+            {property.isDemo
+              ? "Virtual Tour Feature Demo"
+              : property.title ||
+                `${property.bedrooms || 3}BHK ${property.type || "Apartment"}`}
           </h1>
           <p className="featured-location">
-            {property.location || property.address || "Premium Location"}
+            {property.isDemo
+              ? "This feature is available on all properties in Browse Properties"
+              : property.location || property.address || "Premium Location"}
           </p>
 
           <div className="featured-image">
@@ -439,20 +446,36 @@ function VirtualTour({ onBack, propertyId = null, propertyInfo = null }) {
             </div>
           </div>
 
-          <div className="featured-stats">
-            <div className="stat">
-              <span>{property.bedrooms || 3}</span>Bedrooms
+          {!property.isDemo && (
+            <div className="featured-stats">
+              <div className="stat">
+                <span>{property.bedrooms || 3}</span>Bedrooms
+              </div>
+              <div className="stat">
+                <span>{property.bathrooms || 2}</span>Bathrooms
+              </div>
+              <div className="stat">
+                <span>{property.sqft || property.area || "1,500"}</span>Sq Ft
+              </div>
+              <div className="stat">
+                <span>{property.price || "₹85L"}</span>
+              </div>
             </div>
-            <div className="stat">
-              <span>{property.bathrooms || 2}</span>Bathrooms
-            </div>
-            <div className="stat">
-              <span>{property.sqft || property.area || "1,500"}</span>Sq Ft
-            </div>
-            <div className="stat">
-              <span>{property.price || "₹85L"}</span>
-            </div>
-          </div>
+          )}
+
+          {property.isDemo && (
+            <p
+              className="demo-note"
+              style={{
+                color: "#c9a962",
+                marginTop: "20px",
+                fontSize: "14px",
+                textAlign: "center",
+              }}
+            >
+              Browse our properties to experience virtual tours of real listings
+            </p>
+          )}
 
           <button className="btn-start" onClick={() => setShowIntro(false)}>
             Start Virtual Tour

@@ -17,6 +17,7 @@ const PropertyNews = lazy(() => import("./pages/PropertyNews"));
 const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 const EMICalculatorPage = lazy(() => import("./pages/EMICalculatorPage"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
 
 // Sample property data
 const PROPERTIES = [
@@ -331,6 +332,15 @@ function App() {
     return (
       <Suspense fallback={<LuxuryLoading />}>
         <EMICalculatorPage onBack={() => setCurrentPage("home")} />
+      </Suspense>
+    );
+  }
+
+  // Handle About Us page
+  if (currentPage === "about") {
+    return (
+      <Suspense fallback={<LuxuryLoading />}>
+        <AboutUs onNavigate={handleNavigate} />
       </Suspense>
     );
   }
