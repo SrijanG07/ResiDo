@@ -5,7 +5,7 @@ import './LuxuryAbout.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function LuxuryAbout() {
+function LuxuryAbout({ onNavigate }) {
     const sectionRef = useRef(null);
     const imageRef = useRef(null);
     const statsRef = useRef(null);
@@ -162,7 +162,7 @@ function LuxuryAbout() {
                             investing in property, RoomGi makes it simple and transparent.
                         </p>
                     </div>
-                    <button className="btn-luxury luxury-about__reveal">
+                    <button className="btn-luxury luxury-about__reveal" onClick={() => onNavigate && onNavigate('browse')}>
                         <span>Learn More</span>
                     </button>
                 </div>

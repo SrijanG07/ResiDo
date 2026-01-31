@@ -46,7 +46,7 @@ function LuxuryHomePage({ onNavigate, onViewProperty }) {
             <LuxuryHero onNavigate={onNavigate} />
 
             {/* About Section with Stats */}
-            <LuxuryAbout />
+            <LuxuryAbout onNavigate={onNavigate} />
 
             {/* Projects Carousel */}
             <LuxuryProjects 
@@ -59,13 +59,13 @@ function LuxuryHomePage({ onNavigate, onViewProperty }) {
             <Luxury3DShowcase />
 
             {/* Amenities Section */}
-            <LuxuryAmenities />
+            <LuxuryAmenities onNavigate={onNavigate} />
 
             {/* Investment Section */}
-            <LuxuryInvestment />
+            <LuxuryInvestment onNavigate={onNavigate} />
 
             {/* Lifestyle Section */}
-            <LuxuryLifestyle />
+            <LuxuryLifestyle onNavigate={onNavigate} />
 
             {/* CTA Section */}
             <section className="luxury-cta">

@@ -60,7 +60,7 @@ function Luxury3DShowcase() {
                             </div>
                             <div className="feature-text">
                                 <span className="feature-number">500+</span>
-                                <span className="feature-label">Premium Properties</span>
+                                <span className="feature-label">Quality Properties</span>
                             </div>
                         </div>
                         

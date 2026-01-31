@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cron = require('node-cron');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const sequelize = require('./config/database');
 
 // Load environment variables
@@ -9,7 +11,27 @@ dotenv.config();
 
 const app = express();
 
-// Middleware - Allow all localhost origins during development
+// ============================================
+// SECURITY MIDDLEWARE
+// ============================================
+
+// Helmet for security headers
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    contentSecurityPolicy: false // Disable for development
+}));
+
+// Global rate limiter
+const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 500, // 500 requests per 15 minutes
+    message: { error: 'Too many requests, please try again later.' },
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+app.use(globalLimiter);
+
+// CORS - Allow all localhost origins during development
 app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl)
@@ -26,16 +48,37 @@ app.use(cors({
     },
     credentials: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Health Check
+// Body parsing
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Request logging (development)
+if (process.env.NODE_ENV === 'development') {
+    app.use((req, res, next) => {
+        console.log(`${new Date().toISOString()} ${req.method} ${req.path}`);
+        next();
+    });
+}
+
+// ============================================
+// HEALTH CHECK
+// ============================================
 app.get('/', (req, res) => {
-    res.json({ message: 'RoomGi Backend API is running 🚀' });
+    res.json({ 
+        message: 'RoomGi Backend API is running 🚀',
+        version: '2.0.0',
+        features: ['Firebase Auth', 'Enhanced Security', 'Rate Limiting']
+    });
 });
+
+// ============================================
+// ROUTES
+// ============================================
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const authEnhancedRoutes = require('./routes/authEnhanced');
 const propertyRoutes = require('./routes/properties');
 const inquiryRoutes = require('./routes/inquiries');
 const userRoutes = require('./routes/users');
@@ -50,8 +93,9 @@ const chatRoutes = require('./routes/chat');
 // Import services
 const newsService = require('./services/newsService');
 
-// Mount routes
-app.use('/api/auth', authRoutes);
+// Mount routes - Enhanced auth takes priority
+app.use('/api/auth', authEnhancedRoutes);
+app.use('/api/auth/legacy', authRoutes); // Keep legacy routes for backward compatibility
 app.use('/api/properties', propertyRoutes);
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/users', userRoutes);

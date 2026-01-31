@@ -22,7 +22,7 @@ function LuxuryProjects({ properties = [], onViewProperty, onNavigate }) {
         {
             id: 2,
             title: 'Skyview Penthouse',
-            description: 'Stunning top-floor home with panoramic city views, spacious interiors, and premium finishes.',
+            description: 'Stunning top-floor home with panoramic city views, spacious interiors, and modern finishes.',
             image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
             price: '₹3.2 Cr onwards'
         },

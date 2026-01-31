@@ -9,6 +9,9 @@ const Review = require('./Review');
 const Wishlist = require('./Wishlist');
 const ChatSession = require('./ChatSession');
 const ChatMessage = require('./ChatMessage');
+const UserSession = require('./UserSession');
+const UserActivityLog = require('./UserActivityLog');
+const UserPreferences = require('./UserPreferences');
 
 // Define associations
 User.hasMany(Property, { foreignKey: 'owner_id', as: 'properties' });
@@ -51,6 +54,16 @@ ChatSession.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 ChatSession.hasMany(ChatMessage, { foreignKey: 'session_id', as: 'messages', onDelete: 'CASCADE' });
 ChatMessage.belongsTo(ChatSession, { foreignKey: 'session_id', as: 'session' });
 
+// User sessions and preferences associations
+User.hasMany(UserSession, { foreignKey: 'user_id', as: 'sessions', onDelete: 'CASCADE' });
+UserSession.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+User.hasOne(UserPreferences, { foreignKey: 'user_id', as: 'preferences', onDelete: 'CASCADE' });
+UserPreferences.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+User.hasMany(UserActivityLog, { foreignKey: 'user_id', as: 'activity_logs', onDelete: 'SET NULL' });
+UserActivityLog.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
 module.exports = {
     sequelize,
     User,
@@ -62,5 +75,8 @@ module.exports = {
     Review,
     Wishlist,
     ChatSession,
-    ChatMessage
+    ChatMessage,
+    UserSession,
+    UserActivityLog,
+    UserPreferences
 };

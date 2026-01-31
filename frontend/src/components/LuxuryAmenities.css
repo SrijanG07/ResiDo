@@ -226,10 +226,11 @@
     object-fit: cover;
     transition: transform 0.8s ease, filter 0.5s ease;
     filter: brightness(0.92) contrast(1.05) saturate(1.1);
+    transform: translateY(30px);
 }
 
 .luxury-amenities__image-wrapper:hover .luxury-amenities__image {
-    transform: scale(1.05);
+    transform: translateY(30px) scale(1.05);
     filter: brightness(1) contrast(1.1) saturate(1.15);
 }
 

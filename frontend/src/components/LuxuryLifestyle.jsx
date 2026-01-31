@@ -5,7 +5,7 @@ import './LuxuryLifestyle.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function LuxuryLifestyle() {
+function LuxuryLifestyle({ onNavigate }) {
     const sectionRef = useRef(null);
     const imageRef = useRef(null);
 
@@ -51,7 +51,7 @@ function LuxuryLifestyle() {
             <div className="luxury-lifestyle__container">
                 {/* Left Content */}
                 <div className="luxury-lifestyle__content">
-                    <span className="luxury-lifestyle__label luxury-lifestyle__reveal">(Premium Living)</span>
+                    <span className="luxury-lifestyle__label luxury-lifestyle__reveal">(Quality Living)</span>
                     
                     <h2 className="luxury-lifestyle__title luxury-lifestyle__reveal">
                         Experience The
@@ -60,12 +60,12 @@ function LuxuryLifestyle() {
                     </h2>
                     
                     <p className="luxury-lifestyle__description luxury-lifestyle__reveal">
-                        We don't just find homes — we curate lifestyles. Every property in our 
-                        portfolio is strategically positioned in India's most coveted neighborhoods, 
-                        where world-class amenities meet unparalleled convenience.
+                        We don't just find homes — we help you discover the perfect lifestyle. Every property in our 
+                        portfolio is thoughtfully selected across India's diverse neighborhoods, 
+                        offering great amenities and convenient locations for every budget.
                     </p>
 
-                    <button className="btn-luxury luxury-lifestyle__reveal">
+                    <button className="btn-luxury luxury-lifestyle__reveal" onClick={() => onNavigate && onNavigate('browse')}>
                         <span>Explore Neighborhoods</span>
                     </button>
 
@@ -80,8 +80,8 @@ function LuxuryLifestyle() {
                                 </svg>
                             </div>
                             <div className="feature-content">
-                                <h4>Prime Locations</h4>
-                                <p>Elite addresses in thriving neighborhoods with seamless metro connectivity and proximity to business districts.</p>
+                                <h4>Great Locations</h4>
+                                <p>Properties in thriving neighborhoods with seamless metro connectivity and proximity to business districts.</p>
                             </div>
                         </div>
                         
@@ -132,32 +132,14 @@ function LuxuryLifestyle() {
 
                 {/* Right Image */}
                 <div className="luxury-lifestyle__image-wrapper">
-                    {/* Decorative elements */}
-                    <div className="lifestyle-decor">
-                        <div className="decor-frame"></div>
-                        <div className="decor-corner corner-tr"></div>
-                        <div className="decor-corner corner-bl"></div>
-                        <div className="decor-badge">
-                            <span>Award</span>
-                            <strong>2025</strong>
-                        </div>
-                    </div>
-                    
                     <div className="luxury-lifestyle__image-container" ref={imageRef}>
                         <img 
-                            src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=1000&h=1200&fit=crop&q=90" 
-                            alt="Premium Lifestyle Living"
+                            src="https://cinematic360.in/wp-content/uploads/2024/02/Homepage-scaled.jpg" 
+                            alt="Quality Lifestyle Living"
                             className="luxury-lifestyle__image"
                             loading="lazy"
                         />
                         <div className="lifestyle-shine"></div>
-                    </div>
-                    
-                    <div className="luxury-lifestyle__image-overlay">
-                        <div className="overlay-content">
-                            <span className="overlay-number">100+</span>
-                            <span className="overlay-label">World-Class Amenities</span>
-                        </div>
                     </div>
                 </div>
             </div>

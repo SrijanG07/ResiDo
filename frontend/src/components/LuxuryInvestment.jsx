@@ -5,7 +5,7 @@ import './LuxuryInvestment.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function LuxuryInvestment() {
+function LuxuryInvestment({ onNavigate }) {
     const sectionRef = useRef(null);
     const imageRef = useRef(null);
 
@@ -51,32 +51,14 @@ function LuxuryInvestment() {
             <div className="luxury-investment__container">
                 {/* Left Image */}
                 <div className="luxury-investment__image-wrapper">
-                    {/* Decorative elements */}
-                    <div className="investment-decor">
-                        <div className="decor-frame"></div>
-                        <div className="decor-corner corner-tl"></div>
-                        <div className="decor-corner corner-br"></div>
-                        <div className="decor-badge">
-                            <span>Since</span>
-                            <strong>2024</strong>
-                        </div>
-                    </div>
-                    
                     <div className="luxury-investment__image-container" ref={imageRef}>
                         <img 
                             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000&h=1200&fit=crop&q=90" 
-                            alt="Premium Investment"
+                            alt="Smart Investment"
                             className="luxury-investment__image"
                             loading="lazy"
                         />
                         <div className="investment-shine"></div>
-                    </div>
-                    
-                    <div className="luxury-investment__image-overlay">
-                        <div className="overlay-content">
-                            <span className="overlay-number">15%</span>
-                            <span className="overlay-label">Avg. Annual Appreciation</span>
-                        </div>
                     </div>
                 </div>
 
@@ -96,7 +78,7 @@ function LuxuryInvestment() {
                         across India's fastest-growing cities.
                     </p>
 
-                    <button className="btn-luxury luxury-investment__reveal">
+                    <button className="btn-luxury luxury-investment__reveal" onClick={() => onNavigate && onNavigate('emi-calculator')}>
                         <span>Investment Guide</span>
                     </button>
 
@@ -138,24 +120,6 @@ function LuxuryInvestment() {
                                 <h4>Rental Income</h4>
                                 <p>Generate passive income with rental yields of 3-5% in metro cities.</p>
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Trust Indicators */}
-                    <div className="luxury-investment__trust luxury-investment__reveal">
-                        <div className="trust-item">
-                            <span className="trust-value">10,000+</span>
-                            <span className="trust-label">Happy Investors</span>
-                        </div>
-                        <div className="trust-divider"></div>
-                        <div className="trust-item">
-                            <span className="trust-value">50+</span>
-                            <span className="trust-label">Cities Covered</span>
-                        </div>
-                        <div className="trust-divider"></div>
-                        <div className="trust-item">
-                            <span className="trust-value">500 Cr+</span>
-                            <span className="trust-label">Properties Sold</span>
                         </div>
                     </div>
                 </div>

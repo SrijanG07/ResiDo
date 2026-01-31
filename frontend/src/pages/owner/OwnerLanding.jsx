@@ -1,7 +1,7 @@
 import React from 'react';
 import './OwnerLanding.css';
 
-function OwnerLanding({ onLogin, onBack }) {
+function OwnerLanding({ onLogin, onSignup, onBack }) {
     return (
         <div className="owner-landing">
             {/* Navigation */}
@@ -27,8 +27,8 @@ function OwnerLanding({ onLogin, onBack }) {
                         <button className="btn btn-primary btn-lg" onClick={onLogin}>
                             Sign In to Dashboard
                         </button>
-                        <button className="btn btn-outline btn-lg" disabled title="Coming Soon">
-                            Create Account
+                        <button className="btn btn-outline btn-lg" onClick={onSignup}>
+                            Create Owner Account
                         </button>
                     </div>
                 </div>
