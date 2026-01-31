@@ -1,289 +1,441 @@
-/* Analytics Overview */
+/* ===========================================
+   LUXURY ANALYTICS OVERVIEW - Dark Gold Theme
+   Matching Owner Landing Page Aesthetic
+   =========================================== */
+
 .analytics-overview {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-/* Metrics Grid */
+/* ============ METRICS GRID ============ */
 .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
 }
 
 .metric-card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    transition: all 0.3s;
+  background: linear-gradient(
+    145deg,
+    rgba(18, 20, 22, 0.95),
+    rgba(12, 14, 16, 0.98)
+  );
+  border: 1px solid rgba(201, 169, 98, 0.15);
+  padding: 28px;
+  display: flex;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 169, 98, 0.3),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .metric-card:hover {
-    border-color: #00ff88;
-    transform: translateY(-3px);
+  border-color: rgba(201, 169, 98, 0.35);
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.5),
+    0 0 30px -10px rgba(201, 169, 98, 0.15);
+}
+
+.metric-card:hover::before {
+  opacity: 1;
 }
 
 .metric-icon {
-    font-size: 2rem;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 255, 136, 0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(
+    135deg,
+    rgba(201, 169, 98, 0.12),
+    rgba(201, 169, 98, 0.05)
+  );
+  border: 1px solid rgba(201, 169, 98, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #c9a962;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+.metric-card:hover .metric-icon {
+  background: linear-gradient(
+    135deg,
+    rgba(201, 169, 98, 0.2),
+    rgba(201, 169, 98, 0.1)
+  );
+  border-color: rgba(201, 169, 98, 0.4);
+  transform: scale(1.05);
 }
 
 .metric-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
 }
 
 .metric-label {
-    font-size: 0.85rem;
-    color: #888;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .metric-value {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #fff;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.1;
 }
 
 .metric-change {
-    font-size: 0.8rem;
-    font-weight: 500;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .metric-change.positive {
-    color: #00ff88;
+  color: #c9a962;
 }
 
 .metric-change.negative {
-    color: #ff6b6b;
+  color: #e57373;
 }
 
-/* Analytics Row */
+/* ============ ANALYTICS ROW ============ */
 .analytics-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-/* Card Base */
+/* ============ CARD BASE ============ */
 .card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 16px;
-    padding: 1.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(18, 20, 22, 0.95),
+    rgba(12, 14, 16, 0.98)
+  );
+  border: 1px solid rgba(201, 169, 98, 0.12);
+  padding: 32px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  border-color: rgba(201, 169, 98, 0.25);
 }
 
 .card h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    color: #fff;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: #ffffff;
+  letter-spacing: 0.01em;
 }
 
-/* Market Pulse Card */
+/* ============ MARKET PULSE CARD ============ */
 .market-indicator {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .market-temp {
-    background: rgba(0, 255, 136, 0.08);
-    border: 1px solid rgba(0, 255, 136, 0.2);
-    border-radius: 12px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  background: linear-gradient(
+    145deg,
+    rgba(201, 169, 98, 0.08),
+    rgba(201, 169, 98, 0.03)
+  );
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
 }
 
-.market-temp.seller {
-    background: rgba(0, 255, 136, 0.08);
-    border-color: rgba(0, 255, 136, 0.2);
+.market-temp::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #c9a962, rgba(201, 169, 98, 0.3));
+}
+
+.market-temp.seller .temp-value {
+  color: #c9a962;
 }
 
 .temp-label {
-    font-size: 0.75rem;
-    color: #888;
-    text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .temp-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #00ff88;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #c9a962;
 }
 
 .temp-desc {
-    font-size: 0.85rem;
-    color: #666;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .market-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .stat {
-    background: #0a0a0a;
-    border-radius: 10px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  background: rgba(8, 10, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.3s;
+}
+
+.stat:hover {
+  border-color: rgba(201, 169, 98, 0.2);
+  background: rgba(201, 169, 98, 0.03);
 }
 
 .stat-label {
-    font-size: 0.75rem;
-    color: #666;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .stat-value {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
+  font-family: var(--font-display, "Cormorant Garamond", serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #ffffff;
 }
 
 .stat-change {
-    font-size: 0.8rem;
-    font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .stat-change.positive {
-    color: #00ff88;
+  color: #c9a962;
 }
 
-/* Price Context Card */
+/* ============ PRICE CONTEXT CARD ============ */
 .price-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .price-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0a0a0a;
-    border-radius: 10px;
-    padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(8, 10, 12, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 18px 20px;
+  transition: all 0.3s;
+}
+
+.price-item:hover {
+  border-color: rgba(201, 169, 98, 0.2);
+  background: rgba(201, 169, 98, 0.03);
 }
 
 .price-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .price-title {
-    font-size: 0.9rem;
-    color: #fff;
-    font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 500;
 }
 
 .price-stats {
-    font-size: 0.8rem;
-    color: #666;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
 }
 
+/* ============ PRICE STATUS BADGES - Luxury Style ============ */
 .price-status {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.35rem 0.75rem;
-    border-radius: 20px;
-    text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 1px solid;
+  transition: all 0.3s;
 }
 
 .price-status.green {
-    background: rgba(0, 255, 136, 0.15);
-    color: #00ff88;
+  background: transparent;
+  border-color: rgba(201, 169, 98, 0.4);
+  color: #c9a962;
+}
+
+.price-status.green:hover {
+  background: rgba(201, 169, 98, 0.1);
 }
 
 .price-status.yellow {
-    background: rgba(255, 193, 7, 0.15);
-    color: #ffc107;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.price-status.yellow:hover {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .price-status.red {
-    background: rgba(255, 107, 107, 0.15);
-    color: #ff6b6b;
+  background: transparent;
+  border-color: rgba(229, 115, 115, 0.4);
+  color: #e57373;
 }
 
-/* Performance Chart */
+.price-status.red:hover {
+  background: rgba(229, 115, 115, 0.1);
+}
+
+/* ============ PERFORMANCE CHART ============ */
 .performance-chart {
-    margin-top: 0.5rem;
+  margin-top: 8px;
 }
 
 .chart-placeholder {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .chart-bars {
-    display: flex;
-    align-items: flex-end;
-    gap: 0.5rem;
-    height: 150px;
-    padding: 1rem 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 180px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .chart-bar {
-    flex: 1;
-    background: linear-gradient(180deg, #00ff88 0%, rgba(0, 255, 136, 0.3) 100%);
-    border-radius: 4px 4px 0 0;
-    transition: all 0.3s;
+  flex: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(201, 169, 98, 0.8) 0%,
+    rgba(201, 169, 98, 0.3) 50%,
+    rgba(201, 169, 98, 0.1) 100%
+  );
+  border-radius: 2px 2px 0 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.chart-bar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #c9a962;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .chart-bar:hover {
-    background: linear-gradient(180deg, #00ff88 0%, rgba(0, 255, 136, 0.5) 100%);
-    transform: scaleY(1.05);
+  background: linear-gradient(
+    180deg,
+    rgba(201, 169, 98, 1) 0%,
+    rgba(201, 169, 98, 0.5) 50%,
+    rgba(201, 169, 98, 0.2) 100%
+  );
+  transform: scaleY(1.03);
+}
+
+.chart-bar:hover::before {
+  opacity: 1;
 }
 
 .chart-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 4px 0;
 }
 
 .chart-labels span {
-    font-size: 0.7rem;
-    color: #666;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-/* Responsive */
+/* ============ RESPONSIVE ============ */
 @media (max-width: 1200px) {
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .analytics-row {
-        grid-template-columns: 1fr;
-    }
+  .analytics-row {
+    grid-template-columns: 1fr;
+  }
 
-    .metric-card {
-        flex-direction: column;
-        text-align: center;
-    }
+  .metric-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 
-    .metric-icon {
-        margin: 0 auto;
-    }
+  .metric-content {
+    align-items: center;
+  }
 }
