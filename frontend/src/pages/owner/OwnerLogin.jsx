@@ -3,14 +3,17 @@ import { useAuth } from '../../context/AuthContext';
 import './OwnerLogin.css';
 
 function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
-    const { login } = useAuth();
+    const { login, register } = useAuth();
+    const [activeTab, setActiveTab] = useState('signin');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
         setError('');
         setLoading(true);
@@ -21,6 +24,7 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
             // Check if user is owner/broker (skip if allowAllUsers is true)
             if (!allowAllUsers && result.user.user_type !== 'owner' && result.user.user_type !== 'broker') {
                 setError('Access denied. Owner or broker account required.');
+                setLoading(false);
                 return;
             }
 
@@ -32,29 +36,70 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
         }
     };
 
+    const handleSignUp = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters');
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            // Register as owner type
+            await register(name, email, password, 'owner');
+            onSuccess();
+        } catch (err) {
+            setError(err.message || 'Registration failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <div className="owner-login">
-            <nav className="login-nav">
-                <a href="#" onClick={(e) => { e.preventDefault(); onBack(); }} className="back-link">
-                    ← Back
-                </a>
-            </nav>
-
+        <div className="owner-login-page">
             <div className="login-container">
-                <div className="login-card">
-                    <div className="login-header">
-                        <div className="login-icon">O</div>
-                        <h1>Owner Hub</h1>
-                        <p>Sign in to manage your properties</p>
+                <div className="login-logo">
+                    <span className="logo-room">ROOM</span>
+                    <span className="logo-gi">Gi</span>
+                </div>
+
+                <div className="login-header">
+                    <h1>Property Owner</h1>
+                    <p>{activeTab === 'signin' ? 'Sign in to manage your properties' : 'Create an owner account to list properties'}</p>
+                </div>
+
+                {/* Tabs */}
+                <div className="login-tabs">
+                    <button
+                        className={`login-tab ${activeTab === 'signin' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('signin'); setError(''); }}
+                    >
+                        Sign In
+                    </button>
+                    <button
+                        className={`login-tab ${activeTab === 'signup' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('signup'); setError(''); }}
+                    >
+                        Create Account
+                    </button>
+                </div>
+
+                {error && (
+                    <div className="login-error">
+                        <span>⚠</span> {error}
                     </div>
+                )}
 
-                    {error && (
-                        <div className="login-error">
-                            ! {error}
-                        </div>
-                    )}
-
-                    <form onSubmit={handleSubmit} className="login-form">
+                {activeTab === 'signin' ? (
+                    <form onSubmit={handleSignIn} className="login-form">
                         <div className="form-group">
                             <label htmlFor="email">Email Address</label>
                             <input
@@ -100,19 +145,79 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
                             {loading ? 'Signing in...' : 'Sign In'}
                         </button>
                     </form>
+                ) : (
+                    <form onSubmit={handleSignUp} className="login-form">
+                        <div className="form-group">
+                            <label htmlFor="name">Full Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="John Doe"
+                                required
+                                autoFocus
+                            />
+                        </div>
 
-                    <div className="login-footer">
-                        <p>Don't have an account?</p>
-                        <button className="btn btn-outline" disabled>
-                            Sign Up (Coming Soon)
+                        <div className="form-group">
+                            <label htmlFor="signup-email">Email Address</label>
+                            <input
+                                type="email"
+                                id="signup-email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="owner@example.com"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="signup-password">Password</label>
+                            <input
+                                type="password"
+                                id="signup-password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="confirm-password">Confirm Password</label>
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-block"
+                            disabled={loading}
+                        >
+                            {loading ? 'Creating Account...' : 'Create Owner Account'}
                         </button>
-                    </div>
+                    </form>
+                )}
 
-                    <div className="login-demo">
-                        <p>Demo credentials:</p>
-                        <code>owner1@roomgi.com / password123</code>
-                    </div>
+                <div className="login-demo">
+                    <p>Demo credentials:</p>
+                    <code>owner1@roomgi.com</code> / <code>Password123!</code>
                 </div>
+
+                <button 
+                    type="button"
+                    className="btn-back-landing"
+                    onClick={onBack}
+                >
+                    ← Back to Home
+                </button>
             </div>
         </div>
     );

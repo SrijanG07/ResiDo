@@ -21,23 +21,13 @@ app.use(helmet({
     contentSecurityPolicy: false // Disable for development
 }));
 
-// Global rate limiter
-const globalLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 500, // 500 requests per 15 minutes
-    message: { error: 'Too many requests, please try again later.' },
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-app.use(globalLimiter);
-
 // CORS - Allow all localhost origins during development
 app.use(cors({
     origin: function (origin, callback) {
         // Allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
         // Allow all localhost origins during development
-        if (origin.startsWith('http://localhost:')) {
+        if (origin && origin.startsWith('http://localhost:')) {
             return callback(null, true);
         }
         // Otherwise use the configured FRONTEND_URL
@@ -116,8 +106,10 @@ sequelize.authenticate()
         return sequelize.sync({ alter: true }); // Sync new tables
     })
     .then(() => {
-        app.listen(PORT, () => {
+        const server = app.listen(PORT, '0.0.0.0', () => {
             console.log(`🚀 Server running on port ${PORT}`);
+            console.log(`🔗 Server listening on http://localhost:${PORT}`);
+            console.log(`📡 Server address:`, server.address());
 
             // Setup cron job - fetch news every 4 hours
             cron.schedule('0 */4 * * *', async () => {
@@ -130,6 +122,10 @@ sequelize.authenticate()
                 console.log('📰 Initial news fetch on startup...');
                 await newsService.refreshNews();
             }, 10000);
+        });
+
+        server.on('error', (err) => {
+            console.error('❌ Server error:', err);
         });
     })
     .catch(err => {

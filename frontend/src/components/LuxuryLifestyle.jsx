@@ -110,24 +110,6 @@ function LuxuryLifestyle({ onNavigate }) {
                             </div>
                         </div>
                     </div>
-
-                    {/* Trust Indicators */}
-                    <div className="luxury-lifestyle__trust luxury-lifestyle__reveal">
-                        <div className="trust-item">
-                            <span className="trust-value">4.9/5</span>
-                            <span className="trust-label">Customer Rating</span>
-                        </div>
-                        <div className="trust-divider"></div>
-                        <div className="trust-item">
-                            <span className="trust-value">25,000+</span>
-                            <span className="trust-label">Happy Families</span>
-                        </div>
-                        <div className="trust-divider"></div>
-                        <div className="trust-item">
-                            <span className="trust-value">98%</span>
-                            <span className="trust-label">Satisfaction Rate</span>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Right Image */}

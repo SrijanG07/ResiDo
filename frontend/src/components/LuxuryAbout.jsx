@@ -113,21 +113,6 @@ function LuxuryAbout({ onNavigate }) {
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
                 >
-                    {/* Decorative floating elements */}
-                    <div className="about-float-elements">
-                        <div className="float-square float-1"></div>
-                        <div className="float-square float-2"></div>
-                        <div className="float-line float-3"></div>
-                        <div className="float-dot float-4"></div>
-                        <div className="float-dot float-5"></div>
-                    </div>
-                    
-                    {/* Animated corner accents */}
-                    <div className="image-corner corner-tl"></div>
-                    <div className="image-corner corner-tr"></div>
-                    <div className="image-corner corner-bl"></div>
-                    <div className="image-corner corner-br"></div>
-                    
                     <div className="luxury-about__image-wrapper">
                         {/* Inner parallax container */}
                         <div className="image-parallax-inner" ref={parallaxRef}>
@@ -144,9 +129,6 @@ function LuxuryAbout({ onNavigate }) {
                         {/* Shine effect */}
                         <div className="image-shine"></div>
                     </div>
-                    
-                    {/* Orbit ring */}
-                    <div className="about-orbit-ring"></div>
                 </div>
 
                 {/* Right Column - Description */}

@@ -165,6 +165,7 @@ function App() {
                     setCurrentPage(redirectTo);
                 }}
                 onBack={() => setCurrentPage('home')}
+                onNavigate={handleNavigate}
             />
         );
     }

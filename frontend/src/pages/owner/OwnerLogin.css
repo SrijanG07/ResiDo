@@ -30,12 +30,52 @@
 /* Login Container */
 .login-container {
     width: 100%;
-    max-width: 440px;
+    max-width: 520px;
     position: relative;
     z-index: 1;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Logo */
+.login-logo {
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.login-logo .logo-room {
+    color: var(--color-text-primary);
+}
+
+.login-logo .logo-gi {
+    color: var(--color-accent-gold);
+    font-style: italic;
+}
+
+/* Back to Landing Button */
+.btn-back-landing {
+    margin-top: 24px;
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.btn-back-landing:hover {
+    color: var(--color-accent-gold);
 }
 
 .login-card {
+    width: 100%;
     background: var(--color-bg-secondary);
     border: 1px solid var(--color-border);
     padding: 48px;
@@ -45,24 +85,22 @@
 .login-header {
     text-align: center;
     margin-bottom: 40px;
-}
-
-.login-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
+    width: 100%;
 }
 
 .login-header h1 {
     font-family: var(--font-display);
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 400;
     color: var(--color-text-primary);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    font-style: italic;
 }
 
 .login-header p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--color-text-muted);
+    line-height: 1.5;
 }
 
 /* Form */
@@ -70,12 +108,14 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    width: 100%;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
 }
 
 .form-group label {
@@ -87,12 +127,15 @@
 }
 
 .form-group input {
-    padding: 16px 20px;
-    font-size: 14px;
+    width: 100%;
+    padding: 18px 20px;
+    font-size: 15px;
     color: var(--color-text-primary);
     background: var(--color-bg-primary);
     border: 1px solid var(--color-border);
+    border-radius: 4px;
     transition: border-color var(--transition-base);
+    box-sizing: border-box;
 }
 
 .form-group input:focus {
@@ -104,16 +147,56 @@
     color: var(--color-text-muted);
 }
 
+/* Form Row - for checkbox and forgot password */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: -8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-accent-gold);
+    cursor: pointer;
+}
+
+.forgot-link {
+    font-size: 14px;
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.forgot-link:hover {
+    color: var(--color-text-primary);
+}
+
 /* Error/Success Messages */
 .login-error {
+    width: 100%;
     background: rgba(239, 68, 68, 0.1);
     color: #ef4444;
-    padding: 14px 18px;
-    font-size: 13px;
+    padding: 16px 20px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
     border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 4px;
+    margin-bottom: 24px;
+    box-sizing: border-box;
 }
 
 .login-success {
@@ -130,16 +213,18 @@
 /* Submit Button */
 .btn.btn-primary.btn-block {
     width: 100%;
-    padding: 16px 24px;
-    font-size: 12px;
+    padding: 18px 24px;
+    font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--color-bg-primary);
     background: var(--color-accent-gold);
     border: none;
+    border-radius: 4px;
     cursor: pointer;
     transition: all var(--transition-base);
+    margin-top: 8px;
 }
 
 .btn.btn-primary.btn-block:hover:not(:disabled) {
@@ -154,15 +239,17 @@
 /* Tabs */
 .login-tabs {
     display: flex;
+    width: 100%;
     background: var(--color-bg-primary);
     border: 1px solid var(--color-border);
-    padding: 4px;
+    padding: 6px;
     margin-bottom: 32px;
+    border-radius: 4px;
 }
 
 .login-tab {
     flex: 1;
-    padding: 12px;
+    padding: 16px 24px;
     border: none;
     background: transparent;
     font-size: 12px;
@@ -353,13 +440,200 @@
     font-size: 14px;
 }
 
+/* Login Demo Credentials */
+.login-demo {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.login-demo p {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+}
+
+.login-demo code {
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--color-accent-gold);
+    background: rgba(201, 165, 77, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
 /* Responsive */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    .owner-login-page {
+        padding: 20px 16px;
+    }
+
+    .login-container {
+        max-width: 100%;
+        padding: 0 12px;
+    }
+
     .login-card {
-        padding: 32px 24px;
+        padding: 32px 20px;
     }
 
     .login-header h1 {
-        font-size: 28px;
+        font-size: 26px;
     }
+
+    .login-header p {
+        font-size: 14px;
+    }
+
+    .login-tabs {
+        padding: 4px;
+    }
+
+    .login-tab {
+        padding: 14px 16px;
+        font-size: 11px;
+    }
+
+    .form-group input {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+
+    .btn.btn-primary.btn-block {
+        padding: 16px 20px;
+        font-size: 12px;
+    }
+
+    .owner-redirect-section {
+        padding: 20px 16px;
+    }
+
+    .btn-owner-redirect {
+        padding: 12px 20px;
+        font-size: 12px;
+    }
+
+    .login-logo {
+        font-size: 32px;
+    }
+
+    .login-demo {
+        margin-top: 24px;
+        padding-top: 20px;
+    }
+
+    .login-demo code {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+}
+
+/* ============ NEW STYLES FOR IMPROVED UI ============ */
+
+/* Logo Styling */
+.login-logo {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+}
+
+.login-logo span {
+    color: var(--color-accent-gold);
+    font-style: italic;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    width: 100%;
+    text-align: right;
+    margin-top: -16px;
+    margin-bottom: 8px;
+}
+
+.forgot-password a {
+    font-size: 14px;
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.forgot-password a:hover {
+    color: var(--color-text-primary);
+}
+
+/* Owner Login Divider */
+.owner-login-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0 24px;
+    width: 100%;
+}
+
+.owner-login-divider::before,
+.owner-login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+}
+
+.owner-login-divider span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+}
+
+/* Owner Redirect Section */
+.owner-redirect-section {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(201, 165, 77, 0.08), rgba(201, 165, 77, 0.04));
+    border: 1px solid rgba(201, 165, 77, 0.2);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.owner-question {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+/* Owner Redirect Button */
+.btn-owner-redirect {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid var(--color-accent-gold);
+    color: var(--color-accent-gold);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    border-radius: 4px;
+}
+
+.btn-owner-redirect svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-owner-redirect:hover {
+    background: var(--color-accent-gold);
+    color: var(--color-bg-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(201, 165, 77, 0.3);
 }

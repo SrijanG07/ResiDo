@@ -22,51 +22,59 @@ export function AuthProvider({ children }) {
     }, []);
 
     const login = async (email, password) => {
-        const response = await fetch(`${API_BASE_URL}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Login failed');
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || data.details?.join(', ') || 'Login failed');
+            }
+
+            // Store token and user
+            localStorage.setItem('roomgi_token', data.token);
+            localStorage.setItem('roomgi_user', JSON.stringify(data.user));
+
+            setToken(data.token);
+            setUser(data.user);
+
+            return data;
+        } catch (error) {
+            console.error('Login error:', error);
+            throw error;
         }
-
-        const data = await response.json();
-
-        // Store token and user
-        localStorage.setItem('roomgi_token', data.token);
-        localStorage.setItem('roomgi_user', JSON.stringify(data.user));
-
-        setToken(data.token);
-        setUser(data.user);
-
-        return data;
     };
 
     const register = async (name, email, password, userType = 'buyer') => {
-        const response = await fetch(`${API_BASE_URL}/auth/register`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, user_type: userType })
-        });
+        try {
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, user_type: userType })
+            });
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Registration failed');
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || data.details?.join(', ') || 'Registration failed');
+            }
+
+            // Store token and user
+            localStorage.setItem('roomgi_token', data.token);
+            localStorage.setItem('roomgi_user', JSON.stringify(data.user));
+
+            setToken(data.token);
+            setUser(data.user);
+
+            return data;
+        } catch (error) {
+            console.error('Registration error:', error);
+            throw error;
         }
-
-        const data = await response.json();
-
-        // Store token and user
-        localStorage.setItem('roomgi_token', data.token);
-        localStorage.setItem('roomgi_user', JSON.stringify(data.user));
-
-        setToken(data.token);
-        setUser(data.user);
-
-        return data;
     };
 
     const logout = () => {

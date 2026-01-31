@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './owner/OwnerLogin.css';
 
-function UserLogin({ onSuccess, onBack }) {
+function UserLogin({ onSuccess, onBack, onNavigate }) {
     const { login, register } = useAuth();
     const [activeTab, setActiveTab] = useState('signin');
     const [email, setEmail] = useState('');
@@ -19,7 +19,15 @@ function UserLogin({ onSuccess, onBack }) {
         setLoading(true);
 
         try {
-            await login(email, password);
+            const result = await login(email, password);
+            
+            // Check if user is a buyer or renter (not owner/broker)
+            if (result.user.user_type === 'owner' || result.user.user_type === 'broker') {
+                setError('This login is for buyers/renters only. Please use the Owner Login.');
+                setLoading(false);
+                return;
+            }
+            
             onSuccess();
         } catch (err) {
             setError(err.message || 'Login failed. Please check your credentials.');
@@ -45,7 +53,8 @@ function UserLogin({ onSuccess, onBack }) {
         setLoading(true);
 
         try {
-            await register(name, email, password, userType);
+            // Always register as buyer from this page
+            await register(name, email, password, 'buyer');
             onSuccess();
         } catch (err) {
             setError(err.message || 'Registration failed. Please try again.');
@@ -58,7 +67,7 @@ function UserLogin({ onSuccess, onBack }) {
         <div className="owner-login-page">
             <div className="login-container">
                 <div className="login-header">
-                    <div className="login-icon">U</div>
+                    <div className="login-logo">ROOM<span>Gi</span></div>
                     <h1>{activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}</h1>
                     <p>{activeTab === 'signin' ? 'Sign in to access your account' : 'Join RoomGi to save properties and connect with owners'}</p>
                 </div>
@@ -81,7 +90,7 @@ function UserLogin({ onSuccess, onBack }) {
 
                 {error && (
                     <div className="login-error">
-                        <span>!</span> {error}
+                        <span>⚠</span> {error}
                     </div>
                 )}
 
@@ -107,6 +116,10 @@ function UserLogin({ onSuccess, onBack }) {
                                 placeholder="••••••••"
                                 required
                             />
+                        </div>
+
+                        <div className="forgot-password">
+                            <a href="#" onClick={(e) => { e.preventDefault(); }}>Forgot password?</a>
                         </div>
 
                         <button
@@ -163,26 +176,6 @@ function UserLogin({ onSuccess, onBack }) {
                             />
                         </div>
 
-                        <div className="form-group">
-                            <label>I am a</label>
-                            <div className="login-tabs" style={{ marginBottom: 0 }}>
-                                <button
-                                    type="button"
-                                    className={`login-tab ${userType === 'buyer' ? 'active' : ''}`}
-                                    onClick={() => setUserType('buyer')}
-                                >
-                                    Buyer / Renter
-                                </button>
-                                <button
-                                    type="button"
-                                    className={`login-tab ${userType === 'owner' ? 'active' : ''}`}
-                                    onClick={() => setUserType('owner')}
-                                >
-                                    Property Owner
-                                </button>
-                            </div>
-                        </div>
-
                         <button
                             type="submit"
                             className="btn btn-primary btn-block"
@@ -192,6 +185,26 @@ function UserLogin({ onSuccess, onBack }) {
                         </button>
                     </form>
                 )}
+
+                {/* Owner Login Divider */}
+                <div className="owner-login-divider">
+                    <span>or</span>
+                </div>
+
+                {/* Owner Redirect Section */}
+                <div className="owner-redirect-section">
+                    <p className="owner-question">Are you a property owner?</p>
+                    <button 
+                        className="btn-owner-redirect"
+                        onClick={() => onNavigate ? onNavigate('owner-landing') : null}
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        List Your Property
+                    </button>
+                </div>
 
                 <button className="btn btn-text" onClick={onBack}>
                     ← Back to Home
