@@ -118,6 +118,30 @@
 .sidebar-footer {
   padding: 20px 16px;
   border-top: 1px solid rgba(201, 169, 98, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.back-to-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 18px;
+  background: transparent;
+  border: 1px solid rgba(201, 169, 98, 0.2);
+  color: rgba(201, 169, 98, 0.7);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border-radius: 6px;
+}
+
+.back-to-home-btn:hover {
+  background: rgba(201, 169, 98, 0.1);
+  border-color: rgba(201, 169, 98, 0.5);
+  color: #c9a962;
 }
 
 .logout-btn {

@@ -376,6 +376,35 @@ function PropertyDetail({ propertyId, onBack }) {
             </div>
           )}
 
+          {/* Property Features with Images */}
+          {property.features && property.features.length > 0 && (
+            <div className="property-features-section">
+              <h2>Property Features</h2>
+              <div className="features-gallery">
+                {property.features.map((feature, idx) => (
+                  <div key={idx} className="feature-card">
+                    <div className="feature-image">
+                      <img
+                        src={
+                          feature.image || "https://via.placeholder.com/400x300"
+                        }
+                        alt={feature.title}
+                        onError={(e) => {
+                          e.target.src =
+                            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop";
+                        }}
+                      />
+                    </div>
+                    <div className="feature-content">
+                      <h3>{feature.title}</h3>
+                      <p>{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* EMI Calculator - Only for sale properties */}
           <EMICalculator
             propertyPrice={property.price}

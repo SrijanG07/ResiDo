@@ -84,6 +84,7 @@ const wishlistRoutes = require("./routes/wishlist");
 const fraudRoutes = require("./routes/fraud");
 const chatRoutes = require("./routes/chat");
 const visitsRoutes = require("./routes/visits");
+const uploadRoutes = require("./routes/upload");
 
 // Import services
 const newsService = require("./services/newsService");
@@ -102,6 +103,7 @@ app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/fraud", fraudRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/visits", visitsRoutes);
+app.use("/api/upload", uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 
