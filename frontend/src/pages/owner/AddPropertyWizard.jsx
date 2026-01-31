@@ -172,21 +172,7 @@ function AddPropertyWizard({ onComplete }) {
                                             onChange={() => updateField('listing_type', 'sale')} />
                                         For Sale
                                     </label>
-                                    <label className={`radio-option ${formData.listing_type === 'rent' ? 'active' : ''}`}>
-                                        <input type="radio" name="listing_type" value="rent"
-                                            checked={formData.listing_type === 'rent'}
-                                            onChange={() => updateField('listing_type', 'rent')} />
-                                        For Rent
-                                    </label>
-                                </div>
-                            </div>
 
-                            <div className="form-group">
-                                <label>Price (₹) *</label>
-                                <input
-                                    type="number"
-                                    placeholder="e.g., 8500000"
-                                    value={formData.price}
                                     onChange={(e) => updateField('price', e.target.value)}
                                 />
                             </div>

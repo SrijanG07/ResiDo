@@ -75,6 +75,10 @@ const Property = sequelize.define('Property', {
         type: DataTypes.JSON, // Store as array
         defaultValue: []
     },
+    features: {
+        type: DataTypes.JSON, // Store property features with images and descriptions
+        defaultValue: []
+    },
     available_from: {
         type: DataTypes.DATE
     },

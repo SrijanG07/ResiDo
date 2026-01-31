@@ -15,7 +15,7 @@ const CATEGORIES = [
     { id: 'Home Investment Advice', label: 'Investment' }
 ];
 
-function PropertyNews() {
+function PropertyNews({ onNavigate }) {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -81,6 +81,23 @@ function PropertyNews() {
 
     return (
         <div className="property-news-page">
+            {/* Navigation Bar */}
+            <nav className="news-navbar">
+                <a href="#" className="news-navbar__logo" onClick={(e) => { e.preventDefault(); onNavigate('home'); }}>
+                    ROOMGI
+                </a>
+                <div className="news-navbar__links">
+                    <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('browse'); }}>Properties</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('tour'); }}>Virtual Tours</a>
+                    <a href="#" className="active">News</a>
+                </div>
+                <div className="news-navbar__actions">
+                    <button className="news-navbar__cta" onClick={() => onNavigate('owner-landing')}>
+                        List Property
+                    </button>
+                </div>
+            </nav>
+
             {/* Hero Section */}
             <section className="news-hero">
                 <div className="container">

@@ -20,12 +20,12 @@ const EMICalculatorPage = lazy(() => import('./pages/EMICalculatorPage'));
 
 // Sample property data
 const PROPERTIES = [
-    { id: 1, price: '₹89,00,000', type: 'For Sale', location: 'Koramangala, Bangalore', sqft: '1,450', beds: 3, baths: 2, image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop' },
-    { id: 2, price: '₹1,25,00,000', type: 'For Sale', location: 'Whitefield, Bangalore', sqft: '1,800', beds: 4, baths: 3, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop' },
-    { id: 3, price: '₹72,50,000', type: 'For Sale', location: 'HSR Layout, Bangalore', sqft: '1,200', beds: 2, baths: 2, image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop' },
-    { id: 4, price: '₹95,00,000', type: 'For Sale', location: 'Indiranagar, Bangalore', sqft: '1,550', beds: 3, baths: 2, image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop' },
-    { id: 5, price: '₹1,45,00,000', type: 'For Sale', location: 'Jayanagar, Bangalore', sqft: '2,100', beds: 4, baths: 3, image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop' },
-    { id: 6, price: '₹68,00,000', type: 'For Sale', location: 'Electronic City, Bangalore', sqft: '1,100', beds: 2, baths: 2, image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop' },
+    { id: 1, price: '₹95,00,000', type: 'For Sale', location: 'Koramangala, Bangalore', sqft: '1,450', beds: 3, baths: 2, image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop' },
+    { id: 2, price: '₹1,45,00,000', type: 'For Sale', location: 'Whitefield, Bangalore', sqft: '1,800', beds: 4, baths: 3, image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop' },
+    { id: 3, price: '₹85,50,000', type: 'For Sale', location: 'HSR Layout, Bangalore', sqft: '1,200', beds: 2, baths: 2, image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop' },
+    { id: 4, price: '₹1,15,00,000', type: 'For Sale', location: 'Indiranagar, Bangalore', sqft: '1,550', beds: 3, baths: 2, image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=300&fit=crop' },
+    { id: 5, price: '₹1,65,00,000', type: 'For Sale', location: 'Jayanagar, Bangalore', sqft: '2,100', beds: 4, baths: 3, image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop' },
+    { id: 6, price: '₹78,00,000', type: 'For Sale', location: 'Electronic City, Bangalore', sqft: '1,100', beds: 2, baths: 2, image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop' },
 ];
 
 const FEATURED_HOMES = [
@@ -198,7 +198,7 @@ function App() {
     if (currentPage === 'news') {
         return (
             <Suspense fallback={<LuxuryLoading />}>
-                <PropertyNews />
+                <PropertyNews onNavigate={handleNavigate} />
             </Suspense>
         );
     }

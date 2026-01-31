@@ -9,6 +9,76 @@
     padding-top: 80px;
 }
 
+/* ============ NAVBAR ============ */
+.news-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    background: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+}
+
+.news-navbar__logo {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.news-navbar__logo:hover {
+    opacity: 0.7;
+}
+
+.news-navbar__links {
+    display: flex;
+    gap: 32px;
+}
+
+.news-navbar__links a {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-navbar__links a:hover,
+.news-navbar__links a.active {
+    color: var(--color-text-primary);
+}
+
+.news-navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.news-navbar__cta {
+    padding: 10px 24px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-bg-primary);
+    background: var(--color-accent-gold);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.news-navbar__cta:hover {
+    background: var(--color-accent-gold-hover, #d4a94d);
+    transform: translateY(-1px);
+}
+
 /* ============ HERO ============ */
 .news-hero {
     padding: 60px 0;

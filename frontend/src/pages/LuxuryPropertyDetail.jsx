@@ -198,6 +198,67 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
     }
   };
 
+  // Helper function to generate feature-specific highlights
+  const getFeatureHighlights = (featureTitle) => {
+    const titleLower = featureTitle.toLowerCase();
+    
+    if (titleLower.includes('bedroom')) {
+      return [
+        { title: 'Premium Comfort', desc: 'Plush furnishings with memory foam mattresses and Egyptian cotton linens.' },
+        { title: 'Ambient Lighting', desc: 'Smart lighting system with dimmable options and mood settings.' },
+        { title: 'Spacious Closets', desc: 'Walk-in wardrobes with custom organization systems.' }
+      ];
+    }
+    if (titleLower.includes('living') || titleLower.includes('lounge')) {
+      return [
+        { title: 'Open Floor Plan', desc: 'Expansive layout designed for seamless flow and natural light.' },
+        { title: 'Entertainment Ready', desc: 'Pre-wired for surround sound and smart home integration.' },
+        { title: 'Designer Details', desc: 'Curated finishes with premium hardwood and custom millwork.' }
+      ];
+    }
+    if (titleLower.includes('kitchen')) {
+      return [
+        { title: 'Gourmet Appliances', desc: 'Professional-grade appliances from leading European brands.' },
+        { title: 'Island Counter', desc: 'Expansive prep space with premium quartz countertops.' },
+        { title: 'Smart Storage', desc: 'Soft-close cabinetry with custom pantry organization.' }
+      ];
+    }
+    if (titleLower.includes('bathroom') || titleLower.includes('bath')) {
+      return [
+        { title: 'Spa Experience', desc: 'Rainfall showerheads with thermostatic controls.' },
+        { title: 'Premium Fixtures', desc: 'Designer faucets and fixtures with polished finishes.' },
+        { title: 'Heated Floors', desc: 'Radiant floor heating for year-round comfort.' }
+      ];
+    }
+    if (titleLower.includes('garden') || titleLower.includes('outdoor')) {
+      return [
+        { title: 'Landscape Design', desc: 'Professionally manicured gardens with native plantings.' },
+        { title: 'Outdoor Living', desc: 'Covered patio areas perfect for entertaining.' },
+        { title: 'Private Oasis', desc: 'Secluded spaces designed for relaxation and tranquility.' }
+      ];
+    }
+    if (titleLower.includes('pool') || titleLower.includes('swimming')) {
+      return [
+        { title: 'Infinity Edge', desc: 'Stunning infinity design with panoramic views.' },
+        { title: 'Temperature Control', desc: 'Heated pool with smart climate management.' },
+        { title: 'Poolside Amenities', desc: 'Sun deck with loungers and outdoor shower.' }
+      ];
+    }
+    if (titleLower.includes('gym') || titleLower.includes('fitness')) {
+      return [
+        { title: 'Pro Equipment', desc: 'Commercial-grade fitness equipment for complete workouts.' },
+        { title: 'Climate Controlled', desc: 'Perfect temperature year-round with dedicated ventilation.' },
+        { title: 'Dedicated Space', desc: 'Spacious layout for free weights and cardio.' }
+      ];
+    }
+    // Default highlights
+    return [
+      { title: 'Premium Quality', desc: 'Finest materials and craftsmanship throughout.' },
+      { title: 'Thoughtful Design', desc: 'Every detail carefully considered for luxury living.' },
+      { title: 'Modern Comfort', desc: 'Contemporary amenities with timeless elegance.' }
+    ];
+  };
+
   const nextImage = () =>
     property.images?.length > 0 &&
     setCurrentImageIndex((prev) => (prev + 1) % property.images.length);
@@ -328,19 +389,6 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
             </>
           )}
         </div>
-        {property.images?.length > 1 && (
-          <div className="gallery-thumbs">
-            {property.images.slice(0, 5).map((img, idx) => (
-              <img
-                key={idx}
-                src={upgradeImageUrl(img.image_url)}
-                alt={`View ${idx + 1}`}
-                className={idx === currentImageIndex ? "active" : ""}
-                onClick={() => setCurrentImageIndex(idx)}
-              />
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Content */}
@@ -437,79 +485,6 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
               {property.description || "No description available."}
             </p>
           </div>
-
-          {property.amenities?.length > 0 && (
-            <div className="luxury-detail__section">
-              <h2>Amenities</h2>
-              <div className="amenities-grid">
-                {property.amenities.map((amenity, idx) => (
-                  <div key={idx} className="amenity-chip">
-                    <span className="amenity-check">✓</span>
-                    {amenity}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {property.latitude && property.longitude && (
-            <div className="luxury-detail__section">
-              <div className="section-header">
-                <h2>Location</h2>
-                <div className="section-actions">
-                  <button
-                    className="btn-action"
-                    onClick={() => setShowStreetView(true)}
-                  >
-                    Street View
-                  </button>
-                  <button
-                    className="btn-action btn-action--primary"
-                    onClick={getDirections}
-                  >
-                    Directions
-                  </button>
-                </div>
-              </div>
-              <div className="location-map">
-                <PropertyMap
-                  properties={[property]}
-                  center={[
-                    parseFloat(property.latitude),
-                    parseFloat(property.longitude),
-                  ]}
-                  zoom={15}
-                  showAmenities={showAmenities}
-                />
-              </div>
-              {nearbyAmenities.length > 0 && (
-                <div className="nearby-places">
-                  <h3>What's Nearby</h3>
-                  <div className="nearby-grid">
-                    {Object.entries(groupedAmenities)
-                      .slice(0, 4)
-                      .map(([type, items]) => (
-                        <div key={type} className="nearby-category">
-                          <span className="category-icon">
-                            {amenityIcons[type]?.emoji || "●"}
-                          </span>
-                          <span className="category-label">
-                            {amenityIcons[type]?.label || type}
-                          </span>
-                          <span className="category-distance">
-                            {formatDistance(items[0].distance)}
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="luxury-detail__section">
-            <ReviewSection propertyId={propertyId} />
-          </div>
         </div>
 
         {/* Sidebar */}
@@ -564,6 +539,173 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
             </button>
           </div>
         </aside>
+      </div>
+
+      {/* Property Features - Full Width Alternating Layout */}
+      {property.features?.length > 0 && (
+        <div className="luxury-detail__features-showcase">
+          <div className="features-showcase-header">
+            <h2>Property <span className="text-italic">Highlights</span></h2>
+            <p className="features-intro">
+              Discover the exceptional features that make this property truly remarkable. 
+              Every detail has been carefully curated to provide an unparalleled living experience.
+            </p>
+          </div>
+          
+          {property.features.map((feature, idx) => (
+            <div 
+              key={idx} 
+              className={`feature-showcase-block ${idx % 2 === 0 ? 'image-right' : 'image-left'}`}
+            >
+              {/* Content Side */}
+              <div className="feature-showcase-content">
+                <span className="feature-number">{String(idx + 1).padStart(2, '0')}</span>
+                <h3 className="feature-showcase-title">{feature.title}</h3>
+                <p className="feature-showcase-description">{feature.description}</p>
+                
+                {/* Feature Highlights */}
+                <div className="feature-highlights">
+                  {getFeatureHighlights(feature.title).map((highlight, hIdx) => (
+                    <div key={hIdx} className="feature-highlight-item">
+                      <span className="highlight-number">{String(hIdx + 1).padStart(2, '0')}</span>
+                      <div className="highlight-content">
+                        <h4>{highlight.title}</h4>
+                        <p>{highlight.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <button className="btn-feature-details" onClick={() => onNavigate && onNavigate('virtual-tour')}>
+                  <span>Explore Feature</span>
+                </button>
+              </div>
+              
+              {/* Image Side */}
+              <div className="feature-showcase-image-wrapper">
+                <div className="feature-showcase-image-container">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title}
+                    loading="lazy"
+                    className="feature-showcase-image"
+                  />
+                  <div className="feature-image-overlay">
+                    <div className="overlay-badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <span>Premium Feature</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="feature-decor">
+                  <div className="decor-frame"></div>
+                  <div className="decor-corner corner-tl"></div>
+                  <div className="decor-corner corner-br"></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Amenities, Location, Reviews Section */}
+      <div className="luxury-detail__content luxury-detail__content--full">
+        <div className="luxury-detail__main luxury-detail__main--full">
+          {property.amenities?.length > 0 && (
+            <div className="luxury-detail__section">
+              <h2>Amenities</h2>
+              <div className="amenities-grid">
+                {property.amenities.map((amenity, idx) => (
+                  <div key={idx} className="amenity-chip">
+                    <span className="amenity-check">✓</span>
+                    {amenity}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {property.latitude && property.longitude && (
+            <div className="luxury-detail__section location-section">
+              <div className="location-header">
+                <div className="location-title-area">
+                  <h2>Property <span className="text-italic">Location</span></h2>
+                  <p className="location-address">
+                    {property.address}, {property.locality}, {property.city}
+                  </p>
+                </div>
+                <div className="location-actions">
+                  <button
+                    className="location-btn"
+                    onClick={() => setShowStreetView(true)}
+                  >
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      <line x1="2" y1="12" x2="22" y2="12"/>
+                    </svg>
+                    Street View
+                  </button>
+                  <button
+                    className="location-btn location-btn--primary"
+                    onClick={getDirections}
+                  >
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Get Directions
+                  </button>
+                </div>
+              </div>
+              
+              <div className="location-map-wrapper">
+                <div className="location-map-container">
+                  <PropertyMap
+                    properties={[property]}
+                    center={[
+                      parseFloat(property.latitude),
+                      parseFloat(property.longitude),
+                    ]}
+                    zoom={15}
+                    showAmenities={showAmenities}
+                  />
+                </div>
+              </div>
+              
+              {nearbyAmenities.length > 0 && (
+                <div className="nearby-section">
+                  <h3 className="nearby-title">What's Nearby</h3>
+                  <div className="nearby-items">
+                    {Object.entries(groupedAmenities)
+                      .slice(0, 4)
+                      .map(([type, items]) => (
+                        <div key={type} className="nearby-item">
+                          <div className="nearby-item-icon">
+                            {amenityIcons[type]?.emoji || "●"}
+                          </div>
+                          <div className="nearby-item-info">
+                            <span className="nearby-item-label">
+                              {amenityIcons[type]?.label || type}
+                            </span>
+                            <span className="nearby-item-distance">
+                              {formatDistance(items[0].distance)}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="luxury-detail__section">
+            <ReviewSection propertyId={propertyId} />
+          </div>
+        </div>
       </div>
 
       {/* Message Modal */}
