@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/luxury-theme.css";
 import "./DashboardSidebar.css";
 
 function DashboardSidebar({

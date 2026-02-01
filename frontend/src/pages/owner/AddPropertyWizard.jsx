@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import { uploadService } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
+import "../../styles/luxury-theme.css";
 import "./AddPropertyWizard.css";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const STEPS = [
   { id: 1, title: "Basic Details", icon: "1" },

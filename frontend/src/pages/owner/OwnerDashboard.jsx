@@ -7,6 +7,7 @@ import InquiryInbox from "../../components/owner/InquiryInbox";
 import VisitCalendar from "../../components/owner/VisitCalendar";
 import OwnerSettings from "../../components/owner/OwnerSettings";
 import AddPropertyWizard from "./AddPropertyWizard";
+import "../../styles/luxury-theme.css";
 import "./OwnerDashboard.css";
 
 function OwnerDashboard({ onLogout, onNavigate }) {

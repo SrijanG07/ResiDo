@@ -36,74 +36,99 @@
 .wizard-progress {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+/* ============ WIZARD CONTENT ============ */
+.wizard-content {
+  margin-bottom: 32px;
+}
+
+.step-content {
+  background: rgba(18, 20, 22, 0.95);
+  border: 1px solid rgba(201, 169, 98, 0.12);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+.step-content h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.step-description {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 32px 0;
 }
 
 .progress-step {
   display: flex;
-  align-items: center;
-}
-
-.step-indicator {
-  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.step-circle {
+.step-icon {
   width: 44px;
   height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 500;
-  color: var(--color-text-muted);
-  background: var(--color-bg-secondary);
-  border: 1px solid var(--color-border);
-  transition: all var(--transition-base);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
-.step-indicator.active .step-circle {
-  color: var(--color-bg-primary);
-  background: var(--color-accent-gold);
-  border-color: var(--color-accent-gold);
+.progress-step.active .step-icon {
+  color: #0a0a0a;
+  background: linear-gradient(135deg, #c9a962, #b8954a);
+  border-color: #c9a962;
+  box-shadow: 0 4px 12px rgba(201, 169, 98, 0.3);
 }
 
-.step-indicator.completed .step-circle {
+.progress-step.completed .step-icon {
   color: #10b981;
   background: rgba(16, 185, 129, 0.1);
   border-color: rgba(16, 185, 129, 0.3);
 }
 
-.step-label {
+.step-title {
   font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+  text-align: center;
 }
 
-.step-indicator.active .step-label {
-  color: var(--color-accent-gold);
+.progress-step.active .step-title {
+  color: #c9a962;
+  font-weight: 600;
 }
 
-.step-line {
-  width: 80px;
-  height: 1px;
-  background: var(--color-border);
-  margin: 0 16px;
-}
-
-.step-line.completed {
-  background: rgba(16, 185, 129, 0.5);
+.progress-step.completed .step-title {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ============ FORM CARD ============ */
 .wizard-card {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
+  border-radius: 8px;
   padding: 48px;
 }
 
@@ -166,6 +191,7 @@
   color: var(--color-text-primary);
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
+  border-radius: 6px;
   transition: border-color var(--transition-base);
 }
 
@@ -204,6 +230,7 @@
   color: var(--color-text-muted);
   background: transparent;
   border: 1px solid var(--color-border);
+  border-radius: 6px;
   cursor: pointer;
   transition: all var(--transition-base);
 }
@@ -233,6 +260,7 @@
   padding: 18px 20px;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
+  border-radius: 6px;
 }
 
 .toggle-info h4 {
@@ -263,6 +291,7 @@
   position: absolute;
   inset: 0;
   background: var(--color-border);
+  border-radius: 14px;
   transition: all var(--transition-base);
 }
 
@@ -272,6 +301,7 @@
   width: 22px;
   height: 22px;
   background: var(--color-text-muted);
+  border-radius: 50%;
   top: 3px;
   left: 3px;
   transition: all var(--transition-base);
@@ -289,6 +319,7 @@
 /* ============ IMAGE UPLOAD ============ */
 .image-upload-area {
   border: 1px dashed var(--color-border);
+  border-radius: 8px;
   padding: 60px 40px;
   text-align: center;
   cursor: pointer;
@@ -330,6 +361,7 @@
   aspect-ratio: 1;
   overflow: hidden;
   border: 1px solid var(--color-border);
+  border-radius: 6px;
 }
 
 .image-preview img {
@@ -375,6 +407,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  border-radius: 6px;
   cursor: pointer;
   transition: all var(--transition-base);
 }
@@ -413,6 +446,7 @@
   padding: 28px;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
+  border-radius: 6px;
 }
 
 .review-section h4 {
