@@ -59,7 +59,7 @@ export const authService = {
 export const uploadService = {
   // Upload single image
   async uploadImage(file, type = "property") {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     const formData = new FormData();
     formData.append("image", file);
     formData.append("type", type); // 'property' or 'panorama'
@@ -81,7 +81,7 @@ export const uploadService = {
 
   // Upload multiple images
   async uploadImages(files, type = "property") {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -106,7 +106,7 @@ export const uploadService = {
 
   // Delete image
   async deleteImage(publicId) {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     const response = await fetch(
       `${API_BASE_URL}/upload/image/${encodeURIComponent(publicId)}`,
       {

@@ -5,6 +5,7 @@ import FilterPanel from '../components/FilterPanel';
 import PropertyCard from '../components/PropertyCard';
 import './BrowseProperties.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const CITIES = ['Bangalore', 'Delhi', 'Mumbai', 'Pune', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Jaipur', 'Chandigarh'];
 
 // Wishlist Button Component
@@ -17,10 +18,10 @@ function WishlistButton({ propertyId }) {
     }, [propertyId]);
 
     const checkWishlistStatus = async () => {
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         if (!token) return;
         try {
-            const response = await fetch(`http://localhost:5000/api/wishlist/check/${propertyId}`, {
+            const response = await fetch(`${API_BASE_URL}/wishlist/check/${propertyId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -34,7 +35,7 @@ function WishlistButton({ propertyId }) {
 
     const toggleWishlist = async (e) => {
         e.stopPropagation();
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         if (!token) {
             alert('Please login to save properties');
             return;
@@ -43,7 +44,7 @@ function WishlistButton({ propertyId }) {
         setIsLoading(true);
         try {
             const method = isWishlisted ? 'DELETE' : 'POST';
-            const response = await fetch(`http://localhost:5000/api/wishlist/${propertyId}`, {
+            const response = await fetch(`${API_BASE_URL}/wishlist/${propertyId}`, {
                 method,
                 headers: { 'Authorization': `Bearer ${token}` }
             });

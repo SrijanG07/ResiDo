@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './PropertyCard.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function PropertyCard({ property, onViewProperty, compact = false }) {
     const { user } = useAuth();
     const [isWishlisted, setIsWishlisted] = useState(false);
@@ -25,7 +27,7 @@ function PropertyCard({ property, onViewProperty, compact = false }) {
     // Check if property is in wishlist
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/api/wishlist/check/${property.id}`, {
+            fetch(`${API_BASE_URL}/wishlist/check/${property.id}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -47,7 +49,7 @@ function PropertyCard({ property, onViewProperty, compact = false }) {
 
         try {
             const method = isWishlisted ? 'DELETE' : 'POST';
-            const response = await fetch(`http://localhost:5000/api/wishlist/${property.id}`, {
+            const response = await fetch(`${API_BASE_URL}/wishlist/${property.id}`, {
                 method,
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

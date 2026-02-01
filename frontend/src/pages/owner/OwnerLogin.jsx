@@ -67,8 +67,8 @@ function OwnerLogin({ onSuccess, onBack, allowAllUsers = false }) {
         <div className="owner-login-page">
             <div className="login-container">
                 <div className="login-logo">
-                    <span className="logo-room">ROOM</span>
-                    <span className="logo-gi">Gi</span>
+                    <span className="logo-room">Resi</span>
+                    <span className="logo-gi">Do</span>
                 </div>
 
                 <div className="login-header">

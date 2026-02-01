@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './ReviewSection.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function ReviewSection({ propertyId, isOwner = false }) {
     const [reviews, setReviews] = useState([]);
     const [averageRating, setAverageRating] = useState(0);
@@ -15,7 +17,7 @@ function ReviewSection({ propertyId, isOwner = false }) {
 
     const fetchReviews = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/reviews/property/${propertyId}`);
+            const response = await fetch(`${API_BASE_URL}/reviews/property/${propertyId}`);
             const data = await response.json();
             setReviews(data.reviews || []);
             setAverageRating(data.averageRating || 0);
@@ -29,14 +31,14 @@ function ReviewSection({ propertyId, isOwner = false }) {
 
     const handleSubmitReview = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         if (!token) {
             alert('Please login to submit a review');
             return;
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/reviews/property/${propertyId}`, {
+            const response = await fetch(`${API_BASE_URL}/reviews/property/${propertyId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -60,9 +62,9 @@ function ReviewSection({ propertyId, isOwner = false }) {
     };
 
     const handleOwnerResponse = async (reviewId, response) => {
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         try {
-            await fetch(`http://localhost:5000/api/reviews/${reviewId}/respond`, {
+            await fetch(`${API_BASE_URL}/reviews/${reviewId}/respond`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

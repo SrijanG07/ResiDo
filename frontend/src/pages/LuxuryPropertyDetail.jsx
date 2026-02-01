@@ -9,6 +9,8 @@ import ScheduleVisitModal from "../components/ScheduleVisitModal";
 import "../styles/luxury-theme.css";
 import "./LuxuryPropertyDetail.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const amenityIcons = {
   school: { emoji: "S", label: "School" },
   hospital: { emoji: "H", label: "Hospital" },
@@ -156,7 +158,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
   };
 
   const sendInquiry = async () => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       alert("Please login to send a message");
       return;
@@ -168,7 +170,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
 
     setSendingMessage(true);
     try {
-      const response = await fetch("http://localhost:5000/api/inquiries", {
+      const response = await fetch(`${API_BASE_URL}/inquiries`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -316,7 +318,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
             onNavigate?.("home") || onBack();
           }}
         >
-          ROOMGI
+          ResiDo
         </a>
         <button className="btn-back" onClick={onBack}>
           <svg
@@ -509,7 +511,7 @@ function LuxuryPropertyDetail({ propertyId, onBack, onNavigate, onStartTour }) {
             </div>
             {property.owner?.phone && (
               <a
-                href={`https://wa.me/91${property.owner.phone.replace(/\D/g, "")}?text=Hi, I'm interested in your property: ${property.title} (${formatPrice(property.price)}) on RoomGi.`}
+                href={`https://wa.me/91${property.owner.phone.replace(/\D/g, "")}?text=Hi, I'm interested in your property: ${property.title} (${formatPrice(property.price)}) on ResiDo.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="whatsapp-btn"

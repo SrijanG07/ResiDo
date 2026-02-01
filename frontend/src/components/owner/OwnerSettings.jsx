@@ -7,7 +7,7 @@ function OwnerSettings() {
 
     const [profile, setProfile] = useState({
         name: user?.name || 'Property Owner',
-        email: user?.email || 'owner@roomgi.com',
+        email: user?.email || 'owner@ResiDo.com',
         phone: '9876543210',
         company: 'Sharma Properties',
         address: 'Koramangala, Bangalore',

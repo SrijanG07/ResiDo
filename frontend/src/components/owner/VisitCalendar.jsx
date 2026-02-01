@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./VisitCalendar.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Mock scheduled visits (fallback)
 const MOCK_VISITS = [
   {
@@ -69,7 +71,7 @@ function VisitCalendar() {
   const fetchVisits = async () => {
     setLoading(true);
     try {
-      const token = localStorage.getItem("roomgi_token");
+      const token = localStorage.getItem("ResiDo_token");
       if (!token) {
         console.log("No token found, using mock data");
         setVisits(MOCK_VISITS);
@@ -77,7 +79,7 @@ function VisitCalendar() {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/visits/owner", {
+      const response = await fetch(`${API_BASE_URL}/visits/owner`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -116,9 +118,9 @@ function VisitCalendar() {
 
   const handleConfirm = async (id) => {
     try {
-      const token = localStorage.getItem("roomgi_token");
+      const token = localStorage.getItem("ResiDo_token");
       if (token) {
-        await fetch(`http://localhost:5000/api/visits/${id}/status`, {
+        await fetch(`${API_BASE_URL}/visits/${id}/status`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -137,9 +139,9 @@ function VisitCalendar() {
 
   const handleCancel = async (id) => {
     try {
-      const token = localStorage.getItem("roomgi_token");
+      const token = localStorage.getItem("ResiDo_token");
       if (token) {
-        await fetch(`http://localhost:5000/api/visits/${id}`, {
+        await fetch(`${API_BASE_URL}/visits/${id}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,

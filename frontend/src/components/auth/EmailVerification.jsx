@@ -78,12 +78,12 @@ function EmailVerification({ onContinue, onBack }) {
             <div className="email-verification success">
                 <div className="verification-icon verified">✓</div>
                 <h3>Email Verified!</h3>
-                <p>Your email has been successfully verified. You now have full access to all RoomGi features.</p>
+                <p>Your email has been successfully verified. You now have full access to all ResiDo features.</p>
                 <button 
                     className="btn btn-primary btn-block"
                     onClick={onContinue}
                 >
-                    Continue to RoomGi
+                    Continue to ResiDo
                 </button>
             </div>
         );

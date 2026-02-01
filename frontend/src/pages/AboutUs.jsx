@@ -104,7 +104,7 @@ function AboutUs({ onNavigate }) {
             onNavigate("home");
           }}
         >
-          ROOM<span className="text-gold">Gi</span>
+          RESI<span className="text-gold">DO</span>
         </a>
         <button className="about-nav__back" onClick={() => onNavigate("home")}>
           ← Back to Home
@@ -122,7 +122,7 @@ function AboutUs({ onNavigate }) {
             <span className="text-italic text-gold">Real Estate</span>
           </h1>
           <p className="about-hero__subtitle">
-            RoomGi is a cutting-edge real estate platform developed by students
+            ResiDo is a cutting-edge real estate platform developed by students
             of IIIT Bangalore, combining innovative technology with seamless
             user experience to revolutionize property discovery in India.
           </p>
@@ -141,7 +141,7 @@ function AboutUs({ onNavigate }) {
             </h2>
             <p className="section-description">
               We believe finding your dream home should be an exciting journey,
-              not a stressful task. RoomGi eliminates intermediaries, provides
+              not a stressful task. ResiDo eliminates intermediaries, provides
               verified listings, and offers immersive 360° virtual tours to help
               you make informed decisions from anywhere.
             </p>
@@ -253,7 +253,7 @@ function AboutUs({ onNavigate }) {
               <span className="text-italic text-gold">Developers</span>
             </h2>
             <p className="section-description">
-              The talented team behind RoomGi, bringing innovation to real estate.
+              The talented team behind ResiDo, bringing innovation to real estate.
             </p>
           </div>
           <div className="about-team__grid">
@@ -313,7 +313,7 @@ function AboutUs({ onNavigate }) {
       <footer className="about-footer">
         <div className="about-footer__container">
           <p>
-            © {new Date().getFullYear()} RoomGi. Developed at IIIT Bangalore.
+            © {new Date().getFullYear()} ResiDo. Developed at IIIT Bangalore.
           </p>
         </div>
       </footer>

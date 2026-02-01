@@ -23,7 +23,7 @@ app.use(
   }),
 );
 
-// CORS - Allow all localhost origins during development
+// CORS - Allow localhost in dev, configured URLs in production
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -31,6 +31,10 @@ app.use(
       if (!origin) return callback(null, true);
       // Allow all localhost origins during development
       if (origin && origin.startsWith("http://localhost:")) {
+        return callback(null, true);
+      }
+      // Allow Vercel preview deployments
+      if (origin && origin.endsWith(".vercel.app")) {
         return callback(null, true);
       }
       // Otherwise use the configured FRONTEND_URL
@@ -60,7 +64,7 @@ if (process.env.NODE_ENV === "development") {
 // ============================================
 app.get("/", (req, res) => {
   res.json({
-    message: "RoomGi Backend API is running 🚀",
+    message: "ResiDo Backend API is running 🚀",
     version: "2.0.0",
     features: ["Firebase Auth", "Enhanced Security", "Rate Limiting"],
   });

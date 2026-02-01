@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../styles/luxury-theme.css";
 import "./WishlistPage.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function WishlistPage({ onViewProperty, onNavigate }) {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,14 +15,14 @@ function WishlistPage({ onViewProperty, onNavigate }) {
   }, []);
 
   const fetchWishlist = async () => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/wishlist", {
+      const response = await fetch(`${API_BASE_URL}/wishlist`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.ok) {
@@ -35,9 +37,9 @@ function WishlistPage({ onViewProperty, onNavigate }) {
   };
 
   const removeFromWishlist = async (propertyId) => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     try {
-      await fetch(`http://localhost:5000/api/wishlist/${propertyId}`, {
+      await fetch(`${API_BASE_URL}/wishlist/${propertyId}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -76,7 +78,7 @@ function WishlistPage({ onViewProperty, onNavigate }) {
     );
   }
 
-  const token = localStorage.getItem("roomgi_token");
+  const token = localStorage.getItem("ResiDo_token");
   if (!token) {
     return (
       <div className="wishlist-page empty">

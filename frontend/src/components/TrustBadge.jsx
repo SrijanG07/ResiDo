@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './TrustBadge.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function TrustBadge({ propertyId, size = 'normal' }) {
     const [trustData, setTrustData] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
@@ -12,7 +14,7 @@ function TrustBadge({ propertyId, size = 'normal' }) {
 
     const fetchTrustScore = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/fraud/property/${propertyId}/trust-score`);
+            const response = await fetch(`${API_BASE_URL}/fraud/property/${propertyId}/trust-score`);
             if (response.ok) {
                 const data = await response.json();
                 setTrustData(data);

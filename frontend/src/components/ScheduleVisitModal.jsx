@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import "./ScheduleVisitModal.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function ScheduleVisitModal({ property, onClose }) {
   const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -18,7 +20,7 @@ function ScheduleVisitModal({ property, onClose }) {
 
   // Check if user is logged in on mount
   useEffect(() => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       setError("Please login to schedule a visit");
     }
@@ -82,7 +84,7 @@ function ScheduleVisitModal({ property, onClose }) {
     e.preventDefault();
     setError("");
 
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     console.log("Token found:", token ? "Yes" : "No");
 
     if (!token) {
@@ -107,7 +109,7 @@ function ScheduleVisitModal({ property, onClose }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/visits", {
+      const response = await fetch(`${API_BASE_URL}/visits`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -285,7 +287,7 @@ function ScheduleVisitModal({ property, onClose }) {
               <button
                 type="submit"
                 className="btn-schedule-submit"
-                disabled={loading || !localStorage.getItem("roomgi_token")}
+                disabled={loading || !localStorage.getItem("ResiDo_token")}
               >
                 {loading ? "Scheduling..." : "Confirm Visit"}
               </button>

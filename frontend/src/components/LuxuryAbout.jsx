@@ -135,13 +135,13 @@ function LuxuryAbout({ onNavigate }) {
                 <div className="luxury-about__right">
                     <div className="luxury-about__description luxury-about__reveal">
                         <p>
-                            Every element of RoomGi reflects our commitment to helping you find your perfect home. 
+                            Every element of ResiDo reflects our commitment to helping you find your perfect home. 
                             From cozy apartments to spacious villas, we connect buyers and sellers 
                             with verified properties across India.
                         </p>
                         <p>
                             Whether you're looking for your first home, upgrading to a bigger space, or 
-                            investing in property, RoomGi makes it simple and transparent.
+                            investing in property, ResiDo makes it simple and transparent.
                         </p>
                     </div>
                     <button className="btn-luxury luxury-about__reveal" onClick={() => onNavigate && onNavigate('browse')}>

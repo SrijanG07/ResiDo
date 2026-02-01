@@ -41,7 +41,7 @@ router.post(
 
       const imageType = req.body.type || "property"; // 'property' or 'panorama'
       const folder =
-        imageType === "panorama" ? "roomgi/panoramas" : "roomgi/properties";
+        imageType === "panorama" ? "ResiDo/panoramas" : "ResiDo/properties";
 
       // Upload to Cloudinary
       const result = await new Promise((resolve, reject) => {
@@ -96,7 +96,7 @@ router.post(
 
       const imageType = req.body.type || "property";
       const folder =
-        imageType === "panorama" ? "roomgi/panoramas" : "roomgi/properties";
+        imageType === "panorama" ? "ResiDo/panoramas" : "ResiDo/properties";
 
       // Upload all images to Cloudinary
       const uploadPromises = req.files.map((file) => {

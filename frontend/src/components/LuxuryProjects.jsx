@@ -1,14 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef } from 'react';
 import './LuxuryProjects.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 function LuxuryProjects({ properties = [], onViewProperty, onNavigate }) {
     const sectionRef = useRef(null);
-    const carouselRef = useRef(null);
-    const [activeIndex, setActiveIndex] = useState(0);
 
     // Default showcase properties if none provided
     const showcaseProperties = properties.length > 0 ? properties.slice(0, 6) : [
@@ -35,87 +29,18 @@ function LuxuryProjects({ properties = [], onViewProperty, onNavigate }) {
         }
     ];
 
-    useEffect(() => {
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
-
-        // Delay to ensure DOM is ready after hero pin
-        const timer = setTimeout(() => {
-            const ctx = gsap.context(() => {
-                // Horizontal scroll for carousel on desktop
-                if (carouselRef.current && window.innerWidth > 768) {
-                    const cards = carouselRef.current.querySelectorAll('.luxury-project-card');
-                    const totalWidth = carouselRef.current.scrollWidth;
-                    const viewportWidth = window.innerWidth;
-                    
-                    gsap.to(carouselRef.current, {
-                        x: () => -(totalWidth - viewportWidth + 100),
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: 'top top',
-                            end: () => `+=${totalWidth}`,
-                            scrub: 1,
-                            pin: true,
-                            pinSpacing: true,
-                            onUpdate: (self) => {
-                                const newIndex = Math.round(self.progress * (cards.length - 1));
-                                setActiveIndex(newIndex);
-                            }
-                        }
-                    });
-                }
-
-                // Card reveal animations
-                gsap.utils.toArray('.luxury-project-card').forEach((card, i) => {
-                    gsap.from(card, {
-                        scrollTrigger: {
-                            trigger: card,
-                            start: 'top 90%',
-                        },
-                        y: 60,
-                        opacity: 0,
-                        duration: 1,
-                        delay: i * 0.1,
-                        ease: 'power3.out',
-                    });
-                });
-
-                // Refresh after setup
-                ScrollTrigger.refresh();
-
-            }, sectionRef);
-
-            return () => ctx.revert();
-        }, 200);
-
-        return () => clearTimeout(timer);
-    }, [showcaseProperties.length]);
-
     return (
         <section className="luxury-projects" ref={sectionRef}>
             {/* Section Header */}
             <div className="luxury-projects__header">
                 <span className="luxury-projects__label">(Our Projects)</span>
-                <div className="luxury-projects__pagination">
-                    {showcaseProperties.map((_, i) => (
-                        <span 
-                            key={i} 
-                            className={`pagination-dot ${i === activeIndex ? 'active' : ''}`}
-                        >
-                            {String(i + 1).padStart(2, '0')}
-                        </span>
-                    ))}
-                </div>
             </div>
 
             {/* Main Title */}
-            <h2 className="luxury-projects__title">
-                {showcaseProperties[activeIndex]?.title || 'Featured Properties'}
-            </h2>
+            <h2 className="luxury-projects__title">Featured Properties</h2>
 
-            {/* Carousel */}
-            <div className="luxury-projects__carousel" ref={carouselRef}>
+            {/* Property Grid */}
+            <div className="luxury-projects__grid">
                 {showcaseProperties.map((property, index) => (
                     <article 
                         key={property.id} 
@@ -141,7 +66,7 @@ function LuxuryProjects({ properties = [], onViewProperty, onNavigate }) {
             {/* Description & CTA */}
             <div className="luxury-projects__footer">
                 <p className="luxury-projects__description">
-                    {showcaseProperties[activeIndex]?.description || 'Browse our curated collection of quality properties across India.'}
+                    Browse our curated collection of quality properties across India.
                 </p>
                 <button 
                     className="btn-luxury"

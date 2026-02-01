@@ -18,15 +18,15 @@ async function createDatabase() {
         // Check if database exists
         const result = await client.query(
             "SELECT 1 FROM pg_database WHERE datname = $1",
-            ['roomgi']
+            ['ResiDo']
         );
 
         if (result.rows.length === 0) {
             // Database doesn't exist, create it
-            await client.query('CREATE DATABASE roomgi');
-            console.log('✅ Database "roomgi" created successfully!');
+            await client.query('CREATE DATABASE ResiDo');
+            console.log('✅ Database "ResiDo" created successfully!');
         } else {
-            console.log('✅ Database "roomgi" already exists');
+            console.log('✅ Database "ResiDo" already exists');
         }
 
         await client.end();

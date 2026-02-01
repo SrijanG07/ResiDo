@@ -9,6 +9,8 @@ import './LuxuryBrowseProperties.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Wishlist Button Component
 function WishlistButton({ propertyId }) {
     const [isWishlisted, setIsWishlisted] = useState(false);
@@ -18,12 +20,12 @@ function WishlistButton({ propertyId }) {
     // Check wishlist status lazily (only when user hovers or clicks)
     const checkWishlistStatus = async () => {
         if (checked) return; // Already checked
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         if (!token) return;
 
         setChecked(true);
         try {
-            const response = await fetch(`http://localhost:5000/api/wishlist/check/${propertyId}`, {
+            const response = await fetch(`${API_BASE_URL}/wishlist/check/${propertyId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -37,7 +39,7 @@ function WishlistButton({ propertyId }) {
 
     const toggleWishlist = async (e) => {
         e.stopPropagation();
-        const token = localStorage.getItem('roomgi_token');
+        const token = localStorage.getItem('ResiDo_token');
         if (!token) {
             alert('Please login to save properties');
             return;
@@ -46,7 +48,7 @@ function WishlistButton({ propertyId }) {
         setIsLoading(true);
         try {
             const method = isWishlisted ? 'DELETE' : 'POST';
-            const response = await fetch(`http://localhost:5000/api/wishlist/${propertyId}`, {
+            const response = await fetch(`${API_BASE_URL}/wishlist/${propertyId}`, {
                 method,
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -190,7 +192,7 @@ function LuxuryBrowseProperties({ onViewProperty, onNavigate, initialFilters = '
             {/* Navigation Bar */}
             <nav className="luxury-browse__nav">
                 <a href="#" className="luxury-browse__logo" onClick={(e) => { e.preventDefault(); onNavigate('home'); }}>
-                    ROOMGI
+                    ResiDo
                 </a>
                 <div className="luxury-browse__nav-links">
                     <a href="#" className="active">Properties</a>

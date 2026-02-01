@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/luxury-theme.css';
 import './MessagesPage.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function MessagesPage({ onBack, onNavigate }) {
     const [conversations, setConversations] = useState([]);
     const [selectedInquiry, setSelectedInquiry] = useState(null);
@@ -11,8 +13,8 @@ function MessagesPage({ onBack, onNavigate }) {
     const [sending, setSending] = useState(false);
     const messagesEndRef = useRef(null);
 
-    const token = localStorage.getItem('roomgi_token');
-    const currentUser = JSON.parse(localStorage.getItem('roomgi_user') || '{}');
+    const token = localStorage.getItem('ResiDo_token');
+    const currentUser = JSON.parse(localStorage.getItem('ResiDo_user') || '{}');
 
     useEffect(() => {
         if (token) {
@@ -32,7 +34,7 @@ function MessagesPage({ onBack, onNavigate }) {
 
     const fetchConversations = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/inquiries', {
+            const response = await fetch(`${API_BASE_URL}/inquiries`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -48,7 +50,7 @@ function MessagesPage({ onBack, onNavigate }) {
 
     const fetchMessages = async (inquiryId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/messages/${inquiryId}`, {
+            const response = await fetch(`${API_BASE_URL}/messages/${inquiryId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -71,7 +73,7 @@ function MessagesPage({ onBack, onNavigate }) {
 
         setSending(true);
         try {
-            const response = await fetch('http://localhost:5000/api/messages', {
+            const response = await fetch(`${API_BASE_URL}/messages`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./InquiryInbox.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Mock inquiry data
 const MOCK_INQUIRIES = [
   {
@@ -90,7 +92,7 @@ function InquiryInbox() {
   }, []);
 
   const fetchInquiries = async () => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       // Use mock data if no token
       setInquiries(MOCK_INQUIRIES);
@@ -101,7 +103,7 @@ function InquiryInbox() {
     try {
       // First get owner's properties, then get inquiries for each
       const propsResponse = await fetch(
-        "http://localhost:5000/api/users/my-properties",
+        `${API_BASE_URL}/users/my-properties`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -114,7 +116,7 @@ function InquiryInbox() {
         const allInquiries = [];
         for (const prop of properties) {
           const inqResponse = await fetch(
-            `http://localhost:5000/api/inquiries/property/${prop.id}`,
+            `${API_BASE_URL}/inquiries/property/${prop.id}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             },
@@ -191,7 +193,7 @@ function InquiryInbox() {
   const handleSendReply = async () => {
     if (!replyText.trim() || !selectedInquiry) return;
 
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       alert("Please login to send a reply");
       return;
@@ -201,7 +203,7 @@ function InquiryInbox() {
     try {
       // First, we need to create an inquiry_id association
       // The inquiry object has an 'id' which we'll use
-      const response = await fetch("http://localhost:5000/api/messages", {
+      const response = await fetch(`${API_BASE_URL}/messages`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -450,7 +450,7 @@ async function seedDatabase() {
         for (let i = 1; i <= 30; i++) {
             const user = await User.create({
                 name: `Owner ${i}`,
-                email: `owner${i}@roomgi.com`,
+                email: `owner${i}@ResiDo.com`,
                 password_hash: 'password123',
                 phone: `98765432${String(i).padStart(2, '0')}`,
                 user_type: i % 5 === 0 ? 'broker' : 'owner',
@@ -463,7 +463,7 @@ async function seedDatabase() {
         for (let i = 1; i <= 10; i++) {
             await User.create({
                 name: `Buyer ${i}`,
-                email: `buyer${i}@roomgi.com`,
+                email: `buyer${i}@ResiDo.com`,
                 password_hash: 'password123',
                 phone: `97654321${String(i).padStart(2, '0')}`,
                 user_type: 'buyer'

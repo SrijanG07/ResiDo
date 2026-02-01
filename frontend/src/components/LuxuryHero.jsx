@@ -137,7 +137,7 @@ function LuxuryHero({ onNavigate }) {
             onNavigate("home");
           }}
         >
-          ROOMGI
+          ResiDo
         </a>
         <div className="luxury-hero__nav-links">
           <a
@@ -166,6 +166,15 @@ function LuxuryHero({ onNavigate }) {
             }}
           >
             News
+          </a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate("market-analytics");
+            }}
+          >
+            Analytics
           </a>
           <a
             href="#"
@@ -239,13 +248,13 @@ function LuxuryHero({ onNavigate }) {
           </p>
 
           <h1 className="luxury-hero__title" ref={titleRef}>
-            <span className="luxury-hero__title-main">ROOM</span>
-            <span className="luxury-hero__title-accent">Gi</span>
+            <span className="luxury-hero__title-main">Resi</span>
+            <span className="luxury-hero__title-accent">Do</span>
           </h1>
 
           <div className="luxury-hero__subtitle" ref={subtitleRef}>
             <p>
-              Welcome to RoomGi - India's trusted platform for buying and
+              Welcome to ResiDo - India's trusted platform for buying and
               selling properties. Browse verified listings, connect with sellers
               directly, and find your dream home without intermediaries.
             </p>

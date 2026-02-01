@@ -105,7 +105,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
                 <div className="owner-auth-header">
                     <div className="owner-icon">O</div>
                     <h1>Create Owner Account</h1>
-                    <p>Start listing your properties on RoomGi</p>
+                    <p>Start listing your properties on ResiDo</p>
                 </div>
 
                 {formError && (
@@ -205,7 +205,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
                         <label className="checkbox-label">
                             <input type="checkbox" required />
                             <span>
-                                I agree to RoomGi's{' '}
+                                I agree to ResiDo's{' '}
                                 <a href="/terms" target="_blank">Terms of Service</a>,{' '}
                                 <a href="/privacy" target="_blank">Privacy Policy</a>, and{' '}
                                 <a href="/owner-terms" target="_blank">Owner Agreement</a>
@@ -265,7 +265,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
             <div className="owner-auth-page">
                 <nav className="login-nav">
                     <button onClick={onBack} className="btn btn-text">
-                        ← Back to RoomGi
+                        ← Back to ResiDo
                     </button>
                 </nav>
 
@@ -304,7 +304,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
                     </div>
 
                     <div className="owner-benefits">
-                        <h4>Why list with RoomGi?</h4>
+                        <h4>Why list with ResiDo?</h4>
                         <div className="benefit-item">
                             <span className="benefit-icon">📊</span>
                             <span>Smart analytics dashboard</span>
@@ -325,7 +325,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
 
                     <div className="demo-banner">
                         <p>Demo credentials:</p>
-                        <code>owner1@roomgi.com / password123</code>
+                        <code>owner1@ResiDo.com / password123</code>
                     </div>
                 </div>
             </div>
@@ -357,7 +357,7 @@ function OwnerAuth({ onSuccess, onBack, onDemoMode }) {
 
                     <div className="demo-banner">
                         <p>Demo credentials:</p>
-                        <code>owner1@roomgi.com / password123</code>
+                        <code>owner1@ResiDo.com / password123</code>
                     </div>
                 </div>
             </div>

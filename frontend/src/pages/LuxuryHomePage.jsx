@@ -10,13 +10,15 @@ import LuxuryFooter from '../components/LuxuryFooter';
 import '../styles/luxury-theme.css';
 import './LuxuryHomePage.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function LuxuryHomePage({ onNavigate, onViewProperty }) {
     const [featuredProperties, setFeaturedProperties] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // Fetch featured properties from backend
     useEffect(() => {
-        fetch('http://localhost:5000/api/properties?limit=6')
+        fetch(`${API_BASE_URL}/properties?limit=6`)
             .then(res => res.json())
             .then(data => {
                 // Transform backend data to match component format
@@ -77,7 +79,7 @@ function LuxuryHomePage({ onNavigate, onViewProperty }) {
                             <span className="text-italic">Dream Home?</span>
                         </h2>
                         <p className="luxury-cta__description">
-                            Join thousands of happy homeowners who found their perfect property with RoomGi.
+                            Join thousands of happy homeowners who found their perfect property with ResiDo.
                         </p>
                         <div className="luxury-cta__buttons">
                             <button className="btn-luxury" onClick={() => onNavigate('browse')}>

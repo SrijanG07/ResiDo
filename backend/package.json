@@ -1,7 +1,7 @@
 {
-    "name": "roomgi-backend",
+    "name": "ResiDo-backend",
     "version": "1.0.0",
-    "description": "Backend for RoomGi Property Platform",
+    "description": "Backend for ResiDo Property Platform",
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
@@ -13,7 +13,7 @@
         "express",
         "nodejs"
     ],
-    "author": "RoomGi Team",
+    "author": "ResiDo Team",
     "license": "MIT",
     "dependencies": {
         "bcryptjs": "^2.4.3",

@@ -67,9 +67,9 @@ function UserLogin({ onSuccess, onBack, onNavigate }) {
         <div className="owner-login-page">
             <div className="login-container">
                 <div className="login-header">
-                    <div className="login-logo">ROOM<span>Gi</span></div>
+                    <div className="login-logo">Resi<span>Do</span></div>
                     <h1>{activeTab === 'signin' ? 'Welcome Back' : 'Create Account'}</h1>
-                    <p>{activeTab === 'signin' ? 'Sign in to access your account' : 'Join RoomGi to save properties and connect with owners'}</p>
+                    <p>{activeTab === 'signin' ? 'Sign in to access your account' : 'Join ResiDo to save properties and connect with owners'}</p>
                 </div>
 
                 {/* Tabs */}

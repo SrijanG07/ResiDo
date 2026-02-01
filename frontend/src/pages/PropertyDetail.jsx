@@ -8,6 +8,8 @@ import EMICalculator from "../components/EMICalculator";
 import ScheduleVisitModal from "../components/ScheduleVisitModal";
 import "./PropertyDetail.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 // Amenity icons configuration for nearby places
 const amenityIcons = {
   school: { emoji: "S", label: "School" },
@@ -155,7 +157,7 @@ function PropertyDetail({ propertyId, onBack }) {
   };
 
   const sendInquiry = async () => {
-    const token = localStorage.getItem("roomgi_token");
+    const token = localStorage.getItem("ResiDo_token");
     if (!token) {
       alert("Please login to send a message");
       return;
@@ -167,7 +169,7 @@ function PropertyDetail({ propertyId, onBack }) {
 
     setSendingMessage(true);
     try {
-      const response = await fetch("http://localhost:5000/api/inquiries", {
+      const response = await fetch(`${API_BASE_URL}/inquiries`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

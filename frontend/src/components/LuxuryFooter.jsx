@@ -10,7 +10,7 @@ function LuxuryFooter({ onNavigate }) {
           {/* Brand Section */}
           <div className="luxury-footer__brand">
             <h2 className="luxury-footer__logo">
-              ROOM<span className="text-accent">Gi</span>
+              RESI<span className="text-accent">DO</span>
             </h2>
             <p className="luxury-footer__tagline">
               Your trusted partner in finding the perfect property. We connect
@@ -129,6 +129,17 @@ function LuxuryFooter({ onNavigate }) {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
+                      onNavigate("market-analytics");
+                    }}
+                  >
+                    Market Analytics
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
                       onNavigate("about");
                     }}
                   >
@@ -145,7 +156,7 @@ function LuxuryFooter({ onNavigate }) {
               <h4 className="luxury-footer__heading">Contact</h4>
               <ul>
                 <li>
-                  <a href="mailto:contact@roomgi.com">contact@roomgi.com</a>
+                  <a href="mailto:contact@ResiDo.com">contact@ResiDo.com</a>
                 </li>
                 <li>
                   <a href="tel:+918909309988">+91 890 930 9988</a>
@@ -161,7 +172,7 @@ function LuxuryFooter({ onNavigate }) {
         {/* Bottom Bar */}
         <div className="luxury-footer__bottom">
           <p className="luxury-footer__copyright">
-            © {new Date().getFullYear()} RoomGi. All rights reserved.
+            © {new Date().getFullYear()} ResiDo. All rights reserved.
           </p>
           <div className="luxury-footer__legal">
             <a href="#">Privacy Policy</a>

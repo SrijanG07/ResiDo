@@ -33,7 +33,7 @@ function Navbar({ onNavigate, currentPage }) {
                             <circle cx="20" cy="18" r="3" fill="url(#logoGradient)" />
                         </svg>
                     </div>
-                    <span className="logo-text">Room<span className="logo-highlight">Gi</span></span>
+                    <span className="logo-text">Resi<span className="logo-highlight">Do</span></span>
                 </a>
 
                 {/* Desktop Navigation Links */}
@@ -79,6 +79,15 @@ function Navbar({ onNavigate, currentPage }) {
                             className={currentPage === 'news' ? 'active' : ''}
                         >
                             News
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onClick={(e) => handleNavClick(e, 'market-analytics')}
+                            className={currentPage === 'market-analytics' ? 'active' : ''}
+                        >
+                            Analytics
                         </a>
                     </li>
                 </ul>

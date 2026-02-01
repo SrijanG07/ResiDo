@@ -10,6 +10,9 @@
     overflow: hidden;
     /* Ensure this section appears above the pinned hero */
     z-index: 100;
+    /* GPU acceleration to prevent black screen */
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
 }
 
 /* ============ HEADER ============ */
@@ -71,17 +74,15 @@
     letter-spacing: -0.02em;
 }
 
-/* ============ CAROUSEL ============ */
-.luxury-projects__carousel {
-    display: flex;
+/* ============ GRID ============ */
+.luxury-projects__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     padding: 20px 0;
-    will-change: transform;
 }
 
 .luxury-project-card {
-    flex: 0 0 400px;
-    min-width: 320px;
     cursor: pointer;
     transition: transform var(--transition-slow);
 }
@@ -159,8 +160,8 @@
         padding: 60px 32px;
     }
     
-    .luxury-project-card {
-        flex: 0 0 320px;
+    .luxury-projects__grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .luxury-projects__footer {
@@ -176,14 +177,9 @@
         min-height: auto;
     }
     
-    .luxury-projects__carousel {
-        flex-direction: column;
+    .luxury-projects__grid {
+        grid-template-columns: 1fr;
         gap: 20px;
-    }
-    
-    .luxury-project-card {
-        flex: 1;
-        min-width: 100%;
     }
     
     .luxury-projects__title {

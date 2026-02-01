@@ -25,7 +25,7 @@ function PropertyNews({ onNavigate }) {
 
     useEffect(() => {
         // Set SEO meta tags
-        document.title = 'Property News & Market Insights | RoomGi';
+        document.title = 'Property News & Market Insights | ResiDo';
 
         const metaDescription = document.querySelector('meta[name="description"]');
         if (metaDescription) {
@@ -84,7 +84,7 @@ function PropertyNews({ onNavigate }) {
             {/* Navigation Bar */}
             <nav className="news-navbar">
                 <a href="#" className="news-navbar__logo" onClick={(e) => { e.preventDefault(); onNavigate('home'); }}>
-                    ROOMGI
+                    ResiDo
                 </a>
                 <div className="news-navbar__links">
                     <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('browse'); }}>Properties</a>

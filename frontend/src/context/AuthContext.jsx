@@ -6,13 +6,13 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem('roomgi_token'));
+    const [token, setToken] = useState(localStorage.getItem('ResiDo_token'));
     const [loading, setLoading] = useState(true);
 
     // Check for existing token on mount
     useEffect(() => {
-        const storedToken = localStorage.getItem('roomgi_token');
-        const storedUser = localStorage.getItem('roomgi_user');
+        const storedToken = localStorage.getItem('ResiDo_token');
+        const storedUser = localStorage.getItem('ResiDo_user');
 
         if (storedToken && storedUser) {
             setToken(storedToken);
@@ -36,8 +36,8 @@ export function AuthProvider({ children }) {
             }
 
             // Store token and user
-            localStorage.setItem('roomgi_token', data.token);
-            localStorage.setItem('roomgi_user', JSON.stringify(data.user));
+            localStorage.setItem('ResiDo_token', data.token);
+            localStorage.setItem('ResiDo_user', JSON.stringify(data.user));
 
             setToken(data.token);
             setUser(data.user);
@@ -64,8 +64,8 @@ export function AuthProvider({ children }) {
             }
 
             // Store token and user
-            localStorage.setItem('roomgi_token', data.token);
-            localStorage.setItem('roomgi_user', JSON.stringify(data.user));
+            localStorage.setItem('ResiDo_token', data.token);
+            localStorage.setItem('ResiDo_user', JSON.stringify(data.user));
 
             setToken(data.token);
             setUser(data.user);
@@ -78,8 +78,8 @@ export function AuthProvider({ children }) {
     };
 
     const logout = () => {
-        localStorage.removeItem('roomgi_token');
-        localStorage.removeItem('roomgi_user');
+        localStorage.removeItem('ResiDo_token');
+        localStorage.removeItem('ResiDo_user');
         setToken(null);
         setUser(null);
     };

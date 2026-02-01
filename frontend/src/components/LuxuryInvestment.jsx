@@ -78,9 +78,14 @@ function LuxuryInvestment({ onNavigate }) {
                         across India's fastest-growing cities.
                     </p>
 
-                    <button className="btn-luxury luxury-investment__reveal" onClick={() => onNavigate && onNavigate('emi-calculator')}>
-                        <span>Investment Guide</span>
-                    </button>
+                    <div className="luxury-investment__buttons">
+                        <button className="btn-luxury luxury-investment__reveal" onClick={() => onNavigate && onNavigate('emi-calculator')}>
+                            <span>Investment Guide</span>
+                        </button>
+                        <button className="btn-luxury-outline luxury-investment__reveal" onClick={() => onNavigate && onNavigate('market-analytics')}>
+                            <span>📊 Market Analytics</span>
+                        </button>
+                    </div>
 
                     {/* Benefits List */}
                     <div className="luxury-investment__benefits">

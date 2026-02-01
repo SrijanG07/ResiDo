@@ -9,6 +9,8 @@
     width: 100%;
     overflow: hidden;
     background: var(--color-bg-primary);
+    contain: layout style paint;
+    transform: translate3d(0, 0, 0);
 }
 
 .luxury-hero.loaded .luxury-hero__content {
@@ -21,6 +23,7 @@
     position: absolute;
     inset: 0;
     z-index: 0;
+    transform: translate3d(0, 0, 0);  /* Force GPU acceleration */
 }
 
 .luxury-hero__bg-layer {
@@ -31,6 +34,8 @@
     background-size: cover;
     background-position: center;
     will-change: transform;
+    backface-visibility: hidden;  /* Prevent flickering */
+    transform: translate3d(0, 0, 0);  /* Force GPU acceleration */
 }
 
 .luxury-hero__bg-layer--far {
@@ -52,6 +57,7 @@
             rgba(11, 13, 15, 0.2) 40%,
             rgba(11, 13, 15, 0.6) 80%,
             rgba(11, 13, 15, 0.95) 100%);
+    pointer-events: none;  /* Allow clicks through */
 }
 
 /* ============ NAVIGATION ============ */

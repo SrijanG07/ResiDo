@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatWidget.css';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 function ChatWidget({ onViewProperty }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -110,7 +110,7 @@ function ChatWidget({ onViewProperty }) {
                         <div className="chat-widget__header-info">
                             <span className="chat-widget__avatar">R</span>
                             <div>
-                                <h4>RoomGi Assistant</h4>
+                                <h4>ResiDo Assistant</h4>
                                 <span className="chat-widget__status">AI-Powered Search</span>
                             </div>
                         </div>

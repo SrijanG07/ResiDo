@@ -14,7 +14,7 @@ function OwnerLanding({ onLogin, onSignup, onBack }) {
           }}
           className="back-link"
         >
-          ← Back to RoomGi
+          ← Back to ResiDo
         </a>
       </nav>
 

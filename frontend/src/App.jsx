@@ -18,6 +18,7 @@ const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const MessagesPage = lazy(() => import("./pages/MessagesPage"));
 const EMICalculatorPage = lazy(() => import("./pages/EMICalculatorPage"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
+const MarketAnalytics = lazy(() => import("./pages/MarketAnalytics"));
 
 // Sample property data
 const PROPERTIES = [
@@ -124,11 +125,11 @@ function App() {
 
   // Initialize state from localStorage for persistence on refresh
   const [currentPage, setCurrentPage] = useState(() => {
-    const savedPage = localStorage.getItem("roomgi_currentPage");
+    const savedPage = localStorage.getItem("ResiDo_currentPage");
     return savedPage || "home";
   });
   const [selectedPropertyId, setSelectedPropertyId] = useState(() => {
-    const savedId = localStorage.getItem("roomgi_selectedPropertyId");
+    const savedId = localStorage.getItem("ResiDo_selectedPropertyId");
     return savedId ? parseInt(savedId) : null;
   });
   const [selectedPropertyInfo, setSelectedPropertyInfo] = useState(null);
@@ -137,10 +138,10 @@ function App() {
 
   // Persist current page to localStorage
   useEffect(() => {
-    localStorage.setItem("roomgi_currentPage", currentPage);
+    localStorage.setItem("ResiDo_currentPage", currentPage);
     if (selectedPropertyId) {
       localStorage.setItem(
-        "roomgi_selectedPropertyId",
+        "ResiDo_selectedPropertyId",
         selectedPropertyId.toString(),
       );
     }
@@ -341,6 +342,15 @@ function App() {
     return (
       <Suspense fallback={<LuxuryLoading />}>
         <AboutUs onNavigate={handleNavigate} />
+      </Suspense>
+    );
+  }
+
+  // Handle Market Analytics page
+  if (currentPage === "market-analytics") {
+    return (
+      <Suspense fallback={<LuxuryLoading />}>
+        <MarketAnalytics onNavigate={handleNavigate} />
       </Suspense>
     );
   }

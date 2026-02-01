@@ -3,6 +3,8 @@ import { uploadService } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import "./AddPropertyWizard.css";
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 const STEPS = [
   { id: 1, title: "Basic Details", icon: "1" },
   { id: 2, title: "Location", icon: "2" },
@@ -75,7 +77,7 @@ function AddPropertyWizard({ onComplete }) {
 
   const handlePredictPrice = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/predict-price", {
+      const response = await fetch(`${API_BASE_URL}/predict-price`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -126,8 +128,8 @@ function AddPropertyWizard({ onComplete }) {
     console.log("Submitting property:", formData);
 
     try {
-      const token = localStorage.getItem("roomgi_token");
-      const response = await fetch("http://localhost:5000/api/properties", {
+      const token = localStorage.getItem("ResiDo_token");
+      const response = await fetch(`${API_BASE_URL}/properties`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

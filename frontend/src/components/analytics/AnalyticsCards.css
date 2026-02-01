@@ -1,0 +1,728 @@
+/* ===========================================
+   Analytics Cards Styling
+   Reusable card components for dashboard
+   =========================================== */
+
+/* ============ STAT CARD ============ */
+.stat-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--color-border-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-card.small {
+  padding: 1rem;
+}
+
+.stat-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.stat-card__icon {
+  font-size: 1.25rem;
+}
+
+.stat-card__title {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.stat-card__body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stat-card__value-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-card__value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.stat-card__trend {
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-card__trend.trend-up {
+  color: #10b981;
+}
+
+.stat-card__trend.trend-down {
+  color: #ef4444;
+}
+
+.stat-card__trend.trend-stable {
+  color: #64748b;
+}
+
+.stat-card__sparkline {
+  flex-shrink: 0;
+}
+
+.stat-card__subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ============ CITY CARD ============ */
+.city-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.city-card:hover {
+  border-color: var(--color-accent-gold);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.city-card.selected {
+  border-color: var(--color-accent-gold);
+  background: rgba(201, 169, 98, 0.08);
+}
+
+.city-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.city-card__name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.city-card__state {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.city-card__rating {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+}
+
+.city-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.price-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent-gold);
+}
+
+.price-unit {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.price-growth {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.city-card__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.metric {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.metric-label {
+  flex: 0 0 50px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.metric-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--color-bg-elevated);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.metric-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease-out;
+}
+
+.metric-fill.demand {
+  background: linear-gradient(90deg, #22c55e, #10b981);
+}
+
+.metric-fill.supply {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+}
+
+.metric-value {
+  flex: 0 0 24px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-align: right;
+}
+
+.city-card__footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.footer-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.footer-sentiment {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.footer-sentiment.bullish,
+.footer-sentiment.very-bullish {
+  color: #10b981;
+}
+
+.footer-sentiment.stable {
+  color: #3b82f6;
+}
+
+.footer-sentiment.bearish {
+  color: #ef4444;
+}
+
+/* ============ LOCALITY HOT CARD ============ */
+.locality-hot-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.locality-hot-card:hover {
+  border-color: var(--color-border-light);
+  transform: translateY(-2px);
+}
+
+.locality-hot-card__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.hotness-indicator {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hotness-score {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.locality-info {
+  flex: 1;
+}
+
+.locality-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.locality-city {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.demand-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.demand-badge.very-high {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.demand-badge.high {
+  background: rgba(249, 115, 22, 0.15);
+  color: #f97316;
+}
+
+.demand-badge.medium {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+}
+
+.locality-hot-card__stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.hot-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hot-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.hot-stat-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+/* ============ INVESTMENT CARD ============ */
+.investment-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.investment-card:hover {
+  border-color: var(--color-border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.investment-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.investment-city {
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.investment-score {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-elevated);
+}
+
+.score-grade {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-value {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.investment-card__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.inv-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.inv-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.inv-metric-icon {
+  font-size: 1rem;
+}
+
+.inv-metric-label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.inv-metric-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.investment-card__recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(201, 169, 98, 0.08);
+  border-radius: var(--radius-md);
+}
+
+.recommendation-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.recommendation-text {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* ============ PROPERTY TYPE CARD ============ */
+.property-type-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.property-type-card:hover {
+  border-color: var(--color-accent-gold);
+  transform: translateY(-4px);
+}
+
+.property-type-card.selected {
+  border-color: var(--color-accent-gold);
+  background: rgba(201, 169, 98, 0.08);
+}
+
+.property-type-card__icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+
+.property-type-card__name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem 0;
+}
+
+.property-type-card__share {
+  margin-bottom: 1rem;
+}
+
+.share-bar {
+  height: 8px;
+  background: var(--color-bg-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.share-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-gold-light));
+  border-radius: 4px;
+  transition: width 0.8s ease-out;
+}
+
+.share-value {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.property-type-card__stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.type-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.type-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.type-stat-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.property-type-card__ticket {
+  font-size: 0.8rem;
+  color: var(--color-accent-gold);
+  font-weight: 500;
+}
+
+/* ============ COMPARISON CARD ============ */
+.comparison-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.comparison-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 1.25rem 0;
+  font-family: var(--font-display);
+}
+
+.comparison-card__items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comparison-item__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.comparison-rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.comparison-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+}
+
+.comparison-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent-gold);
+}
+
+.comparison-bar {
+  height: 8px;
+  background: var(--color-bg-elevated);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-left: 32px;
+}
+
+.comparison-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease-out;
+}
+
+/* ============ INFO TOOLTIP ============ */
+.info-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+}
+
+.info-icon {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+.info-text {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.info-tooltip:hover .info-text {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-8px);
+}
+
+/* ============ SKELETON LOADER ============ */
+.skeleton-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.skeleton-title,
+.skeleton-value,
+.skeleton-subtitle,
+.skeleton-chart-area {
+  background: linear-gradient(90deg, 
+    var(--color-bg-elevated) 25%, 
+    var(--color-bg-card) 50%, 
+    var(--color-bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 14px;
+  width: 60%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-value {
+  height: 32px;
+  width: 40%;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-subtitle {
+  height: 12px;
+  width: 80%;
+}
+
+.skeleton-chart-area {
+  height: 200px;
+  width: 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 768px) {
+  .stat-card__value {
+    font-size: 1.4rem;
+  }
+  
+  .city-card__name {
+    font-size: 1.1rem;
+  }
+  
+  .price-value {
+    font-size: 1.25rem;
+  }
+  
+  .investment-card__metrics {
+    gap: 0.75rem;
+  }
+  
+  .property-type-card__icon {
+    font-size: 2.5rem;
+  }
+}

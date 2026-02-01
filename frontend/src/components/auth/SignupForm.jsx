@@ -108,7 +108,7 @@ function SignupForm({ onSuccess, onSwitchToLogin }) {
                     Please check your inbox and click the link to verify your account.
                 </p>
                 <p className="success-note">
-                    You can still use RoomGi while waiting for verification.
+                    You can still use ResiDo while waiting for verification.
                 </p>
             </div>
         );
@@ -226,7 +226,7 @@ function SignupForm({ onSuccess, onSwitchToLogin }) {
                     <label className="checkbox-label">
                         <input type="checkbox" required />
                         <span>
-                            I agree to RoomGi's{' '}
+                            I agree to ResiDo's{' '}
                             <a href="/terms" target="_blank">Terms of Service</a>
                             {' '}and{' '}
                             <a href="/privacy" target="_blank">Privacy Policy</a>

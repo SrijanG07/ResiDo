@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropertyCard from '../components/PropertyCard';
 import './HomePage.css';
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function HomePage({ onNavigate, onViewProperty }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [propertyType, setPropertyType] = useState('');
@@ -12,7 +14,7 @@ function HomePage({ onNavigate, onViewProperty }) {
 
     // Fetch featured properties
     useEffect(() => {
-        fetch('http://localhost:5000/api/properties?limit=10')
+        fetch(`${API_BASE_URL}/properties?limit=10`)
             .then(res => res.json())
             .then(data => {
                 setFeaturedProperties(data);
@@ -267,7 +269,7 @@ function HomePage({ onNavigate, onViewProperty }) {
             <section className="why-choose-section">
                 <div className="container">
                     <div className="section-header-vibrant centered">
-                        <div className="section-badge">Why RoomGi</div>
+                        <div className="section-badge">Why ResiDo</div>
                         <h2>The Smarter Way to Find Your Home</h2>
                         <p>Experience property search like never before</p>
                     </div>
@@ -380,7 +382,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                     <div className="cta-content-vibrant">
                         <div className="cta-text">
                             <h2>Ready to Find Your Dream Home?</h2>
-                            <p>Join thousands of happy homeowners who found their perfect property with RoomGi</p>
+                            <p>Join thousands of happy homeowners who found their perfect property with ResiDo</p>
                             <div className="cta-buttons">
                                 <button className="btn-vibrant btn-white" onClick={() => onNavigate('browse')}>
                                     Browse Properties
@@ -395,7 +397,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                                 <div className="phone-screen">
                                     <div className="app-preview">
                                         <div className="preview-header">
-                                            RoomGi
+                                            ResiDo
                                         </div>
                                         <div className="preview-card"></div>
                                         <div className="preview-card"></div>
@@ -441,7 +443,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                         </div>
                         <div className="testimonial-card">
                             <div className="testimonial-rating">★★★★★</div>
-                            <p>"Listed my property and got genuine inquiries within days. Highly recommend RoomGi!"</p>
+                            <p>"Listed my property and got genuine inquiries within days. Highly recommend ResiDo!"</p>
                             <div className="testimonial-author">
                                 <div className="author-avatar">AP</div>
                                 <div className="author-info">
@@ -472,7 +474,7 @@ function HomePage({ onNavigate, onViewProperty }) {
                                     <path d="M20 8L8 18V32H16V24H24V32H32V18L20 8Z" fill="white"/>
                                     <circle cx="20" cy="18" r="3" fill="url(#footerLogoGradient)"/>
                                 </svg>
-                                <span>Room<span className="highlight">Gi</span></span>
+                                <span>Resi<span className="highlight">Do</span></span>
                             </div>
                             <p>Your trusted partner in finding the perfect property. We connect property seekers with their dream homes using cutting-edge technology.</p>
                             <div className="social-links">
@@ -496,14 +498,14 @@ function HomePage({ onNavigate, onViewProperty }) {
                             </div>
                             <div className="footer-col-vibrant">
                                 <h4>Contact Us</h4>
-                                <a href="mailto:contact@roomgi.com">contact@roomgi.com</a>
+                                <a href="mailto:contact@ResiDo.com">contact@ResiDo.com</a>
                                 <a href="tel:+918909309988">+91 890 930 9988</a>
                                 <a href="#">Mumbai, India</a>
                             </div>
                         </div>
                     </div>
                     <div className="footer-bottom-vibrant">
-                        <p>© 2026 RoomGi. Made in India. All rights reserved.</p>
+                        <p>© 2026 ResiDo. Made in India. All rights reserved.</p>
                     </div>
                 </div>
             </footer>

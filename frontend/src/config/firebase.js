@@ -1,5 +1,5 @@
 /**
- * Firebase Configuration for RoomGi
+ * Firebase Configuration for ResiDo
  * 
  * To set up Firebase:
  * 1. Go to https://console.firebase.google.com/
